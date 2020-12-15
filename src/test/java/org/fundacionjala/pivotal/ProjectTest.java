@@ -1,4 +1,4 @@
-package PivotalGUITest;
+package org.fundacionjala.pivotal;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
