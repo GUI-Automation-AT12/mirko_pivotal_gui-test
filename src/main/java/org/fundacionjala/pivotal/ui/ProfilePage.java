@@ -9,7 +9,7 @@ public class ProfilePage extends BasePage{
     @FindBy(css = "#general.card ul.rows.read li div")
     private WebElement profileUserName;
 
-    public ProfilePage(final WebDriver webDriver, final WebDriverWait webDriverWait) {
+    protected ProfilePage(final WebDriver webDriver, final WebDriverWait webDriverWait) {
         super(webDriver, webDriverWait);
     }
 

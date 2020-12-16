@@ -12,7 +12,7 @@ public class LoginStep1Page extends BasePage{
     @FindBy(name = "action")
     private WebElement nextBtn;
 
-    public LoginStep1Page(final WebDriver webDriver, final WebDriverWait webDriverWait) {
+    protected LoginStep1Page(final WebDriver webDriver, final WebDriverWait webDriverWait) {
         super(webDriver, webDriverWait);
     }
 

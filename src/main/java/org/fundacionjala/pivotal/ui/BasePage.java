@@ -8,7 +8,7 @@ public class BasePage {
     protected WebDriver webDriver;
     protected WebDriverWait webDriverWait;
 
-    public BasePage(final WebDriver webDriver, final WebDriverWait webDriverWait) {
+    protected BasePage(final WebDriver webDriver, final WebDriverWait webDriverWait) {
         this.webDriver = webDriver;
         this.webDriverWait = webDriverWait;
         PageFactory.initElements(this.webDriver, this);

@@ -13,7 +13,10 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//div[@class='Dropdown__options Dropdown__options--small']/div/div/a[1]")
     private WebElement profileLink;
 
-    public HomePage(final WebDriver webDriver, final WebDriverWait webDriverWait) {
+    @FindBy(id = "create-project-button")
+    private WebElement createProjectBtn;
+
+    protected HomePage(final WebDriver webDriver, final WebDriverWait webDriverWait) {
         super(webDriver, webDriverWait);
     }
 
@@ -23,6 +26,15 @@ public class HomePage extends BasePage{
 
     private void clickProfileLink() {
         this.profileLink.click();
+    }
+
+    private void clickCreateProjectBtn() {
+        this.createProjectBtn.click();
+    }
+
+    public CreateProjectPage goToProjectCreation() {
+        clickCreateProjectBtn();
+        return new CreateProjectPage(super.webDriver, super.webDriverWait);
     }
 
     public ProfilePage goToProfile() {
