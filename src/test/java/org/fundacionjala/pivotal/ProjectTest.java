@@ -8,56 +8,64 @@ import static org.junit.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 public class ProjectTest {
-    private WebDriver driver;
+    private WebDriver webDriver;
+    private WebDriverWait webDriverWait;
+    
     @BeforeEach
     public void setUp() {
         System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");
-        driver = new FirefoxDriver();
-        driver.get("https://www.pivotaltracker.com/");
-        driver.findElement(By.linkText("Log in")).click();
-        driver.findElement(By.id("credentials_username")).sendKeys("mirkofer.122020@gmail.com");
-        driver.findElement(By.name("action")).click();
-        driver.findElement(By.id("credentials_password")).sendKeys("622Mirko###");
-        driver.findElement(By.name("action")).click();
+        webDriver = new FirefoxDriver();
+        webDriver.get("https://www.pivotaltracker.com/");
+        webDriver.manage().window().maximize();
+        webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        webDriverWait = new WebDriverWait(webDriver, 40, 500);
+        webDriver.findElement(By.linkText("Log in")).click();
+        webDriver.findElement(By.id("credentials_username")).sendKeys("mirkofer.122020@gmail.com");
+        webDriver.findElement(By.name("action")).click();
+        webDriver.findElement(By.id("credentials_password")).sendKeys("622Mirko###");
+        webDriver.findElement(By.name("action")).click();
     }
     @AfterEach
     public void tearDown() {
-        driver.get("https://www.pivotaltracker.com/projects");
-        String ProjectName = driver.findElement(By.xpath("//div[@class='projects column'][1]/a")).getText();
+        webDriver.get("https://www.pivotaltracker.com/projects");
+        String ProjectName = webDriver.findElement(By.xpath("//div[@class='projects column'][1]/a")).getText();
         if("ProjectTest".equals(ProjectName)) {
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            driver.findElement(By.linkText("Settings")).click();
-            WebElement element = driver.findElement(By.id("delete_link"));
+            JavascriptExecutor js = (JavascriptExecutor) webDriver;
+            webDriver.findElement(By.linkText("Settings")).click();
+            WebElement element = webDriver.findElement(By.id("delete_link"));
             js.executeScript("arguments[0].scrollIntoView();", element);
             element.click();
-            driver.findElement(By.id("confirm_delete")).click();
+            webDriver.findElement(By.id("confirm_delete")).click();
         }
-        driver.quit();
+        webDriver.quit();
     }
     @Test
     public void createProject() throws InterruptedException {
-        driver.findElement(By.id("create-project-button")).click();
-        driver.findElement(By.name("project_name")).click();
-        driver.findElement(By.name("project_name")).sendKeys("ProjectTest");
+        webDriver.findElement(By.id("create-project-button")).click();
+        webDriver.findElement(By.name("project_name")).click();
+        webDriver.findElement(By.name("project_name")).sendKeys("ProjectTest");
         {
-            WebElement element = driver.findElement(By.cssSelector(".tc-account-selector__header"));
-            Actions builder = new Actions(driver);
+            WebElement element = webDriver.findElement(By.cssSelector(".tc-account-selector__header"));
+            Actions builder = new Actions(webDriver);
             builder.moveToElement(element).clickAndHold().perform();
         }
         {
-            WebElement element = driver.findElement(By.cssSelector(".tc-account-selector__list-header-owner"));
-            Actions builder = new Actions(driver);
+            WebElement element = webDriver.findElement(By.cssSelector(".tc-account-selector__list-header-owner"));
+            Actions builder = new Actions(webDriver);
             builder.moveToElement(element).release().perform();
         }
-        driver.findElement(By.cssSelector(".tc-account-selector")).click();
-        driver.findElement(By.cssSelector(".tc-account-selector__option-account:nth-child(1) .tc-account-selector__option-account-name")).click();
-        driver.findElement(By.cssSelector(".tc-project-type-chooser__label:nth-child(3) > .tc-project-type-chooser__label-name")).click();
-        driver.findElement(By.cssSelector(".pvXpn__Button--positive")).click();
+        webDriver.findElement(By.cssSelector(".tc-account-selector")).click();
+        webDriver.findElement(By.cssSelector(".tc-account-selector__option-account:nth-child(1) .tc-account-selector__option-account-name")).click();
+        webDriver.findElement(By.cssSelector(".tc-project-type-chooser__label:nth-child(3) > .tc-project-type-chooser__label-name")).click();
+        webDriver.findElement(By.cssSelector(".pvXpn__Button--positive")).click();
         Thread.sleep(5000);
-        driver.get("https://www.pivotaltracker.com/projects");
-        String ProjectName = driver.findElement(By.xpath("//div[@class='projects column'][1]/a")).getText();
+        webDriver.get("https://www.pivotaltracker.com/projects");
+        String ProjectName = webDriver.findElement(By.xpath("//div[@class='projects column'][1]/a")).getText();
         assertEquals("ProjectTest", ProjectName);
     }
 }
