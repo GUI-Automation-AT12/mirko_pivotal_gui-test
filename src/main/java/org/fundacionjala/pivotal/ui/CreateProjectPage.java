@@ -22,10 +22,6 @@ public class CreateProjectPage extends BasePage{
     @FindBy(css = ".pvXpn__Button--positive")
     private WebElement createBtn;
 
-    protected CreateProjectPage(final WebDriver webDriver, final WebDriverWait webDriverWait) {
-        super(webDriver, webDriverWait);
-    }
-
     private void fillProjectNameTextBox(final String projectName) {
         this.projectNameTextBox.clear();
         this.projectNameTextBox.sendKeys(projectName);
@@ -48,6 +44,6 @@ public class CreateProjectPage extends BasePage{
         clickAccountDropdownList();
         clickAccount1Option();
         clickCreateBtn();
-        return new ProjectPage(super.webDriver, super.webDriverWait);
+        return new ProjectPage();
     }
 }

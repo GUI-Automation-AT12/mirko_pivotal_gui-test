@@ -1,9 +1,7 @@
 package org.fundacionjala.pivotal.ui;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginStep2Page extends BasePage{
     @FindBy(id = "credentials_password")
@@ -11,10 +9,6 @@ public class LoginStep2Page extends BasePage{
 
     @FindBy(name = "action")
     private WebElement signInBtn;
-
-    protected LoginStep2Page(final WebDriver webDriver, final WebDriverWait webDriverWait) {
-        super(webDriver, webDriverWait);
-    }
 
     private void fillPassword(final String password) {
         this.passwordTextBox.clear();
@@ -28,6 +22,6 @@ public class LoginStep2Page extends BasePage{
     public HomePage signIn(final String password) {
         fillPassword(password);
         clickSignInBtn();
-        return new HomePage(super.webDriver, super.webDriverWait);
+        return new HomePage();
     }
 }
