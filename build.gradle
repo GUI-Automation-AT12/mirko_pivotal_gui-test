@@ -33,11 +33,6 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
 }
 
-application {
-    // Define the main class for the application.
-    mainClassName = 'PivotalGUITest.App'
-}
-
 test {
     useJUnitPlatform()
 }
