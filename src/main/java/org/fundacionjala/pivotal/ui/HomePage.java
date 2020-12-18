@@ -16,10 +16,6 @@ public class HomePage extends BasePage{
     @FindBy(id = "create-project-button")
     private WebElement createProjectBtn;
 
-    protected HomePage(final WebDriver webDriver, final WebDriverWait webDriverWait) {
-        super(webDriver, webDriverWait);
-    }
-
     private void clickUserNameDropdownMenu() {
         this.userNameDropdownMenu.click();
     }
@@ -34,12 +30,12 @@ public class HomePage extends BasePage{
 
     public CreateProjectPage goToProjectCreation() {
         clickCreateProjectBtn();
-        return new CreateProjectPage(super.webDriver, super.webDriverWait);
+        return new CreateProjectPage();
     }
 
     public ProfilePage goToProfile() {
         clickUserNameDropdownMenu();
         clickProfileLink();
-        return new ProfilePage(super.webDriver, super.webDriverWait);
+        return new ProfilePage();
     }
 }
