@@ -1,11 +1,11 @@
-package org.fundacionjala.pivotal;
+package org.fundacionjala.pivotal.junit;
 
 import org.fundacionjala.core.config.Environment;
-import org.fundacionjala.pivotal.ui.InitialPage;
-import org.fundacionjala.pivotal.ui.LoginStep1Page;
-import org.fundacionjala.pivotal.ui.LoginStep2Page;
-import org.fundacionjala.pivotal.ui.HomePage;
-import org.fundacionjala.pivotal.ui.ProfilePage;
+import org.fundacionjala.pivotal.ui.pages.InitialPage;
+import org.fundacionjala.pivotal.ui.pages.LoginStep1Page;
+import org.fundacionjala.pivotal.ui.pages.LoginStep2Page;
+import org.fundacionjala.pivotal.ui.pages.HomePage;
+import org.fundacionjala.pivotal.ui.component.UserMenu;
 import org.junit.Test;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
@@ -18,11 +18,11 @@ public class LoginPivotalTest {
     private LoginStep1Page loginStep1Page;
     private LoginStep2Page loginStep2Page;
     private HomePage homePage;
-    private ProfilePage profilePage;
+    private UserMenu userMenu;
 
     @After
     public void tearDown() {
-        profilePage.signOut();
+        userMenu.signOut();
     }
 
     @Test
@@ -32,8 +32,8 @@ public class LoginPivotalTest {
         loginStep1Page = initialPage.goToLoginStep1();
         loginStep2Page = loginStep1Page.goToLoginStep2(Environment.getInstance().getUserEmail());
         homePage = loginStep2Page.signIn(Environment.getInstance().getUserPassword());
-        profilePage = homePage.goToProfile();
-        String actual = profilePage.getProfileUserNameAsString();
+        userMenu = homePage.goToProfile();
+        String actual = userMenu.getProfileUserNameAsString();
         assertEquals(actual, EXPECTED_USER_NAME);
     }
 }

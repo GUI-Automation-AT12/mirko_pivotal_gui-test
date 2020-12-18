@@ -1,13 +1,13 @@
-package org.fundacionjala.pivotal;
+package org.fundacionjala.pivotal.junit;
 
 import org.fundacionjala.core.config.Environment;
 import org.fundacionjala.core.selenium.WebDriverManager;
-import org.fundacionjala.pivotal.ui.LoginStep2Page;
-import org.fundacionjala.pivotal.ui.HomePage;
-import org.fundacionjala.pivotal.ui.CreateProjectPage;
-import org.fundacionjala.pivotal.ui.ProjectPage;
-import org.fundacionjala.pivotal.ui.AllProjectsPage;
-import org.fundacionjala.pivotal.ui.ProjectSettingsPage;
+import org.fundacionjala.pivotal.ui.pages.LoginStep2Page;
+import org.fundacionjala.pivotal.ui.pages.HomePage;
+import org.fundacionjala.pivotal.ui.popups.CreateProjectPopup;
+import org.fundacionjala.pivotal.ui.pages.ProjectPage;
+import org.fundacionjala.pivotal.ui.pages.AllProjectsPage;
+import org.fundacionjala.pivotal.ui.pages.ProjectSettingsPage;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -17,7 +17,7 @@ public class ProjectTest {
     //Page Objects
     private LoginStep2Page loginStep2Page;
     private HomePage homePage;
-    private CreateProjectPage createProjectPage;
+    private CreateProjectPopup createProjectPopup;
     private ProjectPage projectPage;
     private AllProjectsPage allProjectsPage;
     private ProjectSettingsPage projectSettingsPage;
@@ -39,8 +39,8 @@ public class ProjectTest {
     }
     @Test
     public void createProjectTest() {
-        createProjectPage = homePage.goToProjectCreation();
-        projectPage = createProjectPage.createProject("ProjectTest");
+        createProjectPopup = homePage.goToProjectCreation();
+        projectPage = createProjectPopup.createProject("ProjectTest");
         allProjectsPage = projectPage.goToProjectsList();
         firstProjectName = allProjectsPage.getFirstListedProject();
         assertEquals("ProjectTest", firstProjectName);

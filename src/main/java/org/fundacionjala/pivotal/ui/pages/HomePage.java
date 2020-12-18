@@ -1,9 +1,10 @@
-package org.fundacionjala.pivotal.ui;
+package org.fundacionjala.pivotal.ui.pages;
 
-import org.openqa.selenium.WebDriver;
+import org.fundacionjala.pivotal.ui.component.TopMenu;
+import org.fundacionjala.pivotal.ui.component.UserMenu;
+import org.fundacionjala.pivotal.ui.popups.CreateProjectPopup;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage{
 
@@ -15,6 +16,17 @@ public class HomePage extends BasePage{
 
     @FindBy(id = "create-project-button")
     private WebElement createProjectBtn;
+
+    private TopMenu topMenu;
+
+    public HomePage() {
+        super();
+        topMenu = new TopMenu();
+    }
+
+    public TopMenu getTopMenu() {
+        return topMenu;
+    }
 
     private void clickUserNameDropdownMenu() {
         this.userNameDropdownMenu.click();
@@ -28,14 +40,14 @@ public class HomePage extends BasePage{
         this.createProjectBtn.click();
     }
 
-    public CreateProjectPage goToProjectCreation() {
+    public CreateProjectPopup goToProjectCreation() {
         clickCreateProjectBtn();
-        return new CreateProjectPage();
+        return new CreateProjectPopup();
     }
 
-    public ProfilePage goToProfile() {
+    public UserMenu goToProfile() {
         clickUserNameDropdownMenu();
         clickProfileLink();
-        return new ProfilePage();
+        return new UserMenu();
     }
 }
