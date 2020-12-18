@@ -4,16 +4,16 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ProjectSettingsPage extends BasePage{
+public class ProjectSettingsPage extends BasePage {
 
     @FindBy(id = "delete_link")
     private WebElement deleteProjectLink;
 
     @FindBy(id = "confirm_delete")
-    private WebElement deleteProjectBtn;
+    private WebElement confirmDeleteProjectBtn;
 
     private void scrollDownToFindDeleteProjectLink() {
-        JavascriptExecutor js = (JavascriptExecutor) super.webDriver;
+        JavascriptExecutor js = (JavascriptExecutor) super.getWebDriver();
         js.executeScript("arguments[0].scrollIntoView();", this.deleteProjectLink);
     }
 
@@ -21,13 +21,16 @@ public class ProjectSettingsPage extends BasePage{
         this.deleteProjectLink.click();
     }
 
-    private void clickDeleteBtn() {
-        this.deleteProjectBtn.click();
+    private void clickConfirmDeleteBtn() {
+        this.confirmDeleteProjectBtn.click();
     }
 
+    /**
+     * Deletes a project from GUI.
+     */
     public void deleteProject() {
         scrollDownToFindDeleteProjectLink();
         clickDeleteLink();
-        clickDeleteBtn();
+        clickConfirmDeleteBtn();
     }
 }

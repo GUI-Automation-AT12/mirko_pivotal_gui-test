@@ -12,6 +12,10 @@ dependencies {
     testImplementation 'io.cucumber:cucumber-java:5.6.0'
     testImplementation 'io.cucumber:cucumber-junit:5.6.0'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.0'
+    // implementation group: 'io.rest-assured', name: 'rest-assured', version: '4.3.2'
+    // implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '4.3.2'
 }
 
 checkstyle {

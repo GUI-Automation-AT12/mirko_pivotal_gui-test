@@ -1,11 +1,9 @@
 package org.fundacionjala.pivotal.ui;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
 
     @FindBy(css = ".tc_pull_right:nth-child(3) .zWDds__Button")
     private WebElement userNameDropdownMenu;
@@ -28,11 +26,19 @@ public class HomePage extends BasePage{
         this.createProjectBtn.click();
     }
 
+    /**
+     * Allows to go to Project Creation Page from GUI.
+     * @return CreateProjectPage;
+     */
     public CreateProjectPage goToProjectCreation() {
         clickCreateProjectBtn();
         return new CreateProjectPage();
     }
 
+    /**
+     * Allows to go to Profile Page from GUI.
+     * @return a new ProfilePage.
+     */
     public ProfilePage goToProfile() {
         clickUserNameDropdownMenu();
         clickProfileLink();

@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 public class LoginPivotalTest {
 
-    final private String EXPECTED_USER_NAME = "mirkofer122020";
+    private static final String EXPECTED_USER_NAME = "mirkofer122020";
     //Page Objects
     private InitialPage initialPage;
     private LoginStep1Page loginStep1Page;
@@ -20,11 +20,17 @@ public class LoginPivotalTest {
     private HomePage homePage;
     private ProfilePage profilePage;
 
+    /**
+     * Hook that signs out a logged in user After running a test..
+     */
     @After
     public void tearDown() {
         profilePage.signOut();
     }
 
+    /**
+     * Test for Log In a user to Pivotal Tracker from GUI.
+     */
     @Test
     public void loginPivotalTest() {
         initialPage = new InitialPage();

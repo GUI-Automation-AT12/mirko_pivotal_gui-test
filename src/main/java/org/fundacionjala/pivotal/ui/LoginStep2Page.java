@@ -3,7 +3,7 @@ package org.fundacionjala.pivotal.ui;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginStep2Page extends BasePage{
+public class LoginStep2Page extends BasePage {
     @FindBy(id = "credentials_password")
     private WebElement passwordTextBox;
 
@@ -19,6 +19,11 @@ public class LoginStep2Page extends BasePage{
         this.signInBtn.click();
     }
 
+    /**
+     * Fills the password and log a user in Pivotal Tracker.
+     * @param password
+     * @return a new HomePage.
+     */
     public HomePage signIn(final String password) {
         fillPassword(password);
         clickSignInBtn();

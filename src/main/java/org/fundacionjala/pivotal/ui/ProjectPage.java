@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class ProjectPage extends BasePage {
 
+    private static final int SLEEPING_TIME = 5000;
+
     @FindBy(css = ".tc_projects_dropdown_link.tc_context_name")
     private WebElement projectDropdownList;
 
@@ -13,7 +15,7 @@ public class ProjectPage extends BasePage {
 
     private void sleepToShowPage() {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(SLEEPING_TIME);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -27,6 +29,10 @@ public class ProjectPage extends BasePage {
         this.allProjectsLink.click();
     }
 
+    /**
+     * Drives to a Page of All Projects.
+     * @return a new AllProjectsPage.
+     */
     public AllProjectsPage goToProjectsList() {
         sleepToShowPage();
         clickProjectDropdownList();

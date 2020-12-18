@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Environment {
+public final class Environment {
 
     private static final Logger LOGGER = LogManager.getLogger(Environment.class);
     private static final String PROPERTIES_FILE_PATH = "gradle.properties";
@@ -15,6 +15,10 @@ public class Environment {
     private Properties property;
     private FileReader reader;
 
+    /**
+     * If singleInstance was not instanced before it create a new one, otherwise return the created.
+     * @return singleInstance
+     */
     public static Environment getInstance() {
         if (singleInstance == null) {
             singleInstance = new Environment(PROPERTIES_FILE_PATH);
@@ -24,7 +28,6 @@ public class Environment {
 
     /**
      * Initializes an instance of properties files.
-     *
      * @param propertiesPath
      */
     private Environment(final String propertiesPath) {

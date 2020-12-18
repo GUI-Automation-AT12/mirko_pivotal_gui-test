@@ -21,28 +21,38 @@ public class ProjectTest {
     private ProjectPage projectPage;
     private AllProjectsPage allProjectsPage;
     private ProjectSettingsPage projectSettingsPage;
-
     private String firstProjectName;
 
+    /**
+     * Hook that log the user before running a test.
+     */
     @Before
     public void setUp() {
         loginStep2Page = new LoginStep2Page();
         homePage = loginStep2Page.signIn(Environment.getInstance().getUserPassword());
     }
+
+    /**
+     * Hook that deletes a created project and close Firefox after running a test.
+     */
     @After
     public void tearDown() {
-        if("ProjectTest".equals(firstProjectName)) {
+        if ("ProjectTest".equals(firstProjectName)) {
             projectSettingsPage = allProjectsPage.goToFirstProjectSettings();
             projectSettingsPage.deleteProject();
         }
         WebDriverManager.getInstance().getWebDriver().quit();
     }
+
+    /**
+     * Test to verify the creation of a Pivotal project.
+     */
     @Test
     public void createProjectTest() {
         createProjectPage = homePage.goToProjectCreation();
         projectPage = createProjectPage.createProject("ProjectTest");
         allProjectsPage = projectPage.goToProjectsList();
-        firstProjectName = allProjectsPage.getFirstListedProject();
+        this.firstProjectName = allProjectsPage.getFirstListedProject();
         assertEquals("ProjectTest", firstProjectName);
     }
 }

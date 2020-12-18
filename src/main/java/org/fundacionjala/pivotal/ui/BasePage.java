@@ -6,8 +6,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
-    protected WebDriver webDriver;
-    protected WebDriverWait webDriverWait;
+    private WebDriver webDriver;
+    private WebDriverWait webDriverWait;
 
     protected BasePage() {
         this.webDriver = WebDriverManager.getInstance().getWebDriver();
@@ -15,6 +15,18 @@ public class BasePage {
         PageFactory.initElements(this.webDriver, this);
     }
 
+    /**
+     * Get webDriver of the BasePage.
+     * @return webDriver
+     */
+    public WebDriver getWebDriver() {
+        return webDriver;
+    }
+
+    /**
+     * It allows to go to a new Url from any page.
+     * @param url
+     */
     public void goToUrl(final String url) {
         this.webDriver.get(url);
     }

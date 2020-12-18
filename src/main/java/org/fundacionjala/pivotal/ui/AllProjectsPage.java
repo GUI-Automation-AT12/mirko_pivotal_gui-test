@@ -16,10 +16,18 @@ public class AllProjectsPage extends BasePage {
 
     }
 
-    public String getFirstListedProject () {
+    /**
+     * Method that searches for the first element of the list of projects and return its name.
+     * @return the text of firstListedProject.
+     */
+    public String getFirstListedProject() {
         return this.firstListedProject.getText();
     }
 
+    /**
+     * Method to click the settings link of the first listed project.
+     * @return a new ProjectSettingsPage.
+     */
     public ProjectSettingsPage goToFirstProjectSettings() {
         clickFirstProjectSettingsLink();
         return new ProjectSettingsPage();

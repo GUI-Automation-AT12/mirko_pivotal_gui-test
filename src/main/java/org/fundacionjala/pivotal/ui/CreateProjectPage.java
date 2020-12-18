@@ -1,11 +1,9 @@
 package org.fundacionjala.pivotal.ui;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CreateProjectPage extends BasePage{
+public class CreateProjectPage extends BasePage {
 
     @FindBy(name = "project_name")
     private WebElement projectNameTextBox;
@@ -39,6 +37,11 @@ public class CreateProjectPage extends BasePage{
         this.createBtn.click();
     }
 
+    /**
+     * Creates a project from GUI.
+     * @param projectName
+     * @return a new ProjectPage.
+     */
     public ProjectPage createProject(final String projectName) {
         fillProjectNameTextBox(projectName);
         clickAccountDropdownList();
