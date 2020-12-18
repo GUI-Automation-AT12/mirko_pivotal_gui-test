@@ -2,11 +2,16 @@ package org.fundacionjala.pivotal;
 
 import org.fundacionjala.core.config.Environment;
 import org.fundacionjala.core.selenium.WebDriverManager;
-import org.fundacionjala.pivotal.ui.*;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
-import static org.junit.Assert.*;
+import org.fundacionjala.pivotal.ui.LoginStep2Page;
+import org.fundacionjala.pivotal.ui.HomePage;
+import org.fundacionjala.pivotal.ui.CreateProjectPage;
+import org.fundacionjala.pivotal.ui.ProjectPage;
+import org.fundacionjala.pivotal.ui.AllProjectsPage;
+import org.fundacionjala.pivotal.ui.ProjectSettingsPage;
+import org.junit.Test;
+import org.junit.Before;
+import org.junit.After;
+import static org.junit.Assert.assertEquals;
 
 public class ProjectTest {
     //Page Objects
@@ -19,12 +24,12 @@ public class ProjectTest {
 
     private String firstProjectName;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         loginStep2Page = new LoginStep2Page();
         homePage = loginStep2Page.signIn(Environment.getInstance().getUserPassword());
     }
-    @AfterEach
+    @After
     public void tearDown() {
         if("ProjectTest".equals(firstProjectName)) {
             projectSettingsPage = allProjectsPage.goToFirstProjectSettings();

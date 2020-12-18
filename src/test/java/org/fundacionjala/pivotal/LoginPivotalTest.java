@@ -1,16 +1,14 @@
 package org.fundacionjala.pivotal;
 
 import org.fundacionjala.core.config.Environment;
-import org.fundacionjala.core.selenium.WebDriverManager;
-import org.fundacionjala.pivotal.ui.*;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
-import static org.junit.Assert.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.util.concurrent.TimeUnit;
+import org.fundacionjala.pivotal.ui.InitialPage;
+import org.fundacionjala.pivotal.ui.LoginStep1Page;
+import org.fundacionjala.pivotal.ui.LoginStep2Page;
+import org.fundacionjala.pivotal.ui.HomePage;
+import org.fundacionjala.pivotal.ui.ProfilePage;
+import org.junit.Test;
+import org.junit.After;
+import static org.junit.Assert.assertEquals;
 
 public class LoginPivotalTest {
 
@@ -22,7 +20,7 @@ public class LoginPivotalTest {
     private HomePage homePage;
     private ProfilePage profilePage;
 
-    @AfterEach
+    @After
     public void tearDown() {
         profilePage.signOut();
     }
