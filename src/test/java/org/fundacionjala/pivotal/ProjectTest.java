@@ -1,12 +1,18 @@
 package org.fundacionjala.pivotal;
 
-import org.fundacionjala.pivotal.ui.*;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
-import static org.junit.Assert.*;
-
-import org.openqa.selenium.*;
+import org.fundacionjala.pivotal.ui.InitialPage;
+import org.fundacionjala.pivotal.ui.LoginStep1Page;
+import org.fundacionjala.pivotal.ui.LoginStep2Page;
+import org.fundacionjala.pivotal.ui.HomePage;
+import org.fundacionjala.pivotal.ui.CreateProjectPage;
+import org.fundacionjala.pivotal.ui.ProjectPage;
+import org.fundacionjala.pivotal.ui.AllProjectsPage;
+import org.fundacionjala.pivotal.ui.ProjectSettingsPage;
+import org.junit.Test;
+import org.junit.Before;
+import org.junit.After;
+import static org.junit.Assert.assertEquals;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -27,7 +33,7 @@ public class ProjectTest {
 
     private String firstProjectName;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");
         this.webDriver = new FirefoxDriver();
@@ -40,7 +46,7 @@ public class ProjectTest {
         loginStep2Page = loginStep1Page.goToLoginStep2("mirkofer.122020@gmail.com");
         homePage = loginStep2Page.signIn("622Mirko###");
     }
-    @AfterEach
+    @After
     public void tearDown() {
         webDriver.get("https://www.pivotaltracker.com/projects");
         if("ProjectTest".equals(firstProjectName)) {
