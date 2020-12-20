@@ -1,6 +1,7 @@
 package org.fundacionjala.pivotal;
 
-import org.fundacionjala.core.config.Environment;
+import org.fundacionjala.core.selenium.WebDriverManager;
+import org.fundacionjala.core.throwables.EnvironmentReadingException;
 import org.fundacionjala.pivotal.ui.InitialPage;
 import org.fundacionjala.pivotal.ui.LoginStep1Page;
 import org.fundacionjala.pivotal.ui.LoginStep2Page;
@@ -26,18 +27,19 @@ public class LoginPivotalTest {
     @After
     public void tearDown() {
         profilePage.signOut();
+        WebDriverManager.getInstance().quit();
     }
 
     /**
      * Test for Log In a user to Pivotal Tracker from GUI.
      */
     @Test
-    public void loginPivotalTest() {
+    public void loginPivotalTest() throws EnvironmentReadingException {
         initialPage = new InitialPage();
-        initialPage.goToUrl(Environment.getInstance().getBaseUrl());
+        initialPage.goToUrl(PivotalProperties.getInstance().getBaseUrl());
         loginStep1Page = initialPage.goToLoginStep1();
-        loginStep2Page = loginStep1Page.goToLoginStep2(Environment.getInstance().getUserEmail());
-        homePage = loginStep2Page.signIn(Environment.getInstance().getUserPassword());
+        loginStep2Page = loginStep1Page.goToLoginStep2(PivotalProperties.getInstance().getUserEmail());
+        homePage = loginStep2Page.signIn(PivotalProperties.getInstance().getUserPassword());
         profilePage = homePage.goToProfile();
         String actual = profilePage.getProfileUserNameAsString();
         assertEquals(actual, EXPECTED_USER_NAME);

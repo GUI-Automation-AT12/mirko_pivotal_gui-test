@@ -1,6 +1,6 @@
 package org.fundacionjala.core.selenium;
 
-import org.fundacionjala.core.config.Environment;
+import org.fundacionjala.core.config.FirefoxDriverProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,13 +24,13 @@ public final class WebDriverManager {
     }
 
     private WebDriverManager() {
-        System.setProperty("webdriver.gecko.driver", Environment.getInstance().getWebdriverGeckoDriver());
+        System.setProperty("webdriver.gecko.driver", FirefoxDriverProperties.getInstance().getWebdriverGeckoDriver());
         webDriver = new FirefoxDriver();
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().
-                implicitlyWait(Environment.getInstance().getImplicitWaitingSeconds(), TimeUnit.SECONDS);
+                implicitlyWait(FirefoxDriverProperties.getInstance().getImplicitWaitingSeconds(), TimeUnit.SECONDS);
         webDriverWait = new WebDriverWait(webDriver,
-                Environment.getInstance().getExplicitWaitingSeconds(), Environment.getInstance().getSleepingMillis());
+                FirefoxDriverProperties.getInstance().getExplicitWaitingSeconds());
     }
 
     /**
@@ -47,5 +47,13 @@ public final class WebDriverManager {
      */
     public WebDriverWait getWebDriverWait() {
         return webDriverWait;
+    }
+
+    /**
+     * Quits the webDriver and set webDriverManager single instance as null.
+     */
+    public void quit() {
+        this.webDriver.quit();
+        this.webDriverManager = null;
     }
 }
