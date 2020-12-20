@@ -1,5 +1,6 @@
-package org.fundacionjala.core.config;
+package org.fundacionjala.core.selenium;
 
+import org.fundacionjala.core.config.PropertiesFileReader;
 import org.fundacionjala.core.throwables.EnvironmentReadingException;
 
 public final class FirefoxDriverProperties {

@@ -1,5 +1,6 @@
-package org.fundacionjala.pivotal.ui;
+package org.fundacionjala.pivotal.ui.pages;
 
+import org.fundacionjala.core.selenium.WebDriverManager;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,7 +14,7 @@ public class ProjectSettingsPage extends BasePage {
     private WebElement confirmDeleteProjectBtn;
 
     private void scrollDownToFindDeleteProjectLink() {
-        JavascriptExecutor js = (JavascriptExecutor) super.getWebDriver();
+        JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getInstance().getWebDriver();
         js.executeScript("arguments[0].scrollIntoView();", this.deleteProjectLink);
     }
 

@@ -1,4 +1,4 @@
-package org.fundacionjala.pivotal;
+package org.fundacionjala.pivotal.config;
 
 import org.fundacionjala.core.config.PropertiesFileReader;
 import org.fundacionjala.core.throwables.EnvironmentReadingException;
