@@ -1,5 +1,6 @@
 package org.fundacionjala.pivotal.ui.pages;
 
+import org.fundacionjala.core.selenium.GuiInteractioner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -22,11 +23,11 @@ public class ProjectPage extends BasePage {
     }
 
     private void clickProjectDropdownList() {
-        this.projectDropdownList.click();
+        GuiInteractioner.clickWebElement(projectDropdownList);
     }
 
     private void clickAllProjectsLink() {
-        this.allProjectsLink.click();
+        GuiInteractioner.clickWebElement(allProjectsLink);
     }
 
     /**

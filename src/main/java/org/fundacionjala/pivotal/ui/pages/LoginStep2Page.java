@@ -1,5 +1,6 @@
 package org.fundacionjala.pivotal.ui.pages;
 
+import org.fundacionjala.core.selenium.GuiInteractioner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -11,12 +12,11 @@ public class LoginStep2Page extends BasePage {
     private WebElement signInBtn;
 
     private void fillPassword(final String password) {
-        this.passwordTextBox.clear();
-        this.passwordTextBox.sendKeys(password);
+        GuiInteractioner.fillWebElement(passwordTextBox, password);
     }
 
     private void clickSignInBtn() {
-        this.signInBtn.click();
+        GuiInteractioner.clickWebElement(signInBtn);
     }
 
     /**

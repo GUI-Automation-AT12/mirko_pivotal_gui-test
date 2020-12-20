@@ -1,5 +1,6 @@
 package org.fundacionjala.pivotal.ui.pages;
 
+import org.fundacionjala.core.selenium.GuiInteractioner;
 import org.fundacionjala.core.selenium.WebDriverManager;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -19,11 +20,11 @@ public class ProjectSettingsPage extends BasePage {
     }
 
     private void clickDeleteLink() {
-        this.deleteProjectLink.click();
+        GuiInteractioner.clickWebElement(deleteProjectLink);
     }
 
     private void clickConfirmDeleteBtn() {
-        this.confirmDeleteProjectBtn.click();
+        GuiInteractioner.clickWebElement(this.confirmDeleteProjectBtn);
     }
 
     /**

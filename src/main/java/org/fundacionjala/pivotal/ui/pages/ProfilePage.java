@@ -1,5 +1,6 @@
 package org.fundacionjala.pivotal.ui.pages;
 
+import org.fundacionjala.core.selenium.GuiInteractioner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -15,11 +16,11 @@ public class ProfilePage extends BasePage {
     private WebElement signOutBtn;
 
     private void clickUserNameDropdownMenu() {
-        this.userNameDropdownMenu.click();
+        GuiInteractioner.clickWebElement(userNameDropdownMenu);
     }
 
     private void clickSignOutBtn() {
-        this.signOutBtn.click();
+        GuiInteractioner.clickWebElement(signOutBtn);
     }
 
     /**
@@ -27,7 +28,7 @@ public class ProfilePage extends BasePage {
      * @return User name as String.
      */
     public String getProfileUserNameAsString() {
-        return this.profileUserName.getText();
+        return GuiInteractioner.getTextFromWebElement(profileUserName);
     }
 
     /**

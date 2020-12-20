@@ -1,5 +1,6 @@
 package org.fundacionjala.pivotal.ui.pages;
 
+import org.fundacionjala.core.selenium.GuiInteractioner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -12,7 +13,7 @@ public class AllProjectsPage extends BasePage {
     private WebElement firstProjectSettingsLink;
 
     private void clickFirstProjectSettingsLink() {
-        this.firstProjectSettingsLink.click();
+        GuiInteractioner.clickWebElement(firstProjectSettingsLink);
     }
 
     /**
@@ -20,7 +21,7 @@ public class AllProjectsPage extends BasePage {
      * @return the text of firstListedProject.
      */
     public String getFirstListedProject() {
-        return this.firstListedProject.getText();
+        return GuiInteractioner.getTextFromWebElement(firstListedProject);
     }
 
     /**

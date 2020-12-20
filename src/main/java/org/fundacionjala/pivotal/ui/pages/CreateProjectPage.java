@@ -1,5 +1,6 @@
 package org.fundacionjala.pivotal.ui.pages;
 
+import org.fundacionjala.core.selenium.GuiInteractioner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -21,20 +22,19 @@ public class CreateProjectPage extends BasePage {
     private WebElement createBtn;
 
     private void fillProjectNameTextBox(final String projectName) {
-        this.projectNameTextBox.clear();
-        this.projectNameTextBox.sendKeys(projectName);
+        GuiInteractioner.fillWebElement(projectNameTextBox, projectName);
     }
 
     private void clickAccountDropdownList() {
-        this.accountDropdownList.click();
+        GuiInteractioner.clickWebElement(accountDropdownList);
     }
 
     private void clickAccount1Option() {
-        this.account1Option.click();
+        GuiInteractioner.clickWebElement(account1Option);
     }
 
     private void clickCreateBtn() {
-        this.createBtn.click();
+        GuiInteractioner.clickWebElement(createBtn);
     }
 
     /**

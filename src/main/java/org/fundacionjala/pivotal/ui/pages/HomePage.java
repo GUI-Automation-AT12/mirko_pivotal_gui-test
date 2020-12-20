@@ -1,5 +1,6 @@
 package org.fundacionjala.pivotal.ui.pages;
 
+import org.fundacionjala.core.selenium.GuiInteractioner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -15,15 +16,15 @@ public class HomePage extends BasePage {
     private WebElement createProjectBtn;
 
     private void clickUserNameDropdownMenu() {
-        this.userNameDropdownMenu.click();
+        GuiInteractioner.clickWebElement(userNameDropdownMenu);
     }
 
     private void clickProfileLink() {
-        this.profileLink.click();
+        GuiInteractioner.clickWebElement(profileLink);
     }
 
     private void clickCreateProjectBtn() {
-        this.createProjectBtn.click();
+        GuiInteractioner.clickWebElement(createProjectBtn);
     }
 
     /**

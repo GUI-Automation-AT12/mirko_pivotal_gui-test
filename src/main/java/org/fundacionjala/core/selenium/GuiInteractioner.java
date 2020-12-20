@@ -1,6 +1,5 @@
 package org.fundacionjala.core.selenium;
 
-import org.fundacionjala.core.throwables.EnvironmentReadingException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,7 +9,7 @@ public final class GuiInteractioner {
     private GuiInteractioner() {
     }
 
-    private static WebElement getWebElementFormBy(final By by) throws EnvironmentReadingException {
+    private static WebElement getWebElementFormBy(final By by) {
         return WebDriverManager.getInstance().getWebDriver().findElement(by);
     }
 
@@ -29,7 +28,7 @@ public final class GuiInteractioner {
      * @param by
      * @param text
      */
-    public static void fillWebElement(final By by, final String text) throws EnvironmentReadingException {
+    public static void fillWebElement(final By by, final String text) {
         fillWebElement(getWebElementFormBy(by), text);
     }
 
@@ -37,7 +36,7 @@ public final class GuiInteractioner {
      * Waits for a WebElement to be clickable and clicks it.
      * @param webElement
      */
-    public static void clickWebElement(final WebElement webElement) throws EnvironmentReadingException {
+    public static void clickWebElement(final WebElement webElement) {
         WebDriverManager.getInstance().getWebDriverWait().until(ExpectedConditions.elementToBeClickable(webElement));
         webElement.click();
     }
@@ -46,7 +45,7 @@ public final class GuiInteractioner {
      * Provide clickWebElement method to support By objects.
      * @param by
      */
-    public static void clickWebElement(final By by) throws EnvironmentReadingException {
+    public static void clickWebElement(final By by) {
         clickWebElement(getWebElementFormBy(by));
     }
 
@@ -64,7 +63,7 @@ public final class GuiInteractioner {
      * @param by
      * @return String text from the By.
      */
-    public static String getTextFromWebElement(final By by) throws EnvironmentReadingException {
+    public static String getTextFromWebElement(final By by) {
         return getTextFromWebElement(getWebElementFormBy(by));
     }
 }

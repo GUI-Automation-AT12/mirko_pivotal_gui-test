@@ -1,5 +1,6 @@
 package org.fundacionjala.pivotal.ui.pages;
 
+import org.fundacionjala.core.selenium.GuiInteractioner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -16,7 +17,7 @@ public class LoginStep1Page extends BasePage {
     }
 
     private void clickNextBtn() {
-        this.nextBtn.click();
+        GuiInteractioner.clickWebElement(nextBtn);
     }
 
     /**
