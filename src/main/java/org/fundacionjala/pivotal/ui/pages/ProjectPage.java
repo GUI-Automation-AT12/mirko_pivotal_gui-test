@@ -1,5 +1,7 @@
-package org.fundacionjala.pivotal.ui;
+package org.fundacionjala.pivotal.ui.pages;
 
+import org.fundacionjala.pivotal.ui.pages.AllProjectsPage;
+import org.fundacionjala.pivotal.ui.pages.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

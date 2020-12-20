@@ -1,9 +1,11 @@
-package org.fundacionjala.pivotal.ui;
+package org.fundacionjala.pivotal.ui.component;
 
+import org.fundacionjala.pivotal.ui.pages.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ProfilePage extends BasePage{
+public class UserMenu extends BasePage {
+
     @FindBy(css = "#general.card ul.rows.read li div")
     private WebElement profileUserName;
 
