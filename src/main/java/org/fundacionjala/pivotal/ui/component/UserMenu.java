@@ -1,10 +1,12 @@
-package org.fundacionjala.pivotal.ui.pages;
+package org.fundacionjala.pivotal.ui.component;
 
 import org.fundacionjala.core.selenium.GuiInteractioner;
+import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProfilePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.fundacionjala.pivotal.ui.pages.BasePage;
 
-public class HomePage extends BasePage {
+public class UserMenu extends BasePage {
 
     @FindBy(css = ".tc_pull_right:nth-child(3) .zWDds__Button")
     private WebElement userNameDropdownMenu;
@@ -12,8 +14,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[@class='Dropdown__options Dropdown__options--small']/div/div/a[1]")
     private WebElement profileLink;
 
-    @FindBy(id = "create-project-button")
-    private WebElement createProjectBtn;
+    @FindBy(xpath = "//div[@class='Dropdown__options Dropdown__options--small']"
+            + "/div/div/form/button[contains(@data-aid,'signout')]")
+    private WebElement signOutBtn;
 
     private void clickUserNameDropdownMenu() {
         GuiInteractioner.clickWebElement(userNameDropdownMenu);
@@ -23,22 +26,20 @@ public class HomePage extends BasePage {
         GuiInteractioner.clickWebElement(profileLink);
     }
 
-    private void clickCreateProjectBtn() {
-        GuiInteractioner.clickWebElement(createProjectBtn);
+    private void clickSignOutBtn() {
+        GuiInteractioner.clickWebElement(signOutBtn);
     }
-
     /**
-     * Allows to go to Project Creation Page from GUI.
-     * @return CreateProjectPage;
+     * Allows sign a user out from GUI.
      */
-    public CreateProjectPage goToProjectCreation() {
-        clickCreateProjectBtn();
-        return new CreateProjectPage();
+    public void signOut() {
+        clickUserNameDropdownMenu();
+        clickSignOutBtn();
     }
 
     /**
-     * Allows to go to Profile Page from GUI.
-     * @return a new ProfilePage.
+     * Allows user to drive to Profile Page.
+     * @return ProfilePage
      */
     public ProfilePage goToProfile() {
         clickUserNameDropdownMenu();

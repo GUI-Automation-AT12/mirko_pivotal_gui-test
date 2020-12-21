@@ -1,6 +1,7 @@
-package org.fundacionjala.pivotal.ui.pages;
+package org.fundacionjala.pivotal.ui.pages.LogedOut;
 
 import org.fundacionjala.core.selenium.GuiInteractioner;
+import org.fundacionjala.pivotal.ui.pages.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

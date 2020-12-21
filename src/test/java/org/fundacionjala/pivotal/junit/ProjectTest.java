@@ -1,17 +1,17 @@
-package org.fundacionjala.pivotal;
+package org.fundacionjala.pivotal.junit;
 
 import org.fundacionjala.core.selenium.WebDriverManager;
 import org.fundacionjala.core.throwables.EnvironmentReadingException;
 import org.fundacionjala.pivotal.config.PivotalProperties;
 import org.fundacionjala.pivotal.ui.WebTransporter;
-import org.fundacionjala.pivotal.ui.pages.InitialPage;
-import org.fundacionjala.pivotal.ui.pages.LoginStep1Page;
-import org.fundacionjala.pivotal.ui.pages.LoginStep2Page;
-import org.fundacionjala.pivotal.ui.pages.HomePage;
-import org.fundacionjala.pivotal.ui.pages.CreateProjectPage;
-import org.fundacionjala.pivotal.ui.pages.ProjectPage;
-import org.fundacionjala.pivotal.ui.pages.AllProjectsPage;
-import org.fundacionjala.pivotal.ui.pages.ProjectSettingsPage;
+import org.fundacionjala.pivotal.ui.pages.LogedOut.InitialPage;
+import org.fundacionjala.pivotal.ui.pages.LogedOut.LoginStep1Page;
+import org.fundacionjala.pivotal.ui.pages.LogedOut.LoginStep2Page;
+import org.fundacionjala.pivotal.ui.pages.LoggedIn.DashboardPage;
+import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectPage;
+import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectsSummaryPage;
+import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectSettingsPage;
+import org.fundacionjala.pivotal.ui.popups.CreateProjectPopup;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -25,10 +25,10 @@ public class ProjectTest {
     private InitialPage initialPage;
     private LoginStep1Page loginStep1Page;
     private LoginStep2Page loginStep2Page;
-    private HomePage homePage;
-    private CreateProjectPage createProjectPage;
+    private DashboardPage dashboardPage;
+    private CreateProjectPopup createProjectPopup;
     private ProjectPage projectPage;
-    private AllProjectsPage allProjectsPage;
+    private ProjectsSummaryPage projectsSummaryPage;
     private ProjectSettingsPage projectSettingsPage;
     private String firstProjectName;
 
@@ -41,7 +41,7 @@ public class ProjectTest {
         initialPage = new InitialPage();
         loginStep1Page = initialPage.goToLoginStep1();
         loginStep2Page = loginStep1Page.goToLoginStep2(PivotalProperties.getInstance().getUserEmail());
-        homePage = loginStep2Page.signIn(PivotalProperties.getInstance().getUserPassword());
+        dashboardPage = loginStep2Page.signIn(PivotalProperties.getInstance().getUserPassword());
     }
 
     /**
@@ -50,7 +50,7 @@ public class ProjectTest {
     @After
     public void tearDown() {
         if ("ProjectTest".equals(firstProjectName)) {
-            projectSettingsPage = allProjectsPage.goToFirstProjectSettings();
+            projectSettingsPage = projectsSummaryPage.goToFirstProjectSettings();
             projectSettingsPage.deleteProject();
         }
         WebDriverManager.getInstance().quit();
@@ -61,10 +61,10 @@ public class ProjectTest {
      */
     @Test
     public void createProjectTest() {
-        createProjectPage = homePage.goToProjectCreation();
-        projectPage = createProjectPage.createProject("ProjectTest");
-        allProjectsPage = projectPage.goToProjectsList();
-        this.firstProjectName = allProjectsPage.getFirstListedProject();
+        createProjectPopup = dashboardPage.goToProjectCreation();
+        projectPage = createProjectPopup.createProject("ProjectTest");
+        projectsSummaryPage = projectPage.goToProjectsList();
+        this.firstProjectName = projectsSummaryPage.getFirstListedProject();
         assertEquals("ProjectTest", firstProjectName);
     }
 }

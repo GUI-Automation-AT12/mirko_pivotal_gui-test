@@ -1,6 +1,7 @@
-package org.fundacionjala.pivotal.ui.pages;
+package org.fundacionjala.pivotal.ui.pages.LogedOut;
 
 import org.fundacionjala.core.selenium.GuiInteractioner;
+import org.fundacionjala.pivotal.ui.pages.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -12,8 +13,7 @@ public class LoginStep1Page extends BasePage {
     private WebElement nextBtn;
 
     private void fillUsernameOrEmail(final String usernameOrEmail) {
-        this.usernameOrEmailTextBox.clear();
-        this.usernameOrEmailTextBox.sendKeys(usernameOrEmail);
+        GuiInteractioner.fillWebElement(usernameOrEmailTextBox, usernameOrEmail);
     }
 
     private void clickNextBtn() {

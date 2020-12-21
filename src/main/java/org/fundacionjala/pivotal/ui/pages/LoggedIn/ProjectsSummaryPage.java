@@ -1,10 +1,10 @@
-package org.fundacionjala.pivotal.ui.pages;
+package org.fundacionjala.pivotal.ui.pages.LoggedIn;
 
 import org.fundacionjala.core.selenium.GuiInteractioner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AllProjectsPage extends BasePage {
+public class ProjectsSummaryPage extends BaseLoggedInPage {
 
     @FindBy(xpath = "//div[@class='projects column'][1]/a")
     private WebElement firstListedProject;
@@ -17,16 +17,16 @@ public class AllProjectsPage extends BasePage {
     }
 
     /**
-     * Method that searches for the first element of the list of projects and return its name.
-     * @return the text of firstListedProject.
+     * First project listed in the All Projects Page.
+     * @return first listed project's name.
      */
     public String getFirstListedProject() {
         return GuiInteractioner.getTextFromWebElement(firstListedProject);
     }
 
     /**
-     * Method to click the settings link of the first listed project.
-     * @return a new ProjectSettingsPage.
+     * Allow to drives the user to Project Settings Page.
+     * @return ProjectSettingsPage
      */
     public ProjectSettingsPage goToFirstProjectSettings() {
         clickFirstProjectSettingsLink();

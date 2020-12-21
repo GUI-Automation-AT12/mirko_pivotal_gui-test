@@ -1,10 +1,10 @@
-package org.fundacionjala.pivotal.ui.pages;
+package org.fundacionjala.pivotal.ui.pages.LoggedIn;
 
 import org.fundacionjala.core.selenium.GuiInteractioner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ProjectPage extends BasePage {
+public class ProjectPage extends BaseLoggedInPage {
 
     private static final int SLEEPING_TIME = 5000;
 
@@ -12,7 +12,7 @@ public class ProjectPage extends BasePage {
     private WebElement projectDropdownList;
 
     @FindBy(css = ".tc_projects_menu_show_all")
-    private WebElement allProjectsLink;
+    private WebElement projectsSummaryLink;
 
     private void sleepToShowPage() {
         try {
@@ -26,18 +26,18 @@ public class ProjectPage extends BasePage {
         GuiInteractioner.clickWebElement(projectDropdownList);
     }
 
-    private void clickAllProjectsLink() {
-        GuiInteractioner.clickWebElement(allProjectsLink);
+    private void clickProjectsSummaryLink() {
+        GuiInteractioner.clickWebElement(projectsSummaryLink);
     }
 
     /**
      * Drives to a Page of All Projects.
-     * @return a new AllProjectsPage.
+     * @return a new ProjectsSummaryPage.
      */
-    public AllProjectsPage goToProjectsList() {
+    public ProjectsSummaryPage goToProjectsList() {
         sleepToShowPage();
         clickProjectDropdownList();
-        clickAllProjectsLink();
-        return new AllProjectsPage();
+        clickProjectsSummaryLink();
+        return new ProjectsSummaryPage();
     }
 }

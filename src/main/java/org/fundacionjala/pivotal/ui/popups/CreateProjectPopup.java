@@ -1,10 +1,12 @@
-package org.fundacionjala.pivotal.ui.pages;
+package org.fundacionjala.pivotal.ui.popups;
 
 import org.fundacionjala.core.selenium.GuiInteractioner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.fundacionjala.pivotal.ui.pages.BasePage;
+import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectPage;
 
-public class CreateProjectPage extends BasePage {
+public class CreateProjectPopup extends BasePage {
 
     @FindBy(name = "project_name")
     private WebElement projectNameTextBox;

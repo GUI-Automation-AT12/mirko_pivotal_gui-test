@@ -1,6 +1,8 @@
-package org.fundacionjala.pivotal.ui.pages;
+package org.fundacionjala.pivotal.ui.pages.LogedOut;
 
 import org.fundacionjala.core.selenium.GuiInteractioner;
+import org.fundacionjala.pivotal.ui.pages.BasePage;
+import org.fundacionjala.pivotal.ui.pages.LoggedIn.DashboardPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -22,11 +24,11 @@ public class LoginStep2Page extends BasePage {
     /**
      * Fills the password and log a user in Pivotal Tracker.
      * @param password
-     * @return a new HomePage.
+     * @return a new DashboardPage.
      */
-    public HomePage signIn(final String password) {
+    public DashboardPage signIn(final String password) {
         fillPassword(password);
         clickSignInBtn();
-        return new HomePage();
+        return new DashboardPage();
     }
 }
