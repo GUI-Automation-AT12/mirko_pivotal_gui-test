@@ -16,7 +16,6 @@ public class LoginSteps {
     private InitialPage initialPage;
     private LoginStep1Page loginStep1Page;
     private LoginStep2Page loginStep2Page;
-    private DashboardPage dashboardPage;
 
     /**
      * StepDef to log in a user.
@@ -29,6 +28,6 @@ public class LoginSteps {
         WebTransporter.navigateToPage();
         loginStep1Page = initialPage.goToLoginStep1();
         loginStep2Page = loginStep1Page.goToLoginStep2(PivotalProperties.getInstance().getUserEmail());
-        dashboardPage = loginStep2Page.signIn(PivotalProperties.getInstance().getUserPassword());
+        loginStep2Page.signIn(PivotalProperties.getInstance().getUserPassword());
     }
 }

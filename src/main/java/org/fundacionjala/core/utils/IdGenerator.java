@@ -1,5 +1,7 @@
 package org.fundacionjala.core.utils;
 
+import java.util.UUID;
+
 public final class IdGenerator {
 
     private IdGenerator() {
@@ -10,6 +12,6 @@ public final class IdGenerator {
      * @return UniqueId
      */
     public static String getUniqueId() {
-        return null;
+        return String.valueOf(UUID.randomUUID().node());
     }
 }

@@ -7,7 +7,7 @@ Feature: Edit User Profile
     When I navigate to My Profile page
       And I edit My Profile with the following information
         | User name | Updated User name UNIQUE_ID |
-        | Name      | Updated name UNIQUE_ID      |
+        | Name      | Updated name                |
         | Initials  | UU                          |
     Then "Changed saved" message should be displayed in My Profile section
       And the user information should be updated in My Profile section
