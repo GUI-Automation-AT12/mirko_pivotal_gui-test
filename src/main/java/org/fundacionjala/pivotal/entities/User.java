@@ -19,36 +19,64 @@ public class User {
 
     // Email & Password
 
-    public void setUserName(String userName) {
-        this.userName = userName.replaceAll("UNIQUE_ID", IdGenerator.getUniqueId());
+    /**
+     * Sets UserName to a User.
+     * @param userUserName
+     */
+    public void setUserName(final String userUserName) {
+        userName = userUserName.replaceAll("UNIQUE_ID", IdGenerator.getUniqueId());
     }
 
+    /**
+     * Gets the UserName from a User.
+     * @return UserName
+     */
     public String getUserName() {
         return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * Sets Name to a User.
+     * @param uName
+     */
+    public void setName(final String uName) {
+        this.name = uName;
     }
 
+    /**
+     * Gets the Name from a User.
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
-    public void setInitials(String initials) {
-        this.initials = initials;
+    /**
+     * Sets Initials to a User.
+     * @param userInitials
+     */
+    public void setInitials(final String userInitials) {
+        this.initials = userInitials;
     }
 
+    /**
+     * Gets the Initials from a User.
+     * @return initials.
+     */
     public String getInitials() {
         return initials;
     }
 
-    public void processInformation(Map<String, String> userInformation) {
-        HashMap<String, Runnable> strategyMap = composeStrategyMap(userInformation);
+    /**
+     * Process all information stored for a User as a map.
+     * @param userInformation
+     */
+    public void processInformation(final Map<String, String> userInformation) {
+        HashMap<String, Runnable> strategyMap = composeMapStrategy(userInformation);
         userInformation.keySet().forEach(key -> strategyMap.get(key).run());
     }
 
-    private HashMap<String, Runnable> composeStrategyMap(Map<String, String> userInformation) {
+    private HashMap<String, Runnable> composeMapStrategy(final Map<String, String> userInformation) {
         HashMap<String, Runnable> strategyMap = new HashMap<>();
         strategyMap.put("User name", () -> setUserName(userInformation.get("User name")));
         strategyMap.put("Name", () -> setName(userInformation.get("Name")));

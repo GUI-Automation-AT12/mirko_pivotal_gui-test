@@ -1,4 +1,6 @@
 package org.fundacionjala.pivotal.ui.component;
 
-public class TopMenu {
+import org.fundacionjala.pivotal.ui.pages.BasePage;
+
+public class TopMenu extends BasePage {
 }

@@ -15,6 +15,10 @@ public class ProfileSteps {
     private TopMenu topMenu;
 
 
+    /**
+     * StepDef to edit user Profile receiving a Data Table.
+     * @param userInformation
+     */
     @When("^I edit My Profile with the following information$")
     public void editMyProfile(final Map<String, String> userInformation) {
 

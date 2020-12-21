@@ -1,11 +1,12 @@
-package org.fundacionjala.pivotal.ui.pages;
+package org.fundacionjala.pivotal.ui.pages.LoggedIn;
 
-import org.fundacionjala.pivotal.ui.pages.BasePage;
+import org.fundacionjala.core.selenium.GuiInteractioner;
+import org.fundacionjala.core.selenium.WebDriverManager;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ProjectSettingsPage extends BasePage {
+public class ProjectSettingsPage extends BaseLoggedInPage {
 
     @FindBy(id = "delete_link")
     private WebElement deleteProjectLink;
@@ -14,18 +15,21 @@ public class ProjectSettingsPage extends BasePage {
     private WebElement deleteProjectBtn;
 
     private void scrollDownToFindDeleteProjectLink() {
-        JavascriptExecutor js = (JavascriptExecutor) super.webDriver;
+        JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getInstance().getWebDriver();
         js.executeScript("arguments[0].scrollIntoView();", this.deleteProjectLink);
     }
 
     private void clickDeleteLink() {
-        this.deleteProjectLink.click();
+        GuiInteractioner.clickWebElement(deleteProjectLink);
     }
 
     private void clickDeleteBtn() {
-        this.deleteProjectBtn.click();
+        GuiInteractioner.clickWebElement(deleteProjectBtn);
     }
 
+    /**
+     * Allows the user to delete a project from GUI.
+     */
     public void deleteProject() {
         scrollDownToFindDeleteProjectLink();
         clickDeleteLink();

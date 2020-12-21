@@ -1,9 +1,10 @@
 package org.fundacionjala.pivotal.ui.popups;
 
-import org.fundacionjala.pivotal.ui.pages.BasePage;
-import org.fundacionjala.pivotal.ui.pages.ProjectPage;
+import org.fundacionjala.core.selenium.GuiInteractioner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.fundacionjala.pivotal.ui.pages.BasePage;
+import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectPage;
 
 public class CreateProjectPopup extends BasePage {
 
@@ -23,22 +24,26 @@ public class CreateProjectPopup extends BasePage {
     private WebElement createBtn;
 
     private void fillProjectNameTextBox(final String projectName) {
-        this.projectNameTextBox.clear();
-        this.projectNameTextBox.sendKeys(projectName);
+        GuiInteractioner.fillWebElement(projectNameTextBox, projectName);
     }
 
     private void clickAccountDropdownList() {
-        this.accountDropdownList.click();
+        GuiInteractioner.clickWebElement(accountDropdownList);
     }
 
     private void clickAccount1Option() {
-        this.account1Option.click();
+        GuiInteractioner.clickWebElement(account1Option);
     }
 
     private void clickCreateBtn() {
-        this.createBtn.click();
+        GuiInteractioner.clickWebElement(createBtn);
     }
 
+    /**
+     * Creates a project from GUI.
+     * @param projectName
+     * @return a new ProjectPage.
+     */
     public ProjectPage createProject(final String projectName) {
         fillProjectNameTextBox(projectName);
         clickAccountDropdownList();

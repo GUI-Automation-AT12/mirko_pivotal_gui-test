@@ -1,11 +1,14 @@
 package org.fundacionjala.pivotal.cucumber.steps;
 
 import io.cucumber.java.en.Given;
-import org.fundacionjala.core.config.Environment;
-import org.fundacionjala.pivotal.ui.pages.HomePage;
-import org.fundacionjala.pivotal.ui.pages.InitialPage;
-import org.fundacionjala.pivotal.ui.pages.LoginStep1Page;
-import org.fundacionjala.pivotal.ui.pages.LoginStep2Page;
+import org.fundacionjala.pivotal.config.PivotalProperties;
+import org.fundacionjala.pivotal.ui.WebTransporter;
+import org.fundacionjala.pivotal.ui.pages.LoggedIn.DashboardPage;
+import org.fundacionjala.pivotal.ui.pages.LogedOut.InitialPage;
+import org.fundacionjala.pivotal.ui.pages.LogedOut.LoginStep1Page;
+import org.fundacionjala.pivotal.ui.pages.LogedOut.LoginStep2Page;
+
+import java.net.MalformedURLException;
 
 public class LoginSteps {
 
@@ -13,14 +16,19 @@ public class LoginSteps {
     private InitialPage initialPage;
     private LoginStep1Page loginStep1Page;
     private LoginStep2Page loginStep2Page;
-    private HomePage homePage;
+    private DashboardPage dashboardPage;
 
+    /**
+     * StepDef to log in a user.
+     * @param userAlias
+     * @throws MalformedURLException
+     */
     @Given("^I log in to Pivotal with (.*?) credentials$")
-    public void logInToPivotal(final String userAlias) {
+    public void logInToPivotal(final String userAlias) throws MalformedURLException {
         initialPage = new InitialPage();
-        initialPage.goToUrl(Environment.getInstance().getBaseUrl());
+        WebTransporter.navigateToPage();
         loginStep1Page = initialPage.goToLoginStep1();
-        loginStep2Page = loginStep1Page.goToLoginStep2(Environment.getInstance().getUserEmail());
-        homePage = loginStep2Page.signIn(Environment.getInstance().getUserPassword());
+        loginStep2Page = loginStep1Page.goToLoginStep2(PivotalProperties.getInstance().getUserEmail());
+        dashboardPage = loginStep2Page.signIn(PivotalProperties.getInstance().getUserPassword());
     }
 }
