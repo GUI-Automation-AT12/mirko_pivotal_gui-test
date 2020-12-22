@@ -50,13 +50,13 @@ public class ProfileSteps {
     @Then("my Name should be updated in the User Management Menu")
     public void myNameShouldBeUpdatedInTheUserManagementMenu() {
         String managementMenuTitle = profilePage.getUserManagementMenuTitleAsString();
-        assertEquals(user.getName(), managementMenuTitle);
+        assertEquals(user.getName().toUpperCase(), managementMenuTitle);
     }
 
     @Then("my User Name should be updated in the Top Menu")
     public void myUserNameShouldBeUpdatedInTheTopMenu() {
         String userNameFromTopMenu = profilePage.getTopMenu().getUserNameFromTopMenu();
-        assertEquals(user.getUserName(), userNameFromTopMenu);
+        assertEquals(user.getUserName().toUpperCase(), userNameFromTopMenu);
     }
 
     @When("I open the User Dropdown Menu from Top Menu")
@@ -69,7 +69,7 @@ public class ProfileSteps {
     public void theUserInformationShouldBeUpdatedInTheUserDropdownMenu() {
         Map<String, String> dropdownMenuInfo = profilePage.getTopMenu().getUserMenu().getUserInformationAsMap();
         assertEquals(user.getInitials(), dropdownMenuInfo.get("Underlying initials"));
-        assertEquals(user.getUserName(), dropdownMenuInfo.get("Details user name"));
+        assertEquals("@" + user.getUserName(), dropdownMenuInfo.get("Details user name"));
         assertEquals(user.getName(), dropdownMenuInfo.get("Details name"));
         assertEquals(user.getInitials(), dropdownMenuInfo.get("Details initials"));
     }

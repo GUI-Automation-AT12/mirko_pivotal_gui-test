@@ -6,9 +6,9 @@ Feature: Edit User Profile
     Given I log in to Pivotal with Editable User credentials
     When I navigate to My Profile page
       And I edit My Profile with the following information
-        | User name | User_UNIQUE_ID |
-        | Name      | Updated name          |
-        | Initials  | UU                    |
+        | User name | User_UNIQUE_ID  |
+        | Name      | Updated Name    |
+        | Initials  | UU              |
     Then "Changes saved" message should be displayed in My Profile section
       And the user information should be updated in My Profile section
     When I reload the page
