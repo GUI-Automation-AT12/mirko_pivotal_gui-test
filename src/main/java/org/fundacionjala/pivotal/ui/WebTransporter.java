@@ -41,6 +41,9 @@ public final class WebTransporter {
         WebDriverManager.getInstance().getWebDriver().navigate().to(new URL(url));
     }
 
+    /**
+     * Allows to reload the actual page.
+     */
     public static void reloadPage() {
         WebDriverManager.getInstance().getWebDriver().navigate().refresh();
     }

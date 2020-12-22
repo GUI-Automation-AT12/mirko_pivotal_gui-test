@@ -18,7 +18,8 @@ import static org.junit.Assert.assertEquals;
 
 public class LoginPivotalTest {
 
-    private static final String EXPECTED_USER_NAME = "mirkofer122020";
+    private static final String EXPECTED_EMAIL = PivotalProperties.getInstance().getUserEmail();
+
     //Page Objects
     private InitialPage initialPage;
     private LoginStep1Page loginStep1Page;
@@ -45,7 +46,7 @@ public class LoginPivotalTest {
         loginStep2Page = loginStep1Page.goToLoginStep2(PivotalProperties.getInstance().getUserEmail());
         dashboardPage = loginStep2Page.signIn(PivotalProperties.getInstance().getUserPassword());
         profilePage = dashboardPage.getTopMenu().openUserNameDropdownMenu().goToProfile();
-        String actual = profilePage.getProfileUserNameAsString();
-        assertEquals(actual, EXPECTED_USER_NAME);
+        String actual = profilePage.getProfileEmailAsString();
+        assertEquals(actual, EXPECTED_EMAIL);
     }
 }

@@ -3,7 +3,6 @@ package org.fundacionjala.pivotal.cucumber.steps;
 import io.cucumber.java.en.Given;
 import org.fundacionjala.pivotal.config.PivotalProperties;
 import org.fundacionjala.pivotal.ui.WebTransporter;
-import org.fundacionjala.pivotal.ui.pages.LoggedIn.DashboardPage;
 import org.fundacionjala.pivotal.ui.pages.LogedOut.InitialPage;
 import org.fundacionjala.pivotal.ui.pages.LogedOut.LoginStep1Page;
 import org.fundacionjala.pivotal.ui.pages.LogedOut.LoginStep2Page;

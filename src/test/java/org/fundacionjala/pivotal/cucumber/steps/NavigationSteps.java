@@ -16,6 +16,9 @@ public class NavigationSteps {
         WebTransporter.navigateToPage(pageName);
     }
 
+    /**
+     * StepDef to reload the browser.
+     */
     @When("I reload the page")
     public void reloadPage() {
         WebTransporter.reloadPage();

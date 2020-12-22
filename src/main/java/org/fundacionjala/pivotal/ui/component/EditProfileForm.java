@@ -23,15 +23,15 @@ public class EditProfileForm extends BasePage {
     @FindBy(css = ".save_button.header_button")
     private WebElement saveEditProfileBtn;
 
-    private void fillUserNameTextBox(String newUserName) {
+    private void fillUserNameTextBox(final String newUserName) {
         GuiInteractioner.fillWebElement(userNameTextBox, newUserName);
     }
 
-    private void fillNameTextBox(String newName) {
+    private void fillNameTextBox(final String newName) {
         GuiInteractioner.fillWebElement(nameTextBox, newName);
     }
 
-    private void fillInitialsTextBox(String newInitials) {
+    private void fillInitialsTextBox(final String newInitials) {
         GuiInteractioner.fillWebElement(initialsTextBox, newInitials);
     }
 

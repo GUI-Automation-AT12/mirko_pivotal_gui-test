@@ -10,8 +10,11 @@ import java.util.Map;
 
 public class ProfilePage extends BaseLoggedInPage {
 
-    EditProfileForm editProfileForm;
+    private EditProfileForm editProfileForm;
 
+    /**
+     * Constructor for ProfilePage.
+     */
     public ProfilePage() {
         editProfileForm = new EditProfileForm();
     }
@@ -25,16 +28,19 @@ public class ProfilePage extends BaseLoggedInPage {
     @FindBy(css = "#general.card ul.rows.read li:nth-child(3) div")
     private WebElement profileInitials;
 
+    @FindBy(css = "#email_and_password ul li:nth-child(1) div")
+    private WebElement profileEmail;
+
     @FindBy(css = ".edit_button.header_button")
     private WebElement editProfileBtn;
 
     @FindBy(css = "#general_flash span")
-    private WebElement changesNotification;
+    private WebElement changesNotifier;
 
     @FindBy(css = ".user_management_header div:nth-child(1)")
     private WebElement userManagementMenuTitle;
 
-    private String getProfileInformationAsString(WebElement webElement) {
+    private String getProfileInformationAsString(final WebElement webElement) {
         return GuiInteractioner.getTextFromWebElement(webElement);
     }
 
@@ -44,6 +50,14 @@ public class ProfilePage extends BaseLoggedInPage {
      */
     public String getProfileUserNameAsString() {
         return getProfileInformationAsString(profileUserName);
+    }
+
+    /**
+     * Find the Email from the Profile Page as String.
+     * @return User name as String
+     */
+    public String getProfileEmailAsString() {
+        return getProfileInformationAsString(profileEmail);
     }
 
     private String getProfileNameAsString() {
@@ -59,7 +73,7 @@ public class ProfilePage extends BaseLoggedInPage {
     }
 
     /**
-     * Returns the EditProfileForm clicking at EditProfileBtn
+     * Returns the EditProfileForm clicking at EditProfileBtn.
      * @return editProfileForm
      */
     public EditProfileForm getEditProfileForm() {
@@ -67,10 +81,18 @@ public class ProfilePage extends BaseLoggedInPage {
         return editProfileForm;
     }
 
-    public String getTextFromChangesNotification() {
-        return GuiInteractioner.getTextFromWebElement(changesNotification);
+    /**
+     * Gets the inner text on changes notifier.
+     * @return text from changes notifier
+     */
+    public String getTextFromChangesNotifier() {
+        return GuiInteractioner.getTextFromWebElement(changesNotifier);
     }
 
+    /**
+     * Gets edited user information described in the Profile Page as a Map.
+     * @return a Map with user information present in the Profile Page
+     */
     public Map<String, String> getUserInformationAsMap() {
         Map userInfoMap = new HashMap<String, String>();
         userInfoMap.put("User name", getProfileUserNameAsString());
@@ -79,6 +101,10 @@ public class ProfilePage extends BaseLoggedInPage {
         return userInfoMap;
     }
 
+    /**
+     * Gets the User Management Menu Title.
+     * @return User Management Menu Title as String
+     */
     public String getUserManagementMenuTitleAsString() {
         return GuiInteractioner.getTextFromWebElement(userManagementMenuTitle);
     }
