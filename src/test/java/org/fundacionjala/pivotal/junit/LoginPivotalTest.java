@@ -44,7 +44,7 @@ public class LoginPivotalTest {
         loginStep1Page = initialPage.goToLoginStep1();
         loginStep2Page = loginStep1Page.goToLoginStep2(PivotalProperties.getInstance().getUserEmail());
         dashboardPage = loginStep2Page.signIn(PivotalProperties.getInstance().getUserPassword());
-        profilePage = dashboardPage.getUserMenu().goToProfile();
+        profilePage = dashboardPage.getTopMenu().openUserNameDropdownMenu().goToProfile();
         String actual = profilePage.getProfileUserNameAsString();
         assertEquals(actual, EXPECTED_USER_NAME);
     }

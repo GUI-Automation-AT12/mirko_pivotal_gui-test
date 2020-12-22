@@ -20,7 +20,7 @@ public class EditProfileForm extends BasePage {
     @FindBy(id = "person_initials")
     private WebElement initialsTextBox;
 
-    @FindBy(css = ".save_button.header.button")
+    @FindBy(css = ".save_button.header_button")
     private WebElement saveEditProfileBtn;
 
     private void fillUserNameTextBox(String newUserName) {

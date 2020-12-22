@@ -15,4 +15,9 @@ public class NavigationSteps {
     public void navigateToPage(final String pageName) throws MalformedURLException {
         WebTransporter.navigateToPage(pageName);
     }
+
+    @When("I reload the page")
+    public void reloadPage() {
+        WebTransporter.reloadPage();
+    }
 }

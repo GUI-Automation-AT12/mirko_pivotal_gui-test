@@ -12,6 +12,6 @@ public final class IdGenerator {
      * @return UniqueId
      */
     public static String getUniqueId() {
-        return String.valueOf(UUID.randomUUID().node());
+        return UUID.randomUUID().toString().replaceAll("-", "");
     }
 }

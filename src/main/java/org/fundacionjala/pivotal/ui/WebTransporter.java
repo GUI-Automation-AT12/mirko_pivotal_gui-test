@@ -40,4 +40,8 @@ public final class WebTransporter {
     private static void navigateToUrl(final String url) throws MalformedURLException {
         WebDriverManager.getInstance().getWebDriver().navigate().to(new URL(url));
     }
+
+    public static void reloadPage() {
+        WebDriverManager.getInstance().getWebDriver().navigate().refresh();
+    }
 }
