@@ -39,17 +39,17 @@ public class EditProfileForm extends BasePage {
         GuiInteractioner.clickWebElement(saveEditProfileBtn);
     }
 
-    private void setInformationToEdit(final Set<String> formFields, final User user) {
-        HashMap<String, Runnable> strategyMap = composeMapStrategy(formFields, user);
-        formFields.forEach(key -> strategyMap.get(key).run());
-    }
-
-    private HashMap<String, Runnable> composeMapStrategy(final Set<String> formFields, final User user) {
+    private HashMap<String, Runnable> composeMapStrategy(final User user) {
         HashMap<String, Runnable> strategyMap = new HashMap<>();
         strategyMap.put("User name", () -> fillUserNameTextBox(user.getUserName()));
         strategyMap.put("Name", () -> fillNameTextBox(user.getName()));
         strategyMap.put("Initials", () -> fillInitialsTextBox(user.getInitials()));
         return strategyMap;
+    }
+
+    private void setInformationToEdit(final Set<String> formFields, final User user) {
+        HashMap<String, Runnable> strategyMap = composeMapStrategy(user);
+        formFields.forEach(key -> strategyMap.get(key).run());
     }
 
     /**

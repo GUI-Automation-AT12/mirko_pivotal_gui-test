@@ -49,7 +49,7 @@ public class UserMenu extends BasePage {
     }
 
     private String getDetailsUserNameAsString() {
-        return GuiInteractioner.getTextFromWebElement(detailsUserName);
+        return GuiInteractioner.getTextFromWebElement(detailsUserName).replaceAll("@", "");
     }
 
     private String getDetailsInitialsAsString() {

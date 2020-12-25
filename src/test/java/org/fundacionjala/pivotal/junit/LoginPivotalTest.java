@@ -1,7 +1,6 @@
 package org.fundacionjala.pivotal.junit;
 
 import org.fundacionjala.core.selenium.WebDriverManager;
-import org.fundacionjala.core.throwables.EnvironmentReadingException;
 import org.fundacionjala.pivotal.config.PivotalProperties;
 import org.fundacionjala.pivotal.ui.WebTransporter;
 import org.fundacionjala.pivotal.ui.pages.LogedOut.InitialPage;
@@ -39,7 +38,7 @@ public class LoginPivotalTest {
      * Test for Log In a user to Pivotal Tracker from GUI.
      */
     @Test
-    public void loginPivotalTest() throws EnvironmentReadingException, MalformedURLException {
+    public void loginPivotalTest() throws MalformedURLException {
         WebTransporter.navigateToPage();
         initialPage = new InitialPage();
         loginStep1Page = initialPage.goToLoginStep1();
