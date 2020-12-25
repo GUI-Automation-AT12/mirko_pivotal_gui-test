@@ -55,6 +55,7 @@ public final class GuiInteractioner {
      * @return String text from the WebElement.
      */
     public static String getTextFromWebElement(final WebElement webElement) {
+        WebDriverManager.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
         return webElement.getText();
     }
 

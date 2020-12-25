@@ -1,7 +1,6 @@
 package org.fundacionjala.pivotal.junit;
 
 import org.fundacionjala.core.selenium.WebDriverManager;
-import org.fundacionjala.core.throwables.EnvironmentReadingException;
 import org.fundacionjala.pivotal.config.PivotalProperties;
 import org.fundacionjala.pivotal.ui.WebTransporter;
 import org.fundacionjala.pivotal.ui.pages.LogedOut.InitialPage;
@@ -18,7 +17,8 @@ import static org.junit.Assert.assertEquals;
 
 public class LoginPivotalTest {
 
-    private static final String EXPECTED_USER_NAME = "mirkofer122020";
+    private static final String EXPECTED_EMAIL = PivotalProperties.getInstance().getUserEmail();
+
     //Page Objects
     private InitialPage initialPage;
     private LoginStep1Page loginStep1Page;
@@ -38,14 +38,14 @@ public class LoginPivotalTest {
      * Test for Log In a user to Pivotal Tracker from GUI.
      */
     @Test
-    public void loginPivotalTest() throws EnvironmentReadingException, MalformedURLException {
+    public void loginPivotalTest() throws MalformedURLException {
         WebTransporter.navigateToPage();
         initialPage = new InitialPage();
         loginStep1Page = initialPage.goToLoginStep1();
         loginStep2Page = loginStep1Page.goToLoginStep2(PivotalProperties.getInstance().getUserEmail());
         dashboardPage = loginStep2Page.signIn(PivotalProperties.getInstance().getUserPassword());
-        profilePage = dashboardPage.getUserMenu().goToProfile();
-        String actual = profilePage.getProfileUserNameAsString();
-        assertEquals(actual, EXPECTED_USER_NAME);
+        profilePage = dashboardPage.getTopMenu().openUserNameDropdownMenu().goToProfile();
+        String actual = profilePage.getProfileEmailAsString();
+        assertEquals(actual, EXPECTED_EMAIL);
     }
 }

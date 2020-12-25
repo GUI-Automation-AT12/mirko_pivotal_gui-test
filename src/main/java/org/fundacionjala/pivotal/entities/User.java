@@ -67,6 +67,14 @@ public class User {
         return initials;
     }
 
+    private HashMap<String, Runnable> composeMapStrategy(final Map<String, String> userInformation) {
+        HashMap<String, Runnable> strategyMap = new HashMap<>();
+        strategyMap.put("User name", () -> setUserName(userInformation.get("User name")));
+        strategyMap.put("Name", () -> setName(userInformation.get("Name")));
+        strategyMap.put("Initials", () -> setInitials(userInformation.get("Initials")));
+        return strategyMap;
+    }
+
     /**
      * Process all information stored for a User as a map.
      * @param userInformation
@@ -74,13 +82,5 @@ public class User {
     public void processInformation(final Map<String, String> userInformation) {
         HashMap<String, Runnable> strategyMap = composeMapStrategy(userInformation);
         userInformation.keySet().forEach(key -> strategyMap.get(key).run());
-    }
-
-    private HashMap<String, Runnable> composeMapStrategy(final Map<String, String> userInformation) {
-        HashMap<String, Runnable> strategyMap = new HashMap<>();
-        strategyMap.put("User name", () -> setUserName(userInformation.get("User name")));
-        strategyMap.put("Name", () -> setName(userInformation.get("Name")));
-        strategyMap.put("Initials", () -> setInitials(userInformation.get("Initials")));
-        return strategyMap;
     }
 }

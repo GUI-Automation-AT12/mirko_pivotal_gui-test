@@ -9,11 +9,10 @@ import java.util.HashMap;
 
 public final class WebTransporter {
 
-    private static final HashMap<String, String> PAGE_URL = new HashMap<>();
-
     private WebTransporter() {
     }
 
+    private static final HashMap<String, String> PAGE_URL = new HashMap<>();
     static {
         PAGE_URL.put("MY PROFILE", "profile");
         PAGE_URL.put("ACCOUNTS", "accounts");
@@ -27,7 +26,7 @@ public final class WebTransporter {
      * @throws MalformedURLException
      */
     public static void navigateToPage(final String pageName) throws MalformedURLException {
-        navigateToUrl(PivotalProperties.getInstance().getBaseUrl().concat("/" + PAGE_URL.get(pageName.toUpperCase())));
+        navigateToUrl(PivotalProperties.getInstance().getBaseUrl().concat(PAGE_URL.get(pageName.toUpperCase())));
     }
 
     /**
@@ -40,5 +39,12 @@ public final class WebTransporter {
 
     private static void navigateToUrl(final String url) throws MalformedURLException {
         WebDriverManager.getInstance().getWebDriver().navigate().to(new URL(url));
+    }
+
+    /**
+     * Allows to reload the actual page.
+     */
+    public static void reloadPage() {
+        WebDriverManager.getInstance().getWebDriver().navigate().refresh();
     }
 }
