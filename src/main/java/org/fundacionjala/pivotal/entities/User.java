@@ -7,17 +7,63 @@ import java.util.Map;
 
 public class User {
 
+    private String alias;
     // My profile section
     private String userName;
     private String name;
     private String initials;
-    private String startPage;
-    private String timeZone;
-    private String defaultStoryType;
-
-    // My profile photo
 
     // Email & Password
+    private String email;
+    private String password;
+
+    /**
+     * Gets the Alias from a User.
+     * @return alias
+     */
+    public String getAlias() {
+        return alias;
+    }
+
+    /**
+     * Sets Alias to a User.
+     * @param alias
+     */
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    /**
+     * Gets the Email from a User.
+     * @return email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Sets Email to a User.
+     * @param email
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Gets the Password from a User.
+     * @return password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Sets Password to a User.
+     * @param password
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     /**
      * Sets UserName to a User.
@@ -69,9 +115,12 @@ public class User {
 
     private HashMap<String, Runnable> composeMapStrategy(final Map<String, String> userInformation) {
         HashMap<String, Runnable> strategyMap = new HashMap<>();
+        strategyMap.put("Alias", () -> setEmail(userInformation.get("Alias")));
         strategyMap.put("User name", () -> setUserName(userInformation.get("User name")));
         strategyMap.put("Name", () -> setName(userInformation.get("Name")));
         strategyMap.put("Initials", () -> setInitials(userInformation.get("Initials")));
+        strategyMap.put("Email", () -> setEmail(userInformation.get("Email")));
+        strategyMap.put("Password", () -> setEmail(userInformation.get("Password")));
         return strategyMap;
     }
 
