@@ -21,7 +21,7 @@ public class User {
 
     /**
      * Get the edited Fields for a User.
-     * @return
+     * @return editedFields
      */
     public Set<String> getEditedFields() {
         return editedFields;
@@ -29,10 +29,10 @@ public class User {
 
     /**
      * Set the Fields which were edited for a User.
-     * @param editedFields
+     * @param edited
      */
-    public void setEditedFields(Set<String> editedFields) {
-        this.editedFields = editedFields;
+    public void setEditedFields(final Set<String> edited) {
+        this.editedFields = edited;
     }
 
     /**
@@ -45,10 +45,10 @@ public class User {
 
     /**
      * Sets Alias to a User.
-     * @param alias
+     * @param uAlias
      */
-    public void setAlias(String alias) {
-        this.alias = alias;
+    public void setAlias(final String uAlias) {
+        this.alias = uAlias;
     }
 
     /**
@@ -61,10 +61,10 @@ public class User {
 
     /**
      * Sets Email to a User.
-     * @param email
+     * @param uEmail
      */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(final String uEmail) {
+        this.email = uEmail;
     }
 
     /**
@@ -77,10 +77,10 @@ public class User {
 
     /**
      * Sets Password to a User.
-     * @param password
+     * @param uPassword
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(final String uPassword) {
+        this.password = uPassword;
     }
 
     /**

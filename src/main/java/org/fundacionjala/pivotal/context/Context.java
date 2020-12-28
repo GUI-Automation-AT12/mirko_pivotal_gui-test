@@ -23,7 +23,7 @@ public class Context {
      * @param alias
      * @return User if the alias matches, otherwise return null.
      */
-    public User getUserByAlias(String alias) {
+    public User getUserByAlias(final String alias) {
         for (User user : this.usersList) {
             if (alias.equals(user.getAlias())) {
                 return user;

@@ -1,7 +1,6 @@
 package org.fundacionjala.pivotal.cucumber.steps;
 
 import io.cucumber.java.en.Given;
-import org.fundacionjala.pivotal.config.PivotalProperties;
 import org.fundacionjala.pivotal.context.Context;
 import org.fundacionjala.pivotal.entities.User;
 import org.fundacionjala.pivotal.ui.WebTransporter;
@@ -21,8 +20,12 @@ public class LoginSteps {
     private LoginStep1Page loginStep1Page;
     private LoginStep2Page loginStep2Page;
 
-    public LoginSteps(final Context context) {
-        this.context = context;
+    /**
+     * Adding Dependency injection to share Default Users information.
+     * @param sharedContext
+     */
+    public LoginSteps(final Context sharedContext) {
+        this.context = sharedContext;
     }
 
     /**

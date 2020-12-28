@@ -13,8 +13,13 @@ public final class JsonFilesReader {
     private JsonFilesReader() {
     }
 
+    /**
+     * Try to read a json file and return a JSONArray with the read info.
+     * @param filePath
+     * @return JSONArray;
+     */
     public static JSONArray jsonArrayFromJsonFile(final String filePath) {
-        try{
+        try {
             JSONParser jsonParser = new JSONParser();
             FileReader reader = new FileReader(filePath);
             Object obj = jsonParser.parse(reader);

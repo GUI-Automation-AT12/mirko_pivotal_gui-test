@@ -9,10 +9,18 @@ import java.util.List;
 import java.util.Map;
 
 public final class JsonParser {
-    public static List<User> getUsersFromJsonArray(){
+
+    private JsonParser() {
+    }
+
+    /**
+     * Get a list of Users from a JSONArray read from json file.
+     * @return userList
+     */
+    public static List<User> getUsersFromJsonArray() {
         List<User> userList = new ArrayList<>();
         for (Object obj : JsonFilesReader.jsonArrayFromJsonFile("src/test/resources/JsonFiles/DefaultUsers.json")) {
-            JSONObject jsonObj = (JSONObject)((JSONObject)obj).get("user");
+            JSONObject jsonObj = (JSONObject) ((JSONObject) obj).get("user");
             Map<String, String> userInformation = new HashMap<>();
             userInformation.put("Alias", (String) jsonObj.get("Alias"));
             userInformation.put("Email", (String) jsonObj.get("Email"));

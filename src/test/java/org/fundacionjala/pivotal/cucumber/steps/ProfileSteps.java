@@ -24,10 +24,10 @@ public class ProfileSteps {
 
     /**
      * Adding Dependency injection to share Default Users information.
-     * @param context
+     * @param sharedContext
      */
-    public ProfileSteps(Context context) {
-        this.context = context;
+    public ProfileSteps(final Context sharedContext) {
+        this.context = sharedContext;
     }
 
     /**
@@ -113,7 +113,7 @@ public class ProfileSteps {
                 "The Username from User Menu does not match with the Username edited previously.");
         softAssert.assertEquals(dropdownMenuInfo.get("Details name"), user.getName(),
                 "The Name from User Menu does not match with the Name edited previously.");
-        softAssert.assertEquals( dropdownMenuInfo.get("Details initials"), user.getInitials(),
+        softAssert.assertEquals(dropdownMenuInfo.get("Details initials"), user.getInitials(),
                 "The Initials from User Menu does not match with the Initials edited previously.");
         softAssert.assertAll();
     }

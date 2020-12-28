@@ -14,10 +14,10 @@ public class UserHooks {
 
     /**
      * Adding Dependency injection to share Default Users information.
-     * @param context
+     * @param sharedContext
      */
-    public UserHooks(Context context) {
-        this.context = context;
+    public UserHooks(final Context sharedContext) {
+        this.context = sharedContext;
     }
 
     /**
