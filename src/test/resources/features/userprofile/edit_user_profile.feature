@@ -1,7 +1,7 @@
 @UserProfile
 Feature: Edit User Profile
 
-  @ResetUserInformation
+  @restoreUserInformation
   Scenario: Edit User's information in My Profile section
     Given I log in to Pivotal with Editable User credentials
     When I navigate to My Profile page
