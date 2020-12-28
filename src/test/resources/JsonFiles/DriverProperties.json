@@ -1,0 +1,26 @@
+[
+  {
+    "webDriver": {
+      "name": "firefox",
+      "implicitWaitingSeconds": 30,
+      "explicitWaitingSeconds": 40,
+      "sleepingTimeMills": 500
+    }
+  },
+  {
+    "webDriver": {
+      "name": "edge",
+      "implicitWaitingSeconds": 40,
+      "explicitWaitingSeconds": 50,
+      "sleepingTimeMills": 500
+    }
+  },
+  {
+    "webDriver": {
+      "name": "chrome",
+      "implicitWaitingSeconds": 30,
+      "explicitWaitingSeconds": 40,
+      "sleepingTimeMills": 500
+    }
+  }
+]

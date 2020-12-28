@@ -1,7 +1,8 @@
 package org.fundacionjala.pivotal.junit;
 
 import org.fundacionjala.core.selenium.WebDriverManager;
-import org.fundacionjala.pivotal.config.PivotalProperties;
+import org.fundacionjala.pivotal.context.Context;
+import org.fundacionjala.pivotal.entities.User;
 import org.fundacionjala.pivotal.ui.WebTransporter;
 import org.fundacionjala.pivotal.ui.pages.LogedOut.InitialPage;
 import org.fundacionjala.pivotal.ui.pages.LogedOut.LoginStep1Page;
@@ -17,7 +18,8 @@ import static org.junit.Assert.assertEquals;
 
 public class LoginPivotalTest {
 
-    private static final String EXPECTED_EMAIL = PivotalProperties.getInstance().getUserEmail();
+    //dependency injection
+    private Context context;
 
     //Page Objects
     private InitialPage initialPage;
@@ -25,6 +27,14 @@ public class LoginPivotalTest {
     private LoginStep2Page loginStep2Page;
     private DashboardPage dashboardPage;
     private ProfilePage profilePage;
+
+    /**
+     * Adding Dependency injection to share Default Users information.
+     * @param sharedContext
+     */
+    public LoginPivotalTest(final Context sharedContext) {
+        this.context = sharedContext;
+    }
 
     /**
      * Hook that signs out a logged in user After running a test..
@@ -39,13 +49,15 @@ public class LoginPivotalTest {
      */
     @Test
     public void loginPivotalTest() throws MalformedURLException {
+        User user = context.getUserByAlias("Editable User");
+        WebDriverManager.setBrowserName("chrome");
         WebTransporter.navigateToPage();
         initialPage = new InitialPage();
         loginStep1Page = initialPage.goToLoginStep1();
-        loginStep2Page = loginStep1Page.goToLoginStep2(PivotalProperties.getInstance().getUserEmail());
-        dashboardPage = loginStep2Page.signIn(PivotalProperties.getInstance().getUserPassword());
+        loginStep2Page = loginStep1Page.goToLoginStep2(user.getEmail());
+        dashboardPage = loginStep2Page.signIn(user.getPassword());
         profilePage = dashboardPage.getTopMenu().openUserNameDropdownMenu().goToProfile();
         String actual = profilePage.getProfileEmailAsString();
-        assertEquals(actual, EXPECTED_EMAIL);
+        assertEquals(actual, user.getPassword());
     }
 }
