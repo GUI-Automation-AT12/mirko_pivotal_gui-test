@@ -4,10 +4,12 @@ import org.fundacionjala.core.utils.IdGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class User {
 
     private String alias;
+    private Set<String> editedFields;
     // My profile section
     private String userName;
     private String name;
@@ -16,6 +18,22 @@ public class User {
     // Email & Password
     private String email;
     private String password;
+
+    /**
+     * Get the edited Fields for a User.
+     * @return
+     */
+    public Set<String> getEditedFields() {
+        return editedFields;
+    }
+
+    /**
+     * Set the Fields which were edited for a User.
+     * @param editedFields
+     */
+    public void setEditedFields(Set<String> editedFields) {
+        this.editedFields = editedFields;
+    }
 
     /**
      * Gets the Alias from a User.
@@ -115,12 +133,12 @@ public class User {
 
     private HashMap<String, Runnable> composeMapStrategy(final Map<String, String> userInformation) {
         HashMap<String, Runnable> strategyMap = new HashMap<>();
-        strategyMap.put("Alias", () -> setEmail(userInformation.get("Alias")));
-        strategyMap.put("User name", () -> setUserName(userInformation.get("User name")));
+        strategyMap.put("Alias", () -> setAlias(userInformation.get("Alias")));
         strategyMap.put("Name", () -> setName(userInformation.get("Name")));
         strategyMap.put("Initials", () -> setInitials(userInformation.get("Initials")));
         strategyMap.put("Email", () -> setEmail(userInformation.get("Email")));
-        strategyMap.put("Password", () -> setEmail(userInformation.get("Password")));
+        strategyMap.put("Password", () -> setPassword(userInformation.get("Password")));
+        strategyMap.put("User name", () -> setUserName(userInformation.get("User name")));
         return strategyMap;
     }
 

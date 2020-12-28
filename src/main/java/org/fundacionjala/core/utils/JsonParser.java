@@ -12,7 +12,7 @@ public final class JsonParser {
     public static List<User> getUsersFromJsonArray(){
         List<User> userList = new ArrayList<>();
         for (Object obj : JsonFilesReader.jsonArrayFromJsonFile("src/test/resources/JsonFiles/DefaultUsers.json")) {
-            JSONObject jsonObj = (JSONObject)obj;
+            JSONObject jsonObj = (JSONObject)((JSONObject)obj).get("user");
             Map<String, String> userInformation = new HashMap<>();
             userInformation.put("Alias", (String) jsonObj.get("Alias"));
             userInformation.put("Email", (String) jsonObj.get("Email"));

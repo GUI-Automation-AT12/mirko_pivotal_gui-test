@@ -2,6 +2,7 @@ package org.fundacionjala.pivotal.cucumber.steps;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.fundacionjala.pivotal.context.Context;
 import org.fundacionjala.pivotal.entities.User;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProfilePage;
 import org.testng.asserts.SoftAssert;
@@ -18,6 +19,17 @@ public class ProfileSteps {
     // Pages
     private ProfilePage profilePage;
 
+    // Context
+    private final Context context;
+
+    /**
+     * Adding Dependency injection to share Default Users information.
+     * @param context
+     */
+    public ProfileSteps(Context context) {
+        this.context = context;
+    }
+
     /**
      * StepDef to edit user Profile from GUI receiving a Data Table.
      * @param userInformation
@@ -32,6 +44,7 @@ public class ProfileSteps {
         // Update User Information by UI
         profilePage = new ProfilePage();
         profilePage.getEditProfileForm().editProfileInformation(userInformation.keySet(), user);
+        context.getUserByAlias("Editable User").setEditedFields(userInformation.keySet());
     }
 
     /**
@@ -94,14 +107,14 @@ public class ProfileSteps {
     public void verifyUserInformationIsUpdatedInUserDropdownMenu() {
         Map<String, String> dropdownMenuInfo = profilePage.getTopMenu().getUserMenu().getUserInformationAsMap();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals("Underlying Initials of User Menu does not match with the Initials edited previously.",
-                dropdownMenuInfo.get("Underlying initials"), user.getInitials());
-        softAssert.assertEquals("The Username from User Menu does not match with the Username edited previously.",
-                dropdownMenuInfo.get("Details user name"), user.getUserName());
-        softAssert.assertEquals("The Name from User Menu does not match with the Name edited previously.",
-                dropdownMenuInfo.get("Details name"), user.getName());
-        softAssert.assertEquals("The Initials from User Menu does not match with the Initials edited previously.",
-                dropdownMenuInfo.get("Details initials"), user.getInitials());
+        softAssert.assertEquals(dropdownMenuInfo.get("Underlying initials"), user.getInitials(),
+                "Underlying Initials of User Menu does not match with the Initials edited previously.");
+        softAssert.assertEquals(dropdownMenuInfo.get("Details user name"), user.getUserName(),
+                "The Username from User Menu does not match with the Username edited previously.");
+        softAssert.assertEquals(dropdownMenuInfo.get("Details name"), user.getName(),
+                "The Name from User Menu does not match with the Name edited previously.");
+        softAssert.assertEquals( dropdownMenuInfo.get("Details initials"), user.getInitials(),
+                "The Initials from User Menu does not match with the Initials edited previously.");
         softAssert.assertAll();
     }
 }

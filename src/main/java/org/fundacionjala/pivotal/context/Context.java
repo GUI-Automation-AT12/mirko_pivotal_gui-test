@@ -3,16 +3,19 @@ package org.fundacionjala.pivotal.context;
 import org.fundacionjala.core.utils.JsonParser;
 import org.fundacionjala.pivotal.entities.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Context {
     private List<User> usersList;
+    private List<String> editedUsersList;
 
     /**
      * Constructor for Context class.
      */
     public Context() {
         this.usersList = JsonParser.getUsersFromJsonArray();
+        this.editedUsersList = new ArrayList<>();
     }
 
     /**
@@ -27,5 +30,13 @@ public class Context {
             }
         }
         return null;
+    }
+
+    /**
+     * Get the List of Edited Users.
+     * @return editedUsersList
+     */
+    public List<String> getEditedUsersList() {
+        return editedUsersList;
     }
 }
