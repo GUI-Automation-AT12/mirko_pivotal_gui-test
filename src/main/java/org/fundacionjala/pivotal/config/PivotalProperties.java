@@ -36,22 +36,4 @@ public final class PivotalProperties {
     public String getBaseUrl() {
         return propertiesFileReader.getProperty("baseUrl");
     }
-
-    /**
-     * get the user's email from the properties file.
-     *
-     * @return userEmail value.
-     */
-    public String getUserEmail() {
-        return propertiesFileReader.getProperty("userEmail");
-    }
-
-    /**
-     * get the user's password from the properties file.
-     *
-     * @return userPassword value.
-     */
-    public String getUserPassword() {
-        return propertiesFileReader.getProperty("userPassword");
-    }
 }
