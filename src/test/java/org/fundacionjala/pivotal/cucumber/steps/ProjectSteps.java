@@ -3,15 +3,15 @@ package org.fundacionjala.pivotal.cucumber.steps;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.fundacionjala.core.selenium.WebDriverManager;
+import org.fundacionjala.pivotal.entities.Project;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.DashboardPage;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectPage;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectsSummaryPage;
 import org.fundacionjala.pivotal.ui.popups.CreateProjectPopup;
 import org.testng.asserts.SoftAssert;
-
 import static org.junit.Assert.assertTrue;
-
 import java.util.Map;
+
 public class ProjectSteps {
 
     // Pages
@@ -19,6 +19,9 @@ public class ProjectSteps {
     private CreateProjectPopup createProjectPopup;
     private ProjectPage projectPage;
     private ProjectsSummaryPage projectsSummaryPage;
+
+    // Entity
+    private Project project;
 
     /**
      * StepDef to open the Create Project pop-up
@@ -35,6 +38,13 @@ public class ProjectSteps {
      */
     @When("I create a new public Project with the following information")
     public void createNewProject(final Map<String, String> projectInfo) {
+        //Updating Project entity
+        project = new Project();
+        project.setName(projectInfo.get("Name"));
+        project.setAccount(projectInfo.get("Account"));
+        project.setPrivacy(projectInfo.get("Privacy"));
+
+        //Creating Project from UI
         projectPage = createProjectPopup.createPublicProject(projectInfo.get("Name"), projectInfo.get("Account"));
     }
 
@@ -48,8 +58,13 @@ public class ProjectSteps {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            String actual = WebDriverManager.getInstance().getCurrentUrl();
-            assertTrue(actual.startsWith("https://www.pivotaltracker.com/n/projects/"));
+            String currentUrl = WebDriverManager.getInstance().getCurrentUrl();
+
+            //Updating Project entity's id
+            project.setId(currentUrl.substring(currentUrl.lastIndexOf('/') + 1));
+            System.out.println(project.getId());
+
+            assertTrue(currentUrl.startsWith("https://www.pivotaltracker.com/n/projects/"));
         }
     }
 
@@ -57,8 +72,8 @@ public class ProjectSteps {
     @Then("the name of my new project should be displayed at Project Dropdown Menu")
     public void verifyTheNameOfMyNewProjectIsDisplayedAtProjectDropdownMenu() {
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(projectPage.getTextFromProjectNameSpan(), "New Public Project");
-        softAssert.assertEquals(projectPage.getTextFromProjectPublicPrivacySpan(), "(Public)");
+        softAssert.assertEquals(projectPage.getTextFromProjectNameSpan(), project.getName());
+        softAssert.assertEquals(projectPage.getTextFromProjectPublicPrivacySpan(), "(" + project.getPrivacy() + ")");
         softAssert.assertAll();
     }
 
@@ -70,6 +85,6 @@ public class ProjectSteps {
 
     @Then("my new project should be listed in the summary")
     public void verifyMyNewProjectIsListedInTheSummary() {
-        assertTrue(projectsSummaryPage.searchProjectInSummary("New Public Project"));
+        assertTrue(projectsSummaryPage.searchProjectInSummary(project.getName()));
     }
 }

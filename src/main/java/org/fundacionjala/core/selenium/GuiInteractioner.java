@@ -85,16 +85,17 @@ public final class GuiInteractioner {
     }
 
     /**
-     * Searches for an specific option in a list, then clicks it.
+     * Searches for an specific option WebElement that contains a text.
      * @param webElementList
      * @param text
+     * @return WebElement if it can find it, otherwise return null
      */
-    public static boolean searchTextInWebElementList(final List<WebElement> webElementList, final String text) {
+    public static WebElement searchTextInWebElementList(final List<WebElement> webElementList, final String text) {
         for(WebElement element : webElementList) {
-            if(text.equals(element.getText())) {
-                return true;
+            if(element.getText().contains(text)) {
+                return element;
             }
         }
-        return false;
+        return null;
     }
 }

@@ -23,7 +23,7 @@ public class ProjectsSummaryPage extends BaseLoggedInPage {
      * @return true if the project was found, otherwise return false
      */
     public boolean searchProjectInSummary(final String projectName) {
-        return GuiInteractioner.searchTextInWebElementList(listedProjects ,projectName);
+        return GuiInteractioner.searchTextInWebElementList(listedProjects ,projectName) != null;
     }
 
     /**
