@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.List;
+
 public final class GuiInteractioner {
 
     private GuiInteractioner() {
@@ -66,5 +68,34 @@ public final class GuiInteractioner {
      */
     public static String getTextFromWebElement(final By by) {
         return getTextFromWebElement(getWebElementFormBy(by));
+    }
+
+    /**
+     * Searches for an specific option in a list, then clicks it.
+     * @param options
+     * @param selected
+     */
+    public static void clickOptionFromWebElementList(final List<WebElement> options, final String selected) {
+        for (WebElement option : options) {
+            if (option.getText().contains(selected)) {
+                option.click();
+                break;
+            }
+        }
+    }
+
+    /**
+     * Searches for an specific option WebElement that contains a text.
+     * @param webElementList
+     * @param text
+     * @return WebElement if it can find it, otherwise return null
+     */
+    public static WebElement searchTextInWebElementList(final List<WebElement> webElementList, final String text) {
+        for (WebElement element : webElementList) {
+            if (element.getText().contains(text)) {
+                return element;
+            }
+        }
+        return null;
     }
 }

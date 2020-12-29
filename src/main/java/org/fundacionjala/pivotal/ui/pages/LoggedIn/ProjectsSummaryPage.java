@@ -4,32 +4,19 @@ import org.fundacionjala.core.selenium.GuiInteractioner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class ProjectsSummaryPage extends BaseLoggedInPage {
 
-    @FindBy(xpath = "//div[@class='projects column'][1]/a")
-    private WebElement firstListedProject;
-
-    @FindBy(xpath = "//div[@class='settings column'][1]/a")
-    private WebElement firstProjectSettingsLink;
-
-    private void clickFirstProjectSettingsLink() {
-        GuiInteractioner.clickWebElement(firstProjectSettingsLink);
-    }
+    @FindBy(xpath = "//div[@class='projects column']/a")
+    private List<WebElement> listedProjects;
 
     /**
-     * First project listed in the All Projects Page.
-     * @return first listed project's name.
+     * Search for a project by project's name.
+     * @param projectName
+     * @return true if the project was found, otherwise return false
      */
-    public String getFirstListedProject() {
-        return GuiInteractioner.getTextFromWebElement(firstListedProject);
-    }
-
-    /**
-     * Allow to drives the user to Project Settings Page.
-     * @return ProjectSettingsPage
-     */
-    public ProjectSettingsPage goToFirstProjectSettings() {
-        clickFirstProjectSettingsLink();
-        return new ProjectSettingsPage();
+    public boolean searchProjectInSummary(final String projectName) {
+        return GuiInteractioner.searchTextInWebElementList(listedProjects, projectName) != null;
     }
 }

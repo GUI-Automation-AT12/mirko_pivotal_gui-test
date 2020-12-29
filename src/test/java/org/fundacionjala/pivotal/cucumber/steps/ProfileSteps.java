@@ -2,13 +2,11 @@ package org.fundacionjala.pivotal.cucumber.steps;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.fundacionjala.pivotal.context.Context;
+import org.fundacionjala.pivotal.context.UserContext;
 import org.fundacionjala.pivotal.entities.User;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProfilePage;
 import org.testng.asserts.SoftAssert;
-
 import java.util.Map;
-
 import static org.junit.Assert.assertEquals;
 
 public class ProfileSteps {
@@ -19,15 +17,15 @@ public class ProfileSteps {
     // Pages
     private ProfilePage profilePage;
 
-    // Context
-    private final Context context;
+    // UserContext
+    private final UserContext userContext;
 
     /**
      * Adding Dependency injection to share Default Users information.
-     * @param sharedContext
+     * @param sharedUserContext
      */
-    public ProfileSteps(final Context sharedContext) {
-        this.context = sharedContext;
+    public ProfileSteps(final UserContext sharedUserContext) {
+        this.userContext = sharedUserContext;
     }
 
     /**
@@ -44,7 +42,7 @@ public class ProfileSteps {
         // Update User Information by UI
         profilePage = new ProfilePage();
         profilePage.getEditProfileForm().editProfileInformation(userInformation.keySet(), user);
-        context.getUserByAlias("Editable User").setEditedFields(userInformation.keySet());
+        userContext.getUserByAlias("Editable User").setEditedFields(userInformation.keySet());
     }
 
     /**

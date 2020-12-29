@@ -1,6 +1,7 @@
 package org.fundacionjala.pivotal.ui.popups;
 
 import org.fundacionjala.core.selenium.GuiInteractioner;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.fundacionjala.pivotal.ui.pages.BasePage;
@@ -13,9 +14,6 @@ public class CreateProjectPopup extends BasePage {
 
     @FindBy(css = ".tc-account-selector")
     private WebElement accountDropdownList;
-
-    @FindBy(css = ".tc-account-selector__option-account:nth-child(1) .tc-account-selector__option-account-name")
-    private WebElement account1Option;
 
     @FindBy(css = ".tc-project-type-chooser__label:nth-child(3) > .tc-project-type-chooser__label-name")
     private WebElement publicProjectType;
@@ -31,8 +29,13 @@ public class CreateProjectPopup extends BasePage {
         GuiInteractioner.clickWebElement(accountDropdownList);
     }
 
-    private void clickAccount1Option() {
-        GuiInteractioner.clickWebElement(account1Option);
+    private void selectAccountOption(final String account) {
+        GuiInteractioner.clickOptionFromWebElementList(
+                accountDropdownList.findElements(By.className("tc-account-selector__option-account")), account);
+    }
+
+    private void clickPublicProjectType() {
+        GuiInteractioner.clickWebElement(publicProjectType);
     }
 
     private void clickCreateBtn() {
@@ -40,14 +43,16 @@ public class CreateProjectPopup extends BasePage {
     }
 
     /**
-     * Creates a project from GUI.
+     * Creates a public project from GUI.
      * @param projectName
+     * @param account
      * @return a new ProjectPage.
      */
-    public ProjectPage createProject(final String projectName) {
+    public ProjectPage createPublicProject(final String projectName, final String account) {
         fillProjectNameTextBox(projectName);
         clickAccountDropdownList();
-        clickAccount1Option();
+        selectAccountOption(account);
+        clickPublicProjectType();
         clickCreateBtn();
         return new ProjectPage();
     }
