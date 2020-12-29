@@ -14,6 +14,12 @@ public class ProjectPage extends BaseLoggedInPage {
     @FindBy(css = ".tc_projects_menu_show_all")
     private WebElement projectsSummaryLink;
 
+     @FindBy(css = ".raw_context_name.public")
+     private WebElement projectNameSpan;
+
+     @FindBy(css = ".public_project_label")
+     private WebElement projectPublicPrivacySpan;
+
     private void sleepToShowPage() {
         try {
             Thread.sleep(SLEEPING_TIME);
@@ -28,6 +34,22 @@ public class ProjectPage extends BaseLoggedInPage {
 
     private void clickProjectsSummaryLink() {
         GuiInteractioner.clickWebElement(projectsSummaryLink);
+    }
+
+    /**
+     * Get inner text from Project Name Span.
+     * @return text from Project Name Span
+     */
+    public String getTextFromProjectNameSpan() {
+        return GuiInteractioner.getTextFromWebElement(projectNameSpan);
+    }
+
+    /**
+     * Get inner text from Project Public Privacy Span.
+     * @return text from Project Public Privacy Span
+     */
+    public String getTextFromProjectPublicPrivacySpan() {
+        return GuiInteractioner.getTextFromWebElement(projectPublicPrivacySpan);
     }
 
     /**

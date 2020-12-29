@@ -65,4 +65,12 @@ public final class WebDriverManager {
         this.webDriver.quit();
         this.webDriverManager = null;
     }
+
+    /**
+     * Get the current Url of the webDriver.
+     * @return Current Url
+     */
+    public String getCurrentUrl() {
+        return this.webDriver.getCurrentUrl();
+    }
 }

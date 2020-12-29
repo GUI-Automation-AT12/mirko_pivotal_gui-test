@@ -20,6 +20,7 @@ import org.junit.Test;
 import java.net.MalformedURLException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ProjectTest {
 
@@ -35,7 +36,6 @@ public class ProjectTest {
     private ProjectPage projectPage;
     private ProjectsSummaryPage projectsSummaryPage;
     private ProjectSettingsPage projectSettingsPage;
-    private String firstProjectName;
 
     /**
      * Adding Dependency injection to share Default Users information.
@@ -64,7 +64,7 @@ public class ProjectTest {
      */
     @After
     public void tearDown() {
-        if ("ProjectTest".equals(firstProjectName)) {
+        if ("ProjectTest".equals("ProjectTest")) {
             projectSettingsPage = projectsSummaryPage.goToFirstProjectSettings();
             projectSettingsPage.deleteProject();
         }
@@ -77,9 +77,8 @@ public class ProjectTest {
     @Test
     public void createProjectTest() {
         createProjectPopup = dashboardPage.goToProjectCreation();
-        projectPage = createProjectPopup.createProject("ProjectTest");
+        projectPage = createProjectPopup.createPublicProject("ProjectTest", "Account1");
         projectsSummaryPage = projectPage.goToProjectsList();
-        this.firstProjectName = projectsSummaryPage.getFirstListedProject();
-        assertEquals("ProjectTest", firstProjectName);
+        assertTrue(projectsSummaryPage.searchProjectInSummary("ProjectTest"));
     }
 }

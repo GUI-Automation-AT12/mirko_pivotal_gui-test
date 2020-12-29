@@ -11,12 +11,12 @@
   },
   {
     "user": {
-      "Alias": "Other User",
-      "Email": "other0@gmail.com",
-      "Password": "6other",
-      "User name": "userOther",
-      "Name": "Other User",
-      "Initials": "OU"
+      "Alias": "Standard User",
+      "Email": "mirkofer.122020@gmail.com",
+      "Password": "622Mirko###",
+      "User name": "standardUser",
+      "Name": "Standard User",
+      "Initials": "SU"
     }
   }
 ]

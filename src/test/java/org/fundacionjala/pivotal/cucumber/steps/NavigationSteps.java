@@ -34,6 +34,4 @@ public class NavigationSteps {
     public void reloadPage() {
         WebTransporter.reloadPage();
     }
-
-
 }

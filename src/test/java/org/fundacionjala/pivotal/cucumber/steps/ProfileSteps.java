@@ -6,9 +6,7 @@ import org.fundacionjala.pivotal.context.Context;
 import org.fundacionjala.pivotal.entities.User;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProfilePage;
 import org.testng.asserts.SoftAssert;
-
 import java.util.Map;
-
 import static org.junit.Assert.assertEquals;
 
 public class ProfileSteps {
