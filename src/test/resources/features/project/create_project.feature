@@ -3,7 +3,7 @@ Feature: Create Project
 
   @deleteProject
   Scenario: Create a new public Project from an existent Account
-    Given I open Firefox web browser
+    Given I open edge web browser
     And I log in to Pivotal with Standard User credentials
     When I open the Create Project pop-up
     And I create a new public Project with the following information

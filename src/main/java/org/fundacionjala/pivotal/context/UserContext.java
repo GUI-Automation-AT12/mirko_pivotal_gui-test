@@ -6,14 +6,14 @@ import org.fundacionjala.pivotal.entities.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Context {
+public class UserContext {
     private List<User> usersList;
     private List<String> editedUsersList;
 
     /**
-     * Constructor for Context class.
+     * Constructor for UserContext class.
      */
-    public Context() {
+    public UserContext() {
         this.usersList = JsonParser.getUsersFromJsonArray();
         this.editedUsersList = new ArrayList<>();
     }

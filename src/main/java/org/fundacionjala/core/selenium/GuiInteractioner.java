@@ -76,8 +76,8 @@ public final class GuiInteractioner {
      * @param selected
      */
     public static void clickOptionFromWebElementList(final List<WebElement> options, final String selected) {
-        for(WebElement option : options) {
-            if(option.getText().contains(selected)) {
+        for (WebElement option : options) {
+            if (option.getText().contains(selected)) {
                 option.click();
                 break;
             }
@@ -91,8 +91,8 @@ public final class GuiInteractioner {
      * @return WebElement if it can find it, otherwise return null
      */
     public static WebElement searchTextInWebElementList(final List<WebElement> webElementList, final String text) {
-        for(WebElement element : webElementList) {
-            if(element.getText().contains(text)) {
+        for (WebElement element : webElementList) {
+            if (element.getText().contains(text)) {
                 return element;
             }
         }

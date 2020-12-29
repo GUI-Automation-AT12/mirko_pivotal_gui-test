@@ -31,7 +31,7 @@ public class CreateProjectPopup extends BasePage {
 
     private void selectAccountOption(final String account) {
         GuiInteractioner.clickOptionFromWebElementList(
-                accountDropdownList.findElements(By.className("tc-account-selector__option-account")) ,account);
+                accountDropdownList.findElements(By.className("tc-account-selector__option-account")), account);
     }
 
     private void clickPublicProjectType() {
@@ -45,6 +45,7 @@ public class CreateProjectPopup extends BasePage {
     /**
      * Creates a public project from GUI.
      * @param projectName
+     * @param account
      * @return a new ProjectPage.
      */
     public ProjectPage createPublicProject(final String projectName, final String account) {

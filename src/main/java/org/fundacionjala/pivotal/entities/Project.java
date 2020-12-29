@@ -19,7 +19,7 @@ public class Project {
      * Sets the id of the project.
      * @param pId
      */
-    public void setId(String pId) {
+    public void setId(final String pId) {
         this.id = pId;
     }
 
@@ -35,13 +35,13 @@ public class Project {
      * Sets the name of the project.
      * @param pName
      */
-    public void setName(String pName) {
+    public void setName(final String pName) {
         this.name = pName;
     }
 
     /**
      * Gets the account of the project.
-     * @return
+     * @return account
      */
     public String getAccount() {
         return account;
@@ -51,7 +51,7 @@ public class Project {
      * Sets the account of the project.
      * @param pAccount
      */
-    public void setAccount(String pAccount) {
+    public void setAccount(final String pAccount) {
         this.account = pAccount;
     }
 
@@ -67,7 +67,7 @@ public class Project {
      * Sets the privacy of the project.
      * @param pPrivacy
      */
-    public void setPrivacy(String pPrivacy) {
+    public void setPrivacy(final String pPrivacy) {
         this.privacy = pPrivacy;
     }
 }

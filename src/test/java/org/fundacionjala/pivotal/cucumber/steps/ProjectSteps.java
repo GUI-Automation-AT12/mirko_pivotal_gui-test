@@ -3,6 +3,7 @@ package org.fundacionjala.pivotal.cucumber.steps;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.fundacionjala.core.selenium.WebDriverManager;
+import org.fundacionjala.pivotal.context.ProjectContext;
 import org.fundacionjala.pivotal.entities.Project;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.DashboardPage;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectPage;
@@ -23,8 +24,20 @@ public class ProjectSteps {
     // Entity
     private Project project;
 
+    //Context
+    private final ProjectContext projectContext;
+
+    private static final int WAIT_TIME = 3000;
     /**
-     * StepDef to open the Create Project pop-up
+     * Adding Dependency injection to share Project Context information.
+     * @param sharedProjectContext
+     */
+    public ProjectSteps(final ProjectContext sharedProjectContext) {
+        this.projectContext = sharedProjectContext;
+    }
+
+    /**
+     * StepDef to open the Create Project pop-up.
      */
     @When("I open the Create Project pop-up")
     public void openTheCreateProjectPopUp() {
@@ -54,21 +67,22 @@ public class ProjectSteps {
     @Then("I am driven to recently created Project Page")
     public void verifyIAmDrivenToProjectPage() {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(WAIT_TIME);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             String currentUrl = WebDriverManager.getInstance().getCurrentUrl();
+            assertTrue(currentUrl.startsWith("https://www.pivotaltracker.com/n/projects/"));
 
             //Updating Project entity's id
             project.setId(currentUrl.substring(currentUrl.lastIndexOf('/') + 1));
-            System.out.println(project.getId());
-
-            assertTrue(currentUrl.startsWith("https://www.pivotaltracker.com/n/projects/"));
+            projectContext.getProjectsIdsToDelete().add(project.getId());
         }
     }
 
-
+    /**
+     * StepDef to verify that the name of the new project is displayed at Project Dropdown Menu.
+     */
     @Then("the name of my new project should be displayed at Project Dropdown Menu")
     public void verifyTheNameOfMyNewProjectIsDisplayedAtProjectDropdownMenu() {
         SoftAssert softAssert = new SoftAssert();
@@ -77,12 +91,18 @@ public class ProjectSteps {
         softAssert.assertAll();
     }
 
+    /**
+     * StepDef to open Project Summary Page.
+     */
     @When("I open the Project Summary page")
     public void openTheProjectSummaryPage() {
         projectsSummaryPage = projectPage.goToProjectsList();
     }
 
 
+    /**
+     * StepDef to verify the new project is listed in the Project Summary Page.
+     */
     @Then("my new project should be listed in the summary")
     public void verifyMyNewProjectIsListedInTheSummary() {
         assertTrue(projectsSummaryPage.searchProjectInSummary(project.getName()));

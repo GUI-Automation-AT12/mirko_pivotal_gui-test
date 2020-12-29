@@ -20,6 +20,10 @@ public final class WebTransporter {
         PAGE_URL.put("SECURITY", "security_settings");
     }
 
+    private static void navigateToUrl(final String url) throws MalformedURLException {
+        WebDriverManager.getInstance().getWebDriver().navigate().to(new URL(url));
+    }
+
     /**
      * Navigates to a feature from the base URL of Pivotal referencing the name of a specific feature.
      * @param pageName
@@ -37,8 +41,13 @@ public final class WebTransporter {
         navigateToUrl(PivotalProperties.getInstance().getBaseUrl());
     }
 
-    private static void navigateToUrl(final String url) throws MalformedURLException {
-        WebDriverManager.getInstance().getWebDriver().navigate().to(new URL(url));
+    /**
+     * Navigates to a specific path from Base Url of pivotal.
+     * @param path
+     * @throws MalformedURLException
+     */
+    public static void navigateToPath(final String path) throws MalformedURLException {
+        navigateToUrl((PivotalProperties.getInstance().getBaseUrl().concat(path)));
     }
 
     /**
