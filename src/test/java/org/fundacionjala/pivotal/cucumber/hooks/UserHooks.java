@@ -1,4 +1,4 @@
-package org.fundacionjala.pivotal.hooks;
+package org.fundacionjala.pivotal.cucumber.hooks;
 
 import io.cucumber.java.After;
 import org.fundacionjala.core.selenium.WebDriverManager;
