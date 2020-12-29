@@ -38,7 +38,6 @@ allure {
 
 task runBDDTests(type: Test) {
     useTestNG()
-    exclude 'org/fundacionjala/trello/unit/tests/**'
     options {
         useDefaultListeners = false
         jvmArgs = ['-Dcucumber.plugin=io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm']
@@ -53,12 +52,10 @@ task runBDDTests(type: Test) {
 
 task reRunBDDTests(type: Test) {
     useTestNG()
-    exclude 'org/fundacionjala/trello/unit/tests/**'
     options {
         useDefaultListeners = false
         jvmArgs = ['-Dcucumber.plugin=io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm']
         jvmArgs = ['-Dcucumber.plugin=rerun:build/target/rerun.txt']
-        jvmArgs = ['-Dcucumber.features=@build/target/rerun.txt']
         jvmArgs = ['-DcucumberThreadCount=' + cucumberThreadCount]
     }
     testLogging.showStandardStreams = true
