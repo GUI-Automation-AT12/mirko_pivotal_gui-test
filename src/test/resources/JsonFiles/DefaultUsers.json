@@ -1,22 +1,18 @@
 [
-  {
-    "user": {
-      "Alias": "Editable User",
-      "Email": "mirkofer.122020@gmail.com",
-      "Password": "622Mirko###",
-      "User name": "userNotEdited",
-      "Name": "User Not Edited",
-      "Initials": "UNE"
+    {
+        "alias": "Editable User",
+        "email": "mirkofer.122020@gmail.com",
+        "password": "622Mirko###",
+        "userName": "userNotEdited",
+        "name": "User Not Edited",
+        "initials": "UNE"
+    },
+    {
+        "alias": "Standard User",
+        "email": "mirkofer.122020@gmail.com",
+        "password": "622Mirko###",
+        "userName": "standardUser",
+        "name": "Standard User",
+        "initials": "SU"
     }
-  },
-  {
-    "user": {
-      "Alias": "Standard User",
-      "Email": "mirkofer.122020@gmail.com",
-      "Password": "622Mirko###",
-      "User name": "standardUser",
-      "Name": "Standard User",
-      "Initials": "SU"
-    }
-  }
 ]

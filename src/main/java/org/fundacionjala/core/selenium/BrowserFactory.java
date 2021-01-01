@@ -6,6 +6,7 @@ import org.fundacionjala.core.selenium.webDrivers.FirefoxBrowser;
 import org.fundacionjala.core.selenium.webDrivers.IBrowser;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,9 +36,10 @@ public final class BrowserFactory {
     /**
      * Gets a driverProps providing the browser name.
      * @param browserName
-     * @return DriverProps of the browser
+     * @return Driver Properties of the browser
+     * @thows IOException
      */
-    public static Map getDriverProps(final String browserName) {
-        return browsersMap.get(browserName).getDriverProps();
+    public static Browser getDriverProps(final String browserName) throws IOException {
+        return BrowserParser.getBrowsersMap().get(browserName);
     }
 }

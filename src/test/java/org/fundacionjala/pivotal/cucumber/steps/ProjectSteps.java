@@ -2,9 +2,9 @@ package org.fundacionjala.pivotal.cucumber.steps;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.fundacionjala.core.selenium.WebDriverManager;
 import org.fundacionjala.pivotal.context.ProjectContext;
 import org.fundacionjala.pivotal.entities.Project;
+import org.fundacionjala.pivotal.ui.WebTransporter;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.DashboardPage;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectPage;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectsSummaryPage;
@@ -71,7 +71,7 @@ public class ProjectSteps {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            String currentUrl = WebDriverManager.getInstance().getCurrentUrl();
+            String currentUrl = WebTransporter.getCurrentUrl();
             assertTrue(currentUrl.startsWith("https://www.pivotaltracker.com/n/projects/"));
 
             //Updating Project entity's id

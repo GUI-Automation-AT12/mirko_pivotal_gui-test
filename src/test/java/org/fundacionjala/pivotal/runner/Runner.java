@@ -2,7 +2,8 @@ package org.fundacionjala.pivotal.runner;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
-import org.fundacionjala.core.config.EnvironmentProperties;
+import org.fundacionjala.core.config.PropertiesSetter;
+import org.fundacionjala.core.config.TestExecutionProperties;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
@@ -23,10 +24,11 @@ public final class Runner extends AbstractTestNGCucumberTests {
     }
 
     /**
-     * Sets dataproviderthreadcount property before all scenarios.
+     * Run code before all scenarios.
      */
     @BeforeTest
     public void beforeAllScenarios() {
-        System.setProperty("dataproviderthreadcount", EnvironmentProperties.getInstance().getCucumberThreadCount());
+        PropertiesSetter.setDataProviderThreadCountProp(TestExecutionProperties.getInstance().getCucumberThreadCount());
+        PropertiesSetter.setTestBrowser(TestExecutionProperties.getInstance().getTestBrowser());
     }
 }

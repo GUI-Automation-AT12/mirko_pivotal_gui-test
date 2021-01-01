@@ -1,7 +1,7 @@
 package org.fundacionjala.pivotal.config;
 
-import org.fundacionjala.core.config.PropertiesFileReader;
-import org.fundacionjala.core.throwables.EnvironmentReadingException;
+import org.fundacionjala.core.utils.PropertiesFileReader;
+import org.fundacionjala.core.throwables.PropertiesReadingException;
 
 public final class PivotalProperties {
     private static final String PROPERTIES_FILE_PATH = "pivotal.properties";
@@ -16,14 +16,14 @@ public final class PivotalProperties {
         if (singleInstance == null) {
             try {
                 singleInstance = new PivotalProperties();
-            } catch (EnvironmentReadingException e) {
+            } catch (PropertiesReadingException e) {
                 e.printStackTrace();
             }
         }
         return singleInstance;
     }
 
-    private PivotalProperties() throws EnvironmentReadingException {
+    private PivotalProperties() throws PropertiesReadingException {
         propertiesFileReader = new PropertiesFileReader(PROPERTIES_FILE_PATH);
     }
 

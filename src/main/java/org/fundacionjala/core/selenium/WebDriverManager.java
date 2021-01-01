@@ -2,14 +2,15 @@ package org.fundacionjala.core.selenium;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public final class WebDriverManager {
 
     private static WebDriverManager webDriverManager;
     private static String browserName;
-    private WebDriver webDriver;
-    private WebDriverWait webDriverWait;
+    private WebDriver webDriver = null;
+    private WebDriverWait webDriverWait = null;
 
 
     /**
@@ -24,14 +25,17 @@ public final class WebDriverManager {
     }
 
     private WebDriverManager() {
-        webDriver = BrowserFactory.getWebDriver(browserName);
-        webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().
-                implicitlyWait(Long.parseLong(BrowserFactory.getDriverProps(browserName).
-                                get("implicitWaitingSeconds").toString()), TimeUnit.SECONDS);
-        webDriverWait = new WebDriverWait(webDriver,
-                Long.parseLong(BrowserFactory.getDriverProps(browserName).get("explicitWaitingSeconds").toString()),
-                Long.parseLong(BrowserFactory.getDriverProps(browserName).get("sleepingTimeMills").toString()));
+        try {
+            Browser browser = BrowserFactory.getDriverProps(browserName);
+            webDriver = BrowserFactory.getWebDriver(browserName);
+            webDriver.manage().window().maximize();
+            webDriver.manage().timeouts().
+                    implicitlyWait(Long.parseLong(browser.getImplicitWaitingSeconds()), TimeUnit.SECONDS);
+            webDriverWait = new WebDriverWait(webDriver, Long.parseLong(browser.getExplicitWaitingSeconds()),
+                            Long.parseLong(browser.getSleepingTimeMills()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -63,14 +67,6 @@ public final class WebDriverManager {
      */
     public void quit() {
         this.webDriver.quit();
-        this.webDriverManager = null;
-    }
-
-    /**
-     * Get the current Url of the webDriver.
-     * @return Current Url
-     */
-    public String getCurrentUrl() {
-        return this.webDriver.getCurrentUrl();
+        webDriverManager = null;
     }
 }

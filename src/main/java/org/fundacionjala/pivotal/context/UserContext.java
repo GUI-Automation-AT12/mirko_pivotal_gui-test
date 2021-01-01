@@ -1,20 +1,20 @@
 package org.fundacionjala.pivotal.context;
 
-import org.fundacionjala.core.utils.JsonParser;
+import org.fundacionjala.pivotal.entities.EntitiesParser;
 import org.fundacionjala.pivotal.entities.User;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserContext {
-    private List<User> usersList;
-    private List<String> editedUsersList;
+    private final List<User> usersList;
+    private final List<String> editedUsersList;
 
     /**
      * Constructor for UserContext class.
      */
-    public UserContext() {
-        this.usersList = JsonParser.getUsersFromJsonArray();
+    public UserContext() throws IOException {
+        this.usersList = EntitiesParser.getUsersListFromJson();
         this.editedUsersList = new ArrayList<>();
     }
 

@@ -21,6 +21,7 @@ public final class WebTransporter {
     }
 
     private static void navigateToUrl(final String url) throws MalformedURLException {
+        System.out.println(WebDriverManager.getInstance().getWebDriver() + "");
         WebDriverManager.getInstance().getWebDriver().navigate().to(new URL(url));
     }
 
@@ -55,5 +56,13 @@ public final class WebTransporter {
      */
     public static void reloadPage() {
         WebDriverManager.getInstance().getWebDriver().navigate().refresh();
+    }
+
+    /**
+     * Get the current Url of the webDriver.
+     * @return Current Url
+     */
+    public static String getCurrentUrl() {
+        return WebDriverManager.getInstance().getWebDriver().getCurrentUrl();
     }
 }

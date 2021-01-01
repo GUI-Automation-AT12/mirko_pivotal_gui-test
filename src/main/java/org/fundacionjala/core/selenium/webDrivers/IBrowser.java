@@ -2,8 +2,6 @@ package org.fundacionjala.core.selenium.webDrivers;
 
 import org.openqa.selenium.WebDriver;
 
-import java.util.Map;
-
 public interface IBrowser {
 
     /**
@@ -11,10 +9,4 @@ public interface IBrowser {
      * @return WebDriver
      */
     WebDriver initDriver();
-
-    /**
-     * Get a Map that contains the Properties for the Driver Browser.
-     * @return driverProps
-     */
-    Map getDriverProps();
 }
