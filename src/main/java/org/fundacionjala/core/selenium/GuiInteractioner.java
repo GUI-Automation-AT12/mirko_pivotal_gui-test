@@ -57,6 +57,11 @@ public final class GuiInteractioner {
         clickWebElement(findElementBy(by));
     }
 
+    /**
+     * Scrolls down until find a WebElement.
+     *
+     * @param webElement to be found in the page
+     */
     public static void scrollDownToFindElement(final WebElement webElement) {
         JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getInstance().getWebDriver();
         js.executeScript("arguments[0].scrollIntoView();", webElement);
@@ -112,5 +117,49 @@ public final class GuiInteractioner {
             }
         }
         return null;
+    }
+
+    /**
+     * Get the state of a Web Element.
+     *
+     * @param webElement to ask for its state
+     * @return true if the WebElement is selected, otherwise return false
+     */
+    public static boolean getStateOfWebElement(final WebElement webElement) {
+        WebDriverManager.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
+        return webElement.isSelected();
+    }
+
+    /**
+     * Provide getStateOfWebElement method to support By objects.
+     *
+     * @param by element to ask for its state
+     * @return true if the WebElement is selected, otherwise return false
+     */
+    public static boolean getStateOfWebElement(final By by) {
+        return getStateOfWebElement(findElementBy(by));
+    }
+
+    /**
+     * Gets the inner value of a specific attribute of a WebElement.
+     *
+     * @param webElement to get attribute's value
+     * @param attribute of the WebElement
+     * @return a String with the value of the attribute, otherwise return null
+     */
+    public static String getAttributeOfWebElement(final WebElement webElement, final String attribute) {
+        WebDriverManager.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
+        return webElement.getAttribute(attribute);
+    }
+
+    /**
+     * Provide getAttributeOfWebElement method to support By objects.
+     *
+     * @param by element to get attribute's value
+     * @param attribute of the By element
+     * @return a String with the value of the attribute, otherwise return null
+     */
+    public static String getAttributeOfWebElement(final By by, final String attribute) {
+        return getAttributeOfWebElement(findElementBy(by), attribute);
     }
 }

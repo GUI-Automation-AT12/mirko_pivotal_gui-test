@@ -1,6 +1,8 @@
 package org.fundacionjala.pivotal.ui.pages.LoggedIn;
 
 import org.fundacionjala.core.selenium.GuiInteractioner;
+import org.fundacionjala.pivotal.entities.Project;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -18,5 +20,16 @@ public class ProjectsSummaryPage extends BaseLoggedInPage {
      */
     public WebElement isProjectInSummary(final String projectName) {
         return GuiInteractioner.searchTextInWebElementList(listedProjects, projectName);
+    }
+
+    /**
+     * Click Settings link of the a project.
+     * @param project of the required project
+     * @return new ProjectSettingsPage
+     */
+    public ProjectSettingsPage clickSettingsLinkOfProject(final Project project) {
+        GuiInteractioner.clickWebElement(By
+                .cssSelector(".project_row.project_" + project.getId() + " .actions.column .settings.column a"));
+        return new ProjectSettingsPage();
     }
 }

@@ -9,7 +9,8 @@ Feature: Create Project
       | Name         | New Public Project  |
       | Account      | Existent Account    |
       | Privacy      | Public              |
-    Then I am driven to recently created Project Page
-      And the name of my new project should be displayed at Project Dropdown Menu
+    Then properties of new project should be displayed at Project's Page
     When I open the Project Summary page
     Then my new project should be listed in the summary
+    When I open the Project's Settings Page
+    Then all Project's creation data should be present

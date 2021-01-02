@@ -2,6 +2,7 @@ package org.fundacionjala.pivotal.cucumber.hooks;
 
 import io.cucumber.java.After;
 import org.fundacionjala.core.selenium.WebDriverManager;
+import org.fundacionjala.core.throwables.PropertiesReadingException;
 import org.fundacionjala.pivotal.context.Context;
 import org.fundacionjala.pivotal.entities.User;
 import org.fundacionjala.pivotal.ui.WebTransporter;
@@ -24,7 +25,7 @@ public class UserHooks {
      * AfterHook that restore User information.
      */
     @After(value = "@restoreUserInformation")
-    public void restoreUserInformation() throws MalformedURLException {
+    public void restoreUserInformation() throws MalformedURLException, PropertiesReadingException {
         for (String userAlias : context.getEditedUsersList()) {
             WebTransporter.navigateToPage("MY PROFILE");
             ProfilePage profilePage = new ProfilePage();

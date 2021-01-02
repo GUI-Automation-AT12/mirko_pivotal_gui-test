@@ -19,6 +19,14 @@ public class User {
     private String email;
     private String password;
 
+    private static final String KEY_ALIAS = "Alias";
+    private static final String KEY_NAME = "Name";
+    private static final String KEY_INITIALS = "Initials";
+    private static final String KEY_EMAIL = "Email";
+    private static final String KEY_PASSWORD = "Password";
+    private static final String KEY_USERNAME = "User name";
+    private static final String STRING_TO_CHANGE = "UNIQUE_ID";
+
     /**
      * Get the edited Fields for a User.
      * @return editedFields
@@ -88,7 +96,7 @@ public class User {
      * @param userUserName
      */
     public void setUserName(final String userUserName) {
-        userName = userUserName.replaceAll("UNIQUE_ID", IdGenerator.getUniqueId());
+        userName = userUserName.replaceAll(STRING_TO_CHANGE, IdGenerator.getUniqueId());
     }
 
     /**
@@ -101,10 +109,10 @@ public class User {
 
     /**
      * Sets Name to a User.
-     * @param userName
+     * @param usName
      */
-    public void setName(final String userName) {
-        this.name = userName;
+    public void setName(final String usName) {
+        this.name = usName;
     }
 
     /**
@@ -133,12 +141,12 @@ public class User {
 
     private HashMap<String, Runnable> composeMapStrategy(final Map<String, String> userInformation) {
         HashMap<String, Runnable> strategyMap = new HashMap<>();
-        strategyMap.put("Alias", () -> setAlias(userInformation.get("Alias")));
-        strategyMap.put("Name", () -> setName(userInformation.get("Name")));
-        strategyMap.put("Initials", () -> setInitials(userInformation.get("Initials")));
-        strategyMap.put("Email", () -> setEmail(userInformation.get("Email")));
-        strategyMap.put("Password", () -> setPassword(userInformation.get("Password")));
-        strategyMap.put("User name", () -> setUserName(userInformation.get("User name")));
+        strategyMap.put(KEY_ALIAS, () -> setAlias(userInformation.get(KEY_ALIAS)));
+        strategyMap.put(KEY_NAME, () -> setName(userInformation.get(KEY_NAME)));
+        strategyMap.put(KEY_INITIALS, () -> setInitials(userInformation.get(KEY_INITIALS)));
+        strategyMap.put(KEY_EMAIL, () -> setEmail(userInformation.get(KEY_EMAIL)));
+        strategyMap.put(KEY_PASSWORD, () -> setPassword(userInformation.get(KEY_PASSWORD)));
+        strategyMap.put(KEY_USERNAME, () -> setUserName(userInformation.get(KEY_USERNAME)));
         return strategyMap;
     }
 

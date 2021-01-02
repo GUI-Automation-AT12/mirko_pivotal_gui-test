@@ -10,8 +10,8 @@ public final class WebDriverManager {
 
     private static WebDriverManager webDriverManager;
     private static String browserName;
-    private WebDriver webDriver = null;
-    private WebDriverWait webDriverWait = null;
+    private WebDriver webDriver;
+    private WebDriverWait webDriverWait;
 
 
     /**
@@ -20,23 +20,23 @@ public final class WebDriverManager {
      */
     public static WebDriverManager getInstance() {
         if (webDriverManager == null) {
-            webDriverManager = new WebDriverManager();
+            try {
+                webDriverManager = new WebDriverManager();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return webDriverManager;
     }
 
-    private WebDriverManager() {
-        try {
-            Browser browser = BrowserFactory.getDriverProps(browserName);
-            webDriver = BrowserFactory.getWebDriver(browserName);
-            webDriver.manage().window().maximize();
-            webDriver.manage().timeouts().
-                    implicitlyWait(Long.parseLong(browser.getImplicitWaitingSeconds()), TimeUnit.SECONDS);
-            webDriverWait = new WebDriverWait(webDriver, Long.parseLong(browser.getExplicitWaitingSeconds()),
+    private WebDriverManager() throws IOException {
+        Browser browser = BrowserFactory.getDriverProps(browserName);
+        webDriver = BrowserFactory.getWebDriver(browserName);
+        webDriver.manage().window().maximize();
+        webDriver.manage().timeouts().
+            implicitlyWait(Long.parseLong(browser.getImplicitWaitingSeconds()), TimeUnit.SECONDS);
+        webDriverWait = new WebDriverWait(webDriver, Long.parseLong(browser.getExplicitWaitingSeconds()),
                             Long.parseLong(browser.getSleepingTimeMills()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

@@ -13,13 +13,9 @@ public final class TestExecutionProperties {
      * If singleInstance was not instanced before it creates a new one, otherwise returns the created.
      * @return singleInstance
      */
-    public static TestExecutionProperties getInstance() {
+    public static TestExecutionProperties getInstance() throws PropertiesReadingException {
         if (singleInstance == null) {
-            try {
-                singleInstance = new TestExecutionProperties();
-            } catch (PropertiesReadingException e) {
-                e.printStackTrace();
-            }
+            singleInstance = new TestExecutionProperties();
         }
         return singleInstance;
     }

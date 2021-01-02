@@ -9,7 +9,8 @@ import java.util.List;
 public final class EntitiesParser {
 
     private static List<User> userList = null;
-    private static final String JSON_FILE_PATH = "src/test/resources/JsonFiles/DefaultUsers.json";
+    private static final String JSON_FILE_PATH =
+            "src/main/java/org/fundacionjala/pivotal/config/jsonFiles/DefaultUsers.json";
 
     private EntitiesParser() {
     }

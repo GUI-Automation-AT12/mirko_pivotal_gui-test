@@ -40,13 +40,13 @@ public class PropertiesFileReader {
 
     /**
      * Gets environment property.
-     * @param property name of the property
+     * @param propertyName name of the property
      * @return property value.
      */
-    public String getProperty(final String property) {
-        String localProperty = System.getProperty(property);
+    public String getProperty(final String propertyName) {
+        String localProperty = System.getProperty(propertyName);
         if (localProperty == null) {
-            return this.property.getProperty(property);
+            return this.property.getProperty(propertyName);
         }
         return localProperty;
     }

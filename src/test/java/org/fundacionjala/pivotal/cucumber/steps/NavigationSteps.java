@@ -1,6 +1,7 @@
 package org.fundacionjala.pivotal.cucumber.steps;
 
 import io.cucumber.java.en.When;
+import org.fundacionjala.core.throwables.PropertiesReadingException;
 import org.fundacionjala.pivotal.ui.WebTransporter;
 import java.net.MalformedURLException;
 
@@ -12,7 +13,7 @@ public class NavigationSteps {
      * @throws MalformedURLException
      */
     @When("^I navigate to (.*?) page$")
-    public void navigateToPage(final String pageName) throws MalformedURLException {
+    public void navigateToPage(final String pageName) throws MalformedURLException, PropertiesReadingException {
         WebTransporter.navigateToPage(pageName);
     }
 

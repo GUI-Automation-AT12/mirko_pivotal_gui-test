@@ -4,9 +4,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import org.fundacionjala.core.config.PropertiesSetter;
 import org.fundacionjala.core.config.TestExecutionProperties;
-import org.fundacionjala.core.selenium.WebDriverManager;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterGroups;
+import org.fundacionjala.core.throwables.PropertiesReadingException;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
@@ -30,7 +28,7 @@ public final class Runner extends AbstractTestNGCucumberTests {
      * Run code before all scenarios.
      */
     @BeforeTest
-    public void beforeAllScenarios() {
+    public void beforeAllScenarios() throws PropertiesReadingException {
         PropertiesSetter.setDataProviderThreadCountProp(TestExecutionProperties.getInstance().getCucumberThreadCount());
         PropertiesSetter.setTestBrowser(TestExecutionProperties.getInstance().getTestBrowser());
     }

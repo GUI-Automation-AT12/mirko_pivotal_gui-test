@@ -1,6 +1,7 @@
 package org.fundacionjala.pivotal.ui;
 
 import org.fundacionjala.core.selenium.WebDriverManager;
+import org.fundacionjala.core.throwables.PropertiesReadingException;
 import org.fundacionjala.pivotal.config.PivotalProperties;
 
 import java.net.MalformedURLException;
@@ -18,6 +19,7 @@ public final class WebTransporter {
         PAGE_URL.put("ACCOUNTS", "accounts");
         PAGE_URL.put("NOTIFICATION SETTINGS", "notification_settings");
         PAGE_URL.put("SECURITY", "security_settings");
+        PAGE_URL.put("SIGN IN STEP ONE", "signin");
     }
 
     private static void navigateToUrl(final String url) throws MalformedURLException {
@@ -30,7 +32,7 @@ public final class WebTransporter {
      * @param pageName
      * @throws MalformedURLException
      */
-    public static void navigateToPage(final String pageName) throws MalformedURLException {
+    public static void navigateToPage(final String pageName) throws MalformedURLException, PropertiesReadingException {
         navigateToUrl(PivotalProperties.getInstance().getBaseUrl().concat(PAGE_URL.get(pageName.toUpperCase())));
     }
 
@@ -38,7 +40,7 @@ public final class WebTransporter {
      * Navigates to initial page of Pivotal Tracker website.
      * @throws MalformedURLException
      */
-    public static void navigateToPage() throws MalformedURLException {
+    public static void navigateToPage() throws MalformedURLException, PropertiesReadingException {
         navigateToUrl(PivotalProperties.getInstance().getBaseUrl());
     }
 
@@ -47,7 +49,7 @@ public final class WebTransporter {
      * @param path
      * @throws MalformedURLException
      */
-    public static void navigateToPath(final String path) throws MalformedURLException {
+    public static void navigateToPath(final String path) throws MalformedURLException, PropertiesReadingException {
         navigateToUrl((PivotalProperties.getInstance().getBaseUrl().concat(path)));
     }
 

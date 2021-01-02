@@ -12,13 +12,9 @@ public final class PivotalProperties {
      * If singleInstance was not instanced before it create a new one, otherwise return the created.
      * @return singleInstance
      */
-    public static PivotalProperties getInstance() {
+    public static PivotalProperties getInstance() throws PropertiesReadingException {
         if (singleInstance == null) {
-            try {
-                singleInstance = new PivotalProperties();
-            } catch (PropertiesReadingException e) {
-                e.printStackTrace();
-            }
+            singleInstance = new PivotalProperties();
         }
         return singleInstance;
     }

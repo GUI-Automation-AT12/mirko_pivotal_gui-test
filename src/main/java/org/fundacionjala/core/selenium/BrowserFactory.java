@@ -1,6 +1,7 @@
 package org.fundacionjala.core.selenium;
 
-import org.fundacionjala.core.selenium.browsers.*;
+import org.fundacionjala.core.selenium.browsers.Browser;
+import org.fundacionjala.core.selenium.browsers.BrowserParser;
 import org.fundacionjala.core.selenium.browsers.browserTypes.ChromeBrowser;
 import org.fundacionjala.core.selenium.browsers.browserTypes.EdgeBrowser;
 import org.fundacionjala.core.selenium.browsers.browserTypes.FirefoxBrowser;

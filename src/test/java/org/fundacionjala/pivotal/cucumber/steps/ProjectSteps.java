@@ -7,12 +7,12 @@ import org.fundacionjala.pivotal.entities.Project;
 import org.fundacionjala.pivotal.ui.WebTransporter;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.DashboardPage;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectPage;
+import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectSettingsPage;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectsSummaryPage;
 import org.fundacionjala.pivotal.ui.popups.CreateProjectPopup;
 import org.testng.asserts.SoftAssert;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import java.util.Map;
 
 public class ProjectSteps {
@@ -22,6 +22,7 @@ public class ProjectSteps {
     private CreateProjectPopup createProjectPopup;
     private ProjectPage projectPage;
     private ProjectsSummaryPage projectsSummaryPage;
+    private ProjectSettingsPage projectSettingsPage;
 
     // Entity
     private Project project;
@@ -64,33 +65,21 @@ public class ProjectSteps {
     }
 
     /**
-     * StepDef to check that I was driven to recently created Project Page.
-     */
-    @Then("I am driven to recently created Project Page")
-    public void verifyIAmDrivenToProjectPage() {
-        try {
-            Thread.sleep(WAIT_TIME);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            String currentUrl = WebTransporter.getCurrentUrl();
-            assertTrue(currentUrl.startsWith("https://www.pivotaltracker.com/n/projects/"));
-
-            //Updating Project entity's id
-            project.setId(currentUrl.substring(currentUrl.lastIndexOf('/') + 1));
-            context.getProjectListToDelete().add(project);
-        }
-    }
-
-    /**
      * StepDef to verify that the name of the new project is displayed at Project Dropdown Menu.
      */
-    @Then("the name of my new project should be displayed at Project Dropdown Menu")
-    public void verifyTheNameOfMyNewProjectIsDisplayedAtProjectDropdownMenu() {
+    @Then("properties of new project should be displayed at Project's Page")
+    public void verifyPropertiesOfNewProjectIsDisplayedAtProjectsPage() throws InterruptedException {
+        Thread.sleep(WAIT_TIME);
+        String currentUrl = WebTransporter.getCurrentUrl();
         SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(currentUrl.startsWith("https://www.pivotaltracker.com/n/projects/"));
         softAssert.assertEquals(projectPage.getTextFromProjectNameSpan(), project.getName());
         softAssert.assertEquals(projectPage.getTextFromProjectPublicPrivacySpan(), "(" + project.getPrivacy() + ")");
         softAssert.assertAll();
+
+        //Updating Project entity's id
+        project.setId(currentUrl.substring(currentUrl.lastIndexOf('/') + 1));
+        context.getProjectListToDelete().add(project);
     }
 
     /**
@@ -107,7 +96,30 @@ public class ProjectSteps {
      */
     @Then("my new project should be listed in the summary")
     public void verifyMyNewProjectIsListedInTheSummary() {
-        assertNotNull("The project: " + project.getName() + " is not present in the Project Summary",
+        assertNotNull("The project: " + project.getName() + " is not present in the Project Summary.",
                 projectsSummaryPage.isProjectInSummary(project.getName()));
+    }
+
+    /**
+     * StepDef to open Project's Settings Page.
+     */
+    @When("I open the Project's Settings Page")
+    public void iOpenTheProjectSSettingsPage() {
+        projectSettingsPage = projectsSummaryPage.clickSettingsLinkOfProject(project);
+    }
+
+    /**
+     * StepDef to verify all Project's creation data should be present in Project's Settings Page.
+     */
+    @Then("all Project's creation data should be present")
+    public void verifyAllProjectsCreationDataIsPresent() {
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(projectSettingsPage.getValueAttributeFromProjectNameTextBox(), project.getName(),
+                "The Project's name is different that defined at creation step.");
+        softAssert.assertTrue(projectSettingsPage.getTextProjectAccountLink().contains(project.getAccount()),
+                "The Project Account Link does not contain the account defined at creation step.");
+        softAssert.assertTrue(projectSettingsPage.getStatusOfProjectPrivacyCheckbox(),
+                "The Project Privacy is private but was created as public.");
+        softAssert.assertAll();
     }
 }

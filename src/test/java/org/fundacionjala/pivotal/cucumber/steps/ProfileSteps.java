@@ -4,6 +4,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.fundacionjala.pivotal.context.Context;
 import org.fundacionjala.pivotal.entities.User;
+import org.fundacionjala.pivotal.ui.component.TopMenu;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProfilePage;
 import org.testng.asserts.SoftAssert;
 import java.util.Map;
@@ -38,11 +39,14 @@ public class ProfileSteps {
         // Update User entity
         user = new User();
         user.processInformation(userInformation);
+        user.setAlias("Editable User");
+        user.setEditedFields(userInformation.keySet());
+        context.getEditedUsersList().add(user.getAlias());
+        context.getUserByAlias(user.getAlias()).setEditedFields(userInformation.keySet());
 
         // Update User Information by UI
         profilePage = new ProfilePage();
         profilePage.getEditProfileForm().editProfileInformation(userInformation.keySet(), user);
-        context.getUserByAlias("Editable User").setEditedFields(userInformation.keySet());
     }
 
     /**
@@ -50,7 +54,8 @@ public class ProfileSteps {
      */
     @When("I open the User Dropdown Menu from Top Menu")
     public void openUserDropdownMenuFromTopMenu() {
-        profilePage.getTopMenu().openUserNameDropdownMenu();
+        TopMenu topMenu = new TopMenu();
+        topMenu.openUserNameDropdownMenu();
     }
 
     /**
