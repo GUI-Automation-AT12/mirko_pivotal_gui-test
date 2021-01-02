@@ -1,4 +1,4 @@
-package org.fundacionjala.core.selenium.webDrivers;
+package org.fundacionjala.core.selenium.browsers.browserTypes;
 
 import org.openqa.selenium.WebDriver;
 

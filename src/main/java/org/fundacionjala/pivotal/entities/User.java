@@ -45,10 +45,10 @@ public class User {
 
     /**
      * Sets Alias to a User.
-     * @param uAlias
+     * @param userAlias
      */
-    public void setAlias(final String uAlias) {
-        this.alias = uAlias;
+    public void setAlias(final String userAlias) {
+        this.alias = userAlias;
     }
 
     /**
@@ -61,10 +61,10 @@ public class User {
 
     /**
      * Sets Email to a User.
-     * @param uEmail
+     * @param userEmail
      */
-    public void setEmail(final String uEmail) {
-        this.email = uEmail;
+    public void setEmail(final String userEmail) {
+        this.email = userEmail;
     }
 
     /**
@@ -77,10 +77,10 @@ public class User {
 
     /**
      * Sets Password to a User.
-     * @param uPassword
+     * @param userPassword
      */
-    public void setPassword(final String uPassword) {
-        this.password = uPassword;
+    public void setPassword(final String userPassword) {
+        this.password = userPassword;
     }
 
     /**
@@ -101,10 +101,10 @@ public class User {
 
     /**
      * Sets Name to a User.
-     * @param uName
+     * @param userName
      */
-    public void setName(final String uName) {
-        this.name = uName;
+    public void setName(final String userName) {
+        this.name = userName;
     }
 
     /**

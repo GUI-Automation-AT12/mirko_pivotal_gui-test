@@ -13,10 +13,10 @@ public class ProjectsSummaryPage extends BaseLoggedInPage {
 
     /**
      * Search for a project by project's name.
-     * @param projectName
-     * @return true if the project was found, otherwise return false
+     * @param projectName name of searched project
+     * @return the WebElement that contains the projectName, if it does not find the project, returns null.
      */
-    public boolean searchProjectInSummary(final String projectName) {
-        return GuiInteractioner.searchTextInWebElementList(listedProjects, projectName) != null;
+    public WebElement isProjectInSummary(final String projectName) {
+        return GuiInteractioner.searchTextInWebElementList(listedProjects, projectName);
     }
 }

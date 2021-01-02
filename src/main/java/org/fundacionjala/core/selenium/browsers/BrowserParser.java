@@ -1,4 +1,4 @@
-package org.fundacionjala.core.selenium;
+package org.fundacionjala.core.selenium.browsers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,7 +12,7 @@ import java.util.Map;
 public final class BrowserParser {
     private static Map<String, Browser> browserMap;
     private static final String JSON_FILE_PATH =
-            "src/main/java/org/fundacionjala/core/config/JsonFiles/DriverProperties.json";
+            "src/main/java/org/fundacionjala/core/config/JsonFiles/BrowserProperties.json";
 
     private BrowserParser() {
     }

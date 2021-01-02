@@ -4,6 +4,9 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import org.fundacionjala.core.config.PropertiesSetter;
 import org.fundacionjala.core.config.TestExecutionProperties;
+import org.fundacionjala.core.selenium.WebDriverManager;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterGroups;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 

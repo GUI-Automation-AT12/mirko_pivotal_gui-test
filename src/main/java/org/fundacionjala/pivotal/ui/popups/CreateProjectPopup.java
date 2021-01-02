@@ -22,7 +22,7 @@ public class CreateProjectPopup extends BasePage {
     private WebElement createBtn;
 
     private void fillProjectNameTextBox(final String projectName) {
-        GuiInteractioner.fillWebElement(projectNameTextBox, projectName);
+        GuiInteractioner.setInputText(projectNameTextBox, projectName);
     }
 
     private void clickAccountDropdownList() {
@@ -44,8 +44,8 @@ public class CreateProjectPopup extends BasePage {
 
     /**
      * Creates a public project from GUI.
-     * @param projectName
-     * @param account
+     * @param projectName name of the new project
+     * @param account account of the new project
      * @return a new ProjectPage.
      */
     public ProjectPage createPublicProject(final String projectName, final String account) {

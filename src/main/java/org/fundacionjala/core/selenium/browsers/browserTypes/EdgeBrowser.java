@@ -1,4 +1,4 @@
-package org.fundacionjala.core.selenium.webDrivers;
+package org.fundacionjala.core.selenium.browsers.browserTypes;
 
 import static io.github.bonigarcia.wdm.DriverManagerType.EDGE;
 import io.github.bonigarcia.wdm.EdgeDriverManager;

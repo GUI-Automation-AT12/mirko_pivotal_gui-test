@@ -18,7 +18,7 @@ public class PropertiesFileReader {
 
     /**
      * Initializes an instance of properties files.
-     * @param propertiesPath
+     * @param propertiesPath path of the properties fiel
      */
     public PropertiesFileReader(final String propertiesPath) throws PropertiesReadingException {
         try {
@@ -40,13 +40,13 @@ public class PropertiesFileReader {
 
     /**
      * Gets environment property.
-     * @param env
+     * @param property name of the property
      * @return property value.
      */
-    public String getProperty(final String env) {
-        String localProperty = System.getProperty(env);
+    public String getProperty(final String property) {
+        String localProperty = System.getProperty(property);
         if (localProperty == null) {
-            return this.property.getProperty(env);
+            return this.property.getProperty(property);
         }
         return localProperty;
     }

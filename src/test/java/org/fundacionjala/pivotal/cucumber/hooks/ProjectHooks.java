@@ -2,7 +2,8 @@ package org.fundacionjala.pivotal.cucumber.hooks;
 
 import io.cucumber.java.After;
 import org.fundacionjala.core.selenium.WebDriverManager;
-import org.fundacionjala.pivotal.context.ProjectContext;
+import org.fundacionjala.pivotal.context.Context;
+import org.fundacionjala.pivotal.entities.Project;
 import org.fundacionjala.pivotal.ui.WebTransporter;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectSettingsPage;
 
@@ -10,14 +11,14 @@ import java.net.MalformedURLException;
 
 public class ProjectHooks {
 
-    private final ProjectContext projectContext;
+    private final Context context;
 
     /**
      * Adding Dependency injection to share Project Context information.
-     * @param sharedProjectContext
+     * @param sharedContext
      */
-    public ProjectHooks(final ProjectContext sharedProjectContext) {
-        this.projectContext = sharedProjectContext;
+    public ProjectHooks(final Context sharedContext) {
+        this.context = sharedContext;
     }
 
     /**
@@ -25,11 +26,12 @@ public class ProjectHooks {
      */
     @After(value = "@deleteProject")
     public void deleteProject() throws MalformedURLException {
-        for (String id : projectContext.getProjectsIdsToDelete()) {
-            WebTransporter.navigateToPath("projects/" + id + "/settings");
+        for (Project project : context.getProjectListToDelete()) {
+            WebTransporter.navigateToPath("projects/" + project.getId() + "/settings");
             ProjectSettingsPage projectSettingsPage = new ProjectSettingsPage();
             projectSettingsPage.deleteProject();
-            WebDriverManager.getInstance().quit();
         }
+        context.getProjectListToDelete().clear();
+        WebDriverManager.getInstance().quit();
     }
 }

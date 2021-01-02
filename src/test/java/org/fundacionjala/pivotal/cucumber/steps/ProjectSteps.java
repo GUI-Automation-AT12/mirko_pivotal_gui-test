@@ -2,7 +2,7 @@ package org.fundacionjala.pivotal.cucumber.steps;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.fundacionjala.pivotal.context.ProjectContext;
+import org.fundacionjala.pivotal.context.Context;
 import org.fundacionjala.pivotal.entities.Project;
 import org.fundacionjala.pivotal.ui.WebTransporter;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.DashboardPage;
@@ -10,6 +10,8 @@ import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectPage;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectsSummaryPage;
 import org.fundacionjala.pivotal.ui.popups.CreateProjectPopup;
 import org.testng.asserts.SoftAssert;
+
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import java.util.Map;
 
@@ -25,15 +27,15 @@ public class ProjectSteps {
     private Project project;
 
     //Context
-    private final ProjectContext projectContext;
+    private final Context context;
 
-    private static final int WAIT_TIME = 3000;
+    private static final int WAIT_TIME = 5000;
     /**
      * Adding Dependency injection to share Project Context information.
-     * @param sharedProjectContext
+     * @param sharedContext
      */
-    public ProjectSteps(final ProjectContext sharedProjectContext) {
-        this.projectContext = sharedProjectContext;
+    public ProjectSteps(final Context sharedContext) {
+        this.context = sharedContext;
     }
 
     /**
@@ -76,7 +78,7 @@ public class ProjectSteps {
 
             //Updating Project entity's id
             project.setId(currentUrl.substring(currentUrl.lastIndexOf('/') + 1));
-            projectContext.getProjectsIdsToDelete().add(project.getId());
+            context.getProjectListToDelete().add(project);
         }
     }
 
@@ -105,6 +107,7 @@ public class ProjectSteps {
      */
     @Then("my new project should be listed in the summary")
     public void verifyMyNewProjectIsListedInTheSummary() {
-        assertTrue(projectsSummaryPage.searchProjectInSummary(project.getName()));
+        assertNotNull("The project: " + project.getName() + " is not present in the Project Summary",
+                projectsSummaryPage.isProjectInSummary(project.getName()));
     }
 }

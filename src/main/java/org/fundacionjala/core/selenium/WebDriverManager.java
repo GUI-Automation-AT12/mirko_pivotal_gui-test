@@ -1,5 +1,6 @@
 package org.fundacionjala.core.selenium;
 
+import org.fundacionjala.core.selenium.browsers.Browser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.IOException;
@@ -40,7 +41,7 @@ public final class WebDriverManager {
 
     /**
      * Sets the browser to run the tests, providing its name.
-     * @param browser
+     * @param browser name of the browser
      */
     public static void setBrowserName(final String browser) {
         WebDriverManager.browserName = browser;

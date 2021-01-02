@@ -1,7 +1,7 @@
 package org.fundacionjala.pivotal.cucumber.steps;
 
 import io.cucumber.java.en.Given;
-import org.fundacionjala.pivotal.context.UserContext;
+import org.fundacionjala.pivotal.context.Context;
 import org.fundacionjala.pivotal.entities.User;
 import org.fundacionjala.pivotal.ui.WebTransporter;
 import org.fundacionjala.pivotal.ui.pages.LogedOut.InitialPage;
@@ -13,7 +13,7 @@ import java.net.MalformedURLException;
 public class LoginSteps {
 
     //dependency injection
-    private UserContext userContext;
+    private Context context;
 
     // Pages
     private InitialPage initialPage;
@@ -22,10 +22,10 @@ public class LoginSteps {
 
     /**
      * Adding Dependency injection to share Default Users information.
-     * @param sharedUserContext
+     * @param sharedContext
      */
-    public LoginSteps(final UserContext sharedUserContext) {
-        this.userContext = sharedUserContext;
+    public LoginSteps(final Context sharedContext) {
+        this.context = sharedContext;
     }
 
     /**
@@ -35,8 +35,8 @@ public class LoginSteps {
      */
     @Given("^I log in to Pivotal with (.*?) credentials$")
     public void logInToPivotal(final String userAlias) throws MalformedURLException {
-        User user = userContext.getUserByAlias(userAlias);
-        userContext.getEditedUsersList().add(userAlias);
+        User user = context.getUserByAlias(userAlias);
+        context.getEditedUsersList().add(userAlias);
         initialPage = new InitialPage();
         WebTransporter.navigateToPage();
         loginStep1Page = initialPage.goToLoginStep1();

@@ -1,4 +1,4 @@
-package org.fundacionjala.core.selenium;
+package org.fundacionjala.core.selenium.browsers;
 
 public class Browser {
     private String name;

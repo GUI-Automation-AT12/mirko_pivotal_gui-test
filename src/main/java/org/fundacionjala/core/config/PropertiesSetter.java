@@ -9,7 +9,8 @@ public final class PropertiesSetter {
 
     /**
      * Sets dataproviderthreadcount property.
-     * @param threadCount
+     *
+     * @param threadCount defined number for threadCount
      */
     public static void setDataProviderThreadCountProp(final String threadCount) {
         System.setProperty("dataproviderthreadcount", threadCount);
@@ -17,7 +18,8 @@ public final class PropertiesSetter {
 
     /**
      * Sets the Test Browser to run test Scenarios.
-     * @param browserName
+     *
+     * @param browserName name of default browser
      */
     public static void setTestBrowser(final String browserName) {
         WebDriverManager.setBrowserName(browserName);

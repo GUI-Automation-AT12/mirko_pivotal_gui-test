@@ -13,12 +13,8 @@ public class UserMenu extends BasePage {
 
 
 
-    @FindBy(xpath = "//div[@class='Dropdown__options Dropdown__options--small']/div/div/a[1]")
+    @FindBy(css = "a.Dropdown__option.selected.Dropdown__option--link")
     private WebElement profileLink;
-
-    @FindBy(xpath = "//div[@class='Dropdown__options Dropdown__options--small']"
-            + "/div/div/form/button[contains(@data-aid,'signout')]")
-    private WebElement signOutBtn;
 
     @FindBy(css = ".AvatarDetails__underlyingInitials")
     private WebElement underlyingInitials;
@@ -36,10 +32,6 @@ public class UserMenu extends BasePage {
         GuiInteractioner.clickWebElement(profileLink);
     }
 
-    private void clickSignOutBtn() {
-        GuiInteractioner.clickWebElement(signOutBtn);
-    }
-
     private String getUnderlyingInitialsAsString() {
         return GuiInteractioner.getTextFromWebElement(underlyingInitials);
     }
@@ -54,13 +46,6 @@ public class UserMenu extends BasePage {
 
     private String getDetailsInitialsAsString() {
         return GuiInteractioner.getTextFromWebElement(detailsInitials);
-    }
-
-    /**
-     * Allows sign a user out from GUI.
-     */
-    public void signOut() {
-        clickSignOutBtn();
     }
 
     /**

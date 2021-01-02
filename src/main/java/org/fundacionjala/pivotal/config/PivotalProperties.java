@@ -29,7 +29,7 @@ public final class PivotalProperties {
 
 
     /**
-     * get the BaseUrl from the properties file.
+     * Get the BaseUrl from the properties file.
      *
      * @return base url.
      */

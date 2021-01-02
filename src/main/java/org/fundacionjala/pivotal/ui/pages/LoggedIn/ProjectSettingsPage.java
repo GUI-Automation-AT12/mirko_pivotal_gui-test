@@ -15,8 +15,7 @@ public class ProjectSettingsPage extends BaseLoggedInPage {
     private WebElement deleteProjectBtn;
 
     private void scrollDownToFindDeleteProjectLink() {
-        JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getInstance().getWebDriver();
-        js.executeScript("arguments[0].scrollIntoView();", this.deleteProjectLink);
+        GuiInteractioner.scrollDownToFindElement(deleteProjectLink);
     }
 
     private void clickDeleteLink() {
