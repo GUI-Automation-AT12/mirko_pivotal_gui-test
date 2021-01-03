@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 public class NavigationSteps {
 
     /**
-     * StepDef to navigate towards any URL.
+     * Navigates towards any URL.
      * @param pageName
      * @throws MalformedURLException
      */
@@ -18,7 +18,7 @@ public class NavigationSteps {
     }
 
     /**
-     * StepDef to reload the browser.
+     * Reloads the browser.
      */
     @When("I reload the page")
     public void reloadPage() {

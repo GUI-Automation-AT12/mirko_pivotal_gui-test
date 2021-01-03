@@ -5,6 +5,7 @@ import org.fundacionjala.core.utils.IdGenerator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class User {
 
@@ -157,5 +158,26 @@ public class User {
     public void processInformation(final Map<String, String> userInformation) {
         HashMap<String, Runnable> strategyMap = composeMapStrategy(userInformation);
         userInformation.keySet().forEach(key -> strategyMap.get(key).run());
+    }
+
+    private HashMap<String, Supplier<String>> composeStrategyGetterMap() {
+        HashMap<String, Supplier<String>> strategyMap = new HashMap<>();
+        strategyMap.put(KEY_ALIAS, () -> getAlias());
+        strategyMap.put(KEY_NAME, () -> getName());
+        strategyMap.put(KEY_INITIALS, () -> getInitials());
+        strategyMap.put(KEY_EMAIL, () -> getEmail());
+        strategyMap.put(KEY_USERNAME, () -> getUserName());
+        strategyMap.put(KEY_PASSWORD, () -> getPassword());
+        return strategyMap;
+    }
+
+    /**
+     * Gets Edited User Info as Map.
+     * @return a Map with edited user info
+     */
+    public Map<String, String> getEditedInfo() {
+        Map userInfoMap = new HashMap<String, String>();
+        editedFields.forEach(field -> userInfoMap.put(field, composeStrategyGetterMap().get(field).get()));
+        return userInfoMap;
     }
 }

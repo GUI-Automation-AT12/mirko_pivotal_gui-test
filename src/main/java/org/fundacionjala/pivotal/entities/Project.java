@@ -8,6 +8,18 @@ public class Project {
     private String privacy;
 
     /**
+     * Constructor for Project entity class.
+     * @param projectName of the new project
+     * @param projectAccount of the new project
+     * @param projectPrivacy of the new project
+     */
+    public Project(final String projectName, final String projectAccount, final String projectPrivacy) {
+        this.name = projectName;
+        this.account = projectAccount;
+        this.privacy = projectPrivacy;
+    }
+
+    /**
      * Gets the id of the project.
      * @return id
      */

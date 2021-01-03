@@ -20,7 +20,7 @@ public class LoginSteps {
     private LoginStep2Page loginStep2Page;
 
     /**
-     * Adding Dependency injection to share Default Users information.
+     * Adds Dependency injection to share Context information.
      * @param sharedContext
      */
     public LoginSteps(final Context sharedContext) {
@@ -28,7 +28,7 @@ public class LoginSteps {
     }
 
     /**
-     * StepDef to log in a user.
+     * Logs a user in Pivotal Tracker.
      * @param userAlias
      * @throws MalformedURLException
      */

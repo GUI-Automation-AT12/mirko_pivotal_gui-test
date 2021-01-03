@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ProjectsSummaryPage extends BaseLoggedInPage {
 
-    @FindBy(xpath = "//div[@class='projects column']/a")
+    @FindBy(css = ".projects.column a")
     private List<WebElement> listedProjects;
 
     /**

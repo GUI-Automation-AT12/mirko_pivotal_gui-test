@@ -1,6 +1,7 @@
 package org.fundacionjala.pivotal.ui.popups;
 
 import org.fundacionjala.core.selenium.GuiInteractioner;
+import org.fundacionjala.pivotal.entities.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,6 +22,8 @@ public class CreateProjectPopup extends BasePage {
     @FindBy(css = ".pvXpn__Button--positive")
     private WebElement createBtn;
 
+    private By accountOptions = By.className("tc-account-selector__option-account");
+
     private void fillProjectNameTextBox(final String projectName) {
         GuiInteractioner.setInputText(projectNameTextBox, projectName);
     }
@@ -30,8 +33,7 @@ public class CreateProjectPopup extends BasePage {
     }
 
     private void selectAccountOption(final String account) {
-        GuiInteractioner.clickOptionFromWebElementList(
-                accountDropdownList.findElements(By.className("tc-account-selector__option-account")), account);
+        GuiInteractioner.clickOptionFromWebElementList(accountDropdownList.findElements(accountOptions), account);
     }
 
     private void clickPublicProjectType() {
@@ -44,14 +46,13 @@ public class CreateProjectPopup extends BasePage {
 
     /**
      * Creates a public project from GUI.
-     * @param projectName name of the new project
-     * @param account account of the new project
+     * @param project Entity that contains the new Project's information
      * @return a new ProjectPage.
      */
-    public ProjectPage createPublicProject(final String projectName, final String account) {
-        fillProjectNameTextBox(projectName);
+    public ProjectPage createPublicProject(final Project project) {
+        fillProjectNameTextBox(project.getName());
         clickAccountDropdownList();
-        selectAccountOption(account);
+        selectAccountOption(project.getAccount());
         clickPublicProjectType();
         clickCreateBtn();
         return new ProjectPage();

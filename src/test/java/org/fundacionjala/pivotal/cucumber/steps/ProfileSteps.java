@@ -22,7 +22,7 @@ public class ProfileSteps {
     private final Context context;
 
     /**
-     * Adding Dependency injection to share Default Users information.
+     * Adds Dependency injection to share Context information.
      * @param sharedContext
      */
     public ProfileSteps(final Context sharedContext) {
@@ -30,7 +30,7 @@ public class ProfileSteps {
     }
 
     /**
-     * StepDef to edit user Profile from GUI receiving a Data Table.
+     * Edits user Profile from GUI receiving a Data Table.
      * @param userInformation
      */
     @When("^I edit My Profile with the following information$")
@@ -50,7 +50,7 @@ public class ProfileSteps {
     }
 
     /**
-     * StepDef to open the User Dropdown Menu of the Profile Page.
+     * Opens the User Dropdown Menu of the Profile Page.
      */
     @When("I open the User Dropdown Menu from Top Menu")
     public void openUserDropdownMenuFromTopMenu() {
@@ -59,7 +59,7 @@ public class ProfileSteps {
     }
 
     /**
-     * StepDef to compare a message given against the message present in Profile Page.
+     * Compares a message given against the message present in Profile Page.
      * @param message
      */
     @Then("{string} message should be displayed in My Profile section")
@@ -69,23 +69,22 @@ public class ProfileSteps {
     }
 
     /**
-     * StepDef to verify that the user information edited was changed in Profile Page.
+     * Verifies that the user information edited was changed in Profile Page.
      */
     @Then("the user information should be updated in My Profile section")
     public void verifyUserInformationIsUpdatedInMyProfileSection() {
-        Map<String, String> profileInfo = profilePage.getUserInformationAsMap();
+        Map<String, String> actualProfileInfo = profilePage.getUserEditedInfoAsMap(user.getEditedFields());
+        Map<String, String> expectedProfileInfo = user.getEditedInfo();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(profileInfo.get("User name"), user.getUserName(),
-                "The Username from Profile Page does not match with the Username edited previously.");
-        softAssert.assertEquals(profileInfo.get("Name"), user.getName(),
-                "The Name from Profile Page does not match with the Name edited previously.");
-        softAssert.assertEquals(profileInfo.get("Initials"), user.getInitials(),
-                "The Initials from Profile Page does not match with the Initials edited previously.");
+        actualProfileInfo.forEach((field, actualValue) -> {
+            softAssert.assertEquals(actualValue, expectedProfileInfo.get(field),
+                    "The " + field + " from Profile Page does not match with the " + field + " edited previously.");
+        });
         softAssert.assertAll();
     }
 
     /**
-     * StepDef to check that the edited Name was showed in the User Management Menu.
+     * Checks that the edited Name was showed in the User Management Menu.
      */
     @Then("my Name should be updated in the User Management Menu")
     public void verifyMyNameIsUpdatedInUserManagementMenu() {
@@ -94,7 +93,7 @@ public class ProfileSteps {
     }
 
     /**
-     * StepDef to check that the edited User name was showed in the Top Menu.
+     * Checks that the edited User name was showed in the Top Menu.
      */
     @Then("my User Name should be updated in the Top Menu")
     public void verifyMyUserNameIsUpdatedInTheTopMenu() {
@@ -104,7 +103,7 @@ public class ProfileSteps {
 
 
     /**
-     * StepDef to verify that the user information edited was changed in the User Dropdown Menu.
+     * Verifies that the user information edited was changed in the User Dropdown Menu.
      */
     @Then("the user information should be updated in the User Dropdown Menu")
     public void verifyUserInformationIsUpdatedInUserDropdownMenu() {
@@ -117,7 +116,7 @@ public class ProfileSteps {
         softAssert.assertEquals(dropdownMenuInfo.get("Details name"), user.getName(),
                 "The Name from User Menu does not match with the Name edited previously.");
         softAssert.assertEquals(dropdownMenuInfo.get("Details initials"), user.getInitials(),
-                "The Initials from User Menu does not match with the Initials edited previously.");
+                "The Details Initials from User Menu does not match with the Initials edited previously.");
         softAssert.assertAll();
     }
 }

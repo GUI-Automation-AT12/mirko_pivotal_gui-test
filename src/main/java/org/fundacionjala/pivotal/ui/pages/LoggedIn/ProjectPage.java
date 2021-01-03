@@ -1,6 +1,7 @@
 package org.fundacionjala.pivotal.ui.pages.LoggedIn;
 
 import org.fundacionjala.core.selenium.GuiInteractioner;
+import org.fundacionjala.pivotal.ui.WebTransporter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -50,5 +51,14 @@ public class ProjectPage extends BaseLoggedInPage {
         clickProjectDropdownList();
         clickProjectsSummaryLink();
         return new ProjectsSummaryPage();
+    }
+
+    /**
+     * Gets the Project Id from the Url of the Project Page.
+     * @return id extract from the Url
+     */
+    public String getIdFromUrl() {
+        String url = WebTransporter.getCurrentUrl();
+        return url.substring(url.lastIndexOf('/') + 1);
     }
 }
