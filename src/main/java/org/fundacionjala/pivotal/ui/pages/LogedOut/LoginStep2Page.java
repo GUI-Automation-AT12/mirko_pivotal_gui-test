@@ -14,7 +14,7 @@ public class LoginStep2Page extends BasePage {
     private WebElement signInBtn;
 
     private void fillPassword(final String password) {
-        GuiInteractioner.fillWebElement(passwordTextBox, password);
+        GuiInteractioner.setInputText(passwordTextBox, password);
     }
 
     private void clickSignInBtn() {
@@ -23,7 +23,7 @@ public class LoginStep2Page extends BasePage {
 
     /**
      * Fills the password and log a user in Pivotal Tracker.
-     * @param password
+     * @param password password of the user
      * @return a new DashboardPage.
      */
     public DashboardPage signIn(final String password) {

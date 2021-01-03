@@ -1,6 +1,6 @@
 package org.fundacionjala.core.throwables;
 
-public class EnvironmentReadingException extends Exception {
+public class PropertiesReadingException extends Exception {
     /**
      * Default error message.
      */
@@ -9,7 +9,7 @@ public class EnvironmentReadingException extends Exception {
     /**
      * Default constructor.
      */
-    public EnvironmentReadingException() {
+    public PropertiesReadingException() {
         super(MESSAGE);
     }
 
@@ -18,7 +18,7 @@ public class EnvironmentReadingException extends Exception {
      *
      * @param message to change
      */
-    public EnvironmentReadingException(final String message) {
+    public PropertiesReadingException(final String message) {
         super(message);
     }
 
@@ -27,7 +27,7 @@ public class EnvironmentReadingException extends Exception {
      *
      * @param throwable new throwable
      */
-    public EnvironmentReadingException(final Throwable throwable) {
+    public PropertiesReadingException(final Throwable throwable) {
         super(MESSAGE, throwable);
     }
 
@@ -37,7 +37,7 @@ public class EnvironmentReadingException extends Exception {
      * @param message   specified
      * @param throwable new throwable
      */
-    public EnvironmentReadingException(final String message, final Throwable throwable) {
+    public PropertiesReadingException(final String message, final Throwable throwable) {
         super(message, throwable);
     }
 }

@@ -1,26 +1,29 @@
 package org.fundacionjala.pivotal.context;
 
-import org.fundacionjala.core.utils.JsonParser;
+import org.fundacionjala.pivotal.entities.EntitiesParser;
+import org.fundacionjala.pivotal.entities.Project;
 import org.fundacionjala.pivotal.entities.User;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserContext {
-    private List<User> usersList;
-    private List<String> editedUsersList;
+public class Context {
+    private final List<User> usersList;
+    private final List<String> editedUsersList;
+    private final List<Project> projectListToDelete;
 
     /**
-     * Constructor for UserContext class.
+     * Constructor for Context class.
      */
-    public UserContext() {
-        this.usersList = JsonParser.getUsersFromJsonArray();
+    public Context() throws IOException {
+        this.usersList = EntitiesParser.getUsersListFromJson();
         this.editedUsersList = new ArrayList<>();
+        this.projectListToDelete = new ArrayList<>();
     }
 
     /**
      * Searches for a specific User in userList by a provided alias.
-     * @param alias
+     * @param alias provided alias
      * @return User if the alias matches, otherwise return null.
      */
     public User getUserByAlias(final String alias) {
@@ -38,5 +41,13 @@ public class UserContext {
      */
     public List<String> getEditedUsersList() {
         return editedUsersList;
+    }
+
+    /**
+     * Get the List of Projects to delete after some Test Scenarios.
+     * @return projectListToDelete
+     */
+    public List<Project> getProjectListToDelete() {
+        return projectListToDelete;
     }
 }

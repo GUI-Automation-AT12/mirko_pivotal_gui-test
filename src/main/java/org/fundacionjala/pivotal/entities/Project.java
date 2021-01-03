@@ -8,6 +8,18 @@ public class Project {
     private String privacy;
 
     /**
+     * Constructor for Project entity class.
+     * @param projectName of the new project
+     * @param projectAccount of the new project
+     * @param projectPrivacy of the new project
+     */
+    public Project(final String projectName, final String projectAccount, final String projectPrivacy) {
+        this.name = projectName;
+        this.account = projectAccount;
+        this.privacy = projectPrivacy;
+    }
+
+    /**
      * Gets the id of the project.
      * @return id
      */
@@ -17,10 +29,10 @@ public class Project {
 
     /**
      * Sets the id of the project.
-     * @param pId
+     * @param projectId
      */
-    public void setId(final String pId) {
-        this.id = pId;
+    public void setId(final String projectId) {
+        this.id = projectId;
     }
 
     /**
@@ -33,10 +45,10 @@ public class Project {
 
     /**
      * Sets the name of the project.
-     * @param pName
+     * @param projectName
      */
-    public void setName(final String pName) {
-        this.name = pName;
+    public void setName(final String projectName) {
+        this.name = projectName;
     }
 
     /**
@@ -49,10 +61,10 @@ public class Project {
 
     /**
      * Sets the account of the project.
-     * @param pAccount
+     * @param projectAccount
      */
-    public void setAccount(final String pAccount) {
-        this.account = pAccount;
+    public void setAccount(final String projectAccount) {
+        this.account = projectAccount;
     }
 
     /**
@@ -65,9 +77,9 @@ public class Project {
 
     /**
      * Sets the privacy of the project.
-     * @param pPrivacy
+     * @param projectPrivacy
      */
-    public void setPrivacy(final String pPrivacy) {
-        this.privacy = pPrivacy;
+    public void setPrivacy(final String projectPrivacy) {
+        this.privacy = projectPrivacy;
     }
 }

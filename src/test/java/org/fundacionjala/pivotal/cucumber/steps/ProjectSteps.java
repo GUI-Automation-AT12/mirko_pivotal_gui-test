@@ -2,15 +2,16 @@ package org.fundacionjala.pivotal.cucumber.steps;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.fundacionjala.core.selenium.WebDriverManager;
-import org.fundacionjala.pivotal.context.ProjectContext;
+import org.fundacionjala.pivotal.context.Context;
 import org.fundacionjala.pivotal.entities.Project;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.DashboardPage;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectPage;
+import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectSettingsPage;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectsSummaryPage;
 import org.fundacionjala.pivotal.ui.popups.CreateProjectPopup;
 import org.testng.asserts.SoftAssert;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.Assert.assertNotNull;
 import java.util.Map;
 
 public class ProjectSteps {
@@ -20,24 +21,25 @@ public class ProjectSteps {
     private CreateProjectPopup createProjectPopup;
     private ProjectPage projectPage;
     private ProjectsSummaryPage projectsSummaryPage;
+    private ProjectSettingsPage projectSettingsPage;
 
     // Entity
     private Project project;
 
     //Context
-    private final ProjectContext projectContext;
+    private final Context context;
 
-    private static final int WAIT_TIME = 3000;
+    private static final int WAIT_TIME = 5000;
     /**
-     * Adding Dependency injection to share Project Context information.
-     * @param sharedProjectContext
+     * Adds Dependency injection to share Context information.
+     * @param sharedContext
      */
-    public ProjectSteps(final ProjectContext sharedProjectContext) {
-        this.projectContext = sharedProjectContext;
+    public ProjectSteps(final Context sharedContext) {
+        this.context = sharedContext;
     }
 
     /**
-     * StepDef to open the Create Project pop-up.
+     * Opens the Create Project pop-up.
      */
     @When("I open the Create Project pop-up")
     public void openTheCreateProjectPopUp() {
@@ -46,45 +48,26 @@ public class ProjectSteps {
     }
 
     /**
-     * StepDef to create a new public project with the provided data.
-     * @param projectInfo
+     * Creates a new public project with the provided data.
+     * @param projectInfo as Map<String, String>
      */
     @When("I create a new public Project with the following information")
     public void createNewProject(final Map<String, String> projectInfo) {
         //Updating Project entity
-        project = new Project();
-        project.setName(projectInfo.get("Name"));
-        project.setAccount(projectInfo.get("Account"));
-        project.setPrivacy(projectInfo.get("Privacy"));
+        project = new Project(projectInfo.get("Name"), projectInfo.get("Account"), projectInfo.get("Privacy"));
 
         //Creating Project from UI
-        projectPage = createProjectPopup.createPublicProject(projectInfo.get("Name"), projectInfo.get("Account"));
+        projectPage = createProjectPopup.createPublicProject(project);
+
+        //Saving new Project in Context
+        context.getProjectListToDelete().add(project);
     }
 
     /**
-     * StepDef to check that I was driven to recently created Project Page.
+     * Verifies that the name of the new project is displayed at Project Dropdown Menu.
      */
-    @Then("I am driven to recently created Project Page")
-    public void verifyIAmDrivenToProjectPage() {
-        try {
-            Thread.sleep(WAIT_TIME);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            String currentUrl = WebDriverManager.getInstance().getCurrentUrl();
-            assertTrue(currentUrl.startsWith("https://www.pivotaltracker.com/n/projects/"));
-
-            //Updating Project entity's id
-            project.setId(currentUrl.substring(currentUrl.lastIndexOf('/') + 1));
-            projectContext.getProjectsIdsToDelete().add(project.getId());
-        }
-    }
-
-    /**
-     * StepDef to verify that the name of the new project is displayed at Project Dropdown Menu.
-     */
-    @Then("the name of my new project should be displayed at Project Dropdown Menu")
-    public void verifyTheNameOfMyNewProjectIsDisplayedAtProjectDropdownMenu() {
+    @Then("properties of new project should be displayed at Project's Page")
+    public void verifyPropertiesOfNewProjectIsDisplayedAtProjectsPage() {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(projectPage.getTextFromProjectNameSpan(), project.getName());
         softAssert.assertEquals(projectPage.getTextFromProjectPublicPrivacySpan(), "(" + project.getPrivacy() + ")");
@@ -92,7 +75,16 @@ public class ProjectSteps {
     }
 
     /**
-     * StepDef to open Project Summary Page.
+     * Saves the project Id in the Project entity.
+     */
+    @When("I save the Project's Id")
+    public void saveTheProjectId() {
+        String gottenId = projectPage.getIdFromUrl();
+        project.setId(gottenId);
+    }
+
+    /**
+     * Opens Project Summary Page.
      */
     @When("I open the Project Summary page")
     public void openTheProjectSummaryPage() {
@@ -101,10 +93,34 @@ public class ProjectSteps {
 
 
     /**
-     * StepDef to verify the new project is listed in the Project Summary Page.
+     * Verifies the new project is listed in the Project Summary Page.
      */
     @Then("my new project should be listed in the summary")
     public void verifyMyNewProjectIsListedInTheSummary() {
-        assertTrue(projectsSummaryPage.searchProjectInSummary(project.getName()));
+        assertNotNull("The project: " + project.getName() + " is not present in the Project Summary.",
+                projectsSummaryPage.isProjectInSummary(project.getName()));
+    }
+
+    /**
+     * Opens Project's Settings Page.
+     */
+    @When("I open the Project's Settings Page")
+    public void openTheProjectSSettingsPage() {
+        projectSettingsPage = projectsSummaryPage.clickSettingsLinkOfProject(project);
+    }
+
+    /**
+     * Verifies all Project's creation data should be present in Project's Settings Page.
+     */
+    @Then("all Project's creation data should be present")
+    public void verifyAllProjectsCreationDataIsPresent() {
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(projectSettingsPage.getValueAttributeFromProjectNameTextBox(), project.getName(),
+                "The Project's name is different that defined at creation step.");
+        softAssert.assertTrue(projectSettingsPage.getTextProjectAccountLink().contains(project.getAccount()),
+                "The Project Account Link does not contain the account defined at creation step.");
+        softAssert.assertTrue(projectSettingsPage.getStatusOfProjectPrivacyCheckbox(),
+                "The Project Privacy is private but was created as public.");
+        softAssert.assertAll();
     }
 }

@@ -1,0 +1,18 @@
+[
+    {
+        "alias": "Editable User",
+        "email": "mirkofer.122020@gmail.com",
+        "password": "622Mirko###",
+        "userName": "userNotEdited",
+        "name": "User Not Edited",
+        "initials": "UNE"
+    },
+    {
+        "alias": "Standard User",
+        "email": "mirkofer.122020@gmail.com",
+        "password": "622Mirko###",
+        "userName": "standardUser",
+        "name": "Standard User",
+        "initials": "SU"
+    }
+]

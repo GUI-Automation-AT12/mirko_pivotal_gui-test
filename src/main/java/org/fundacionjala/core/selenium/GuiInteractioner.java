@@ -1,6 +1,7 @@
 package org.fundacionjala.core.selenium;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -11,32 +12,36 @@ public final class GuiInteractioner {
     private GuiInteractioner() {
     }
 
-    private static WebElement getWebElementFormBy(final By by) {
+    private static WebElement findElementBy(final By by) {
         return WebDriverManager.getInstance().getWebDriver().findElement(by);
     }
 
     /**
      * Clears the previous text in a WebElement and fills a new text into it.
-     * @param webElement
-     * @param text
+     *
+     * @param webElement to set text
+     * @param text text to be set
      */
-    public static void fillWebElement(final WebElement webElement, final String text) {
+    public static void setInputText(final WebElement webElement, final String text) {
+        WebDriverManager.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
         webElement.clear();
         webElement.sendKeys(text);
     }
 
     /**
      * Provide fillWebElement method to support By objects.
-     * @param by
-     * @param text
+     *
+     * @param by element found to set text
+     * @param text text to be set
      */
-    public static void fillWebElement(final By by, final String text) {
-        fillWebElement(getWebElementFormBy(by), text);
+    public static void setInputText(final By by, final String text) {
+        setInputText(findElementBy(by), text);
     }
 
     /**
      * Waits for a WebElement to be clickable and clicks it.
-     * @param webElement
+     *
+     * @param webElement to be clicked
      */
     public static void clickWebElement(final WebElement webElement) {
         WebDriverManager.getInstance().getWebDriverWait().until(ExpectedConditions.elementToBeClickable(webElement));
@@ -45,15 +50,27 @@ public final class GuiInteractioner {
 
     /**
      * Provide clickWebElement method to support By objects.
-     * @param by
+     *
+     * @param by element found to be clicked
      */
     public static void clickWebElement(final By by) {
-        clickWebElement(getWebElementFormBy(by));
+        clickWebElement(findElementBy(by));
+    }
+
+    /**
+     * Scrolls down until find a WebElement.
+     *
+     * @param webElement to be found in the page
+     */
+    public static void scrollDownToFindElement(final WebElement webElement) {
+        JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getInstance().getWebDriver();
+        js.executeScript("arguments[0].scrollIntoView();", webElement);
     }
 
     /**
      * Searches for a WebElement and get the inner text.
-     * @param webElement
+     *
+     * @param webElement to get text
      * @return String text from the WebElement.
      */
     public static String getTextFromWebElement(final WebElement webElement) {
@@ -63,20 +80,22 @@ public final class GuiInteractioner {
 
     /**
      * Provide getTextFromWebElement method to support By objects.
-     * @param by
+     *
+     * @param by element found to get text
      * @return String text from the By.
      */
     public static String getTextFromWebElement(final By by) {
-        return getTextFromWebElement(getWebElementFormBy(by));
+        return getTextFromWebElement(findElementBy(by));
     }
 
     /**
      * Searches for an specific option in a list, then clicks it.
-     * @param options
-     * @param selected
+     *
+     * @param webElementList list of elements
+     * @param selected ,text of the searched element to be clicked
      */
-    public static void clickOptionFromWebElementList(final List<WebElement> options, final String selected) {
-        for (WebElement option : options) {
+    public static void clickOptionFromWebElementList(final List<WebElement> webElementList, final String selected) {
+        for (WebElement option : webElementList) {
             if (option.getText().contains(selected)) {
                 option.click();
                 break;
@@ -86,8 +105,9 @@ public final class GuiInteractioner {
 
     /**
      * Searches for an specific option WebElement that contains a text.
-     * @param webElementList
-     * @param text
+     *
+     * @param webElementList list of elements
+     * @param text of the searched element
      * @return WebElement if it can find it, otherwise return null
      */
     public static WebElement searchTextInWebElementList(final List<WebElement> webElementList, final String text) {
@@ -97,5 +117,49 @@ public final class GuiInteractioner {
             }
         }
         return null;
+    }
+
+    /**
+     * Get the state of a Web Element.
+     *
+     * @param webElement to ask for its state
+     * @return true if the WebElement is selected, otherwise return false
+     */
+    public static boolean getStateOfWebElement(final WebElement webElement) {
+        WebDriverManager.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
+        return webElement.isSelected();
+    }
+
+    /**
+     * Provide getStateOfWebElement method to support By objects.
+     *
+     * @param by element to ask for its state
+     * @return true if the WebElement is selected, otherwise return false
+     */
+    public static boolean getStateOfWebElement(final By by) {
+        return getStateOfWebElement(findElementBy(by));
+    }
+
+    /**
+     * Gets the inner value of a specific attribute of a WebElement.
+     *
+     * @param webElement to get attribute's value
+     * @param attribute of the WebElement
+     * @return a String with the value of the attribute, otherwise return null
+     */
+    public static String getAttributeOfWebElement(final WebElement webElement, final String attribute) {
+        WebDriverManager.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(webElement));
+        return webElement.getAttribute(attribute);
+    }
+
+    /**
+     * Provide getAttributeOfWebElement method to support By objects.
+     *
+     * @param by element to get attribute's value
+     * @param attribute of the By element
+     * @return a String with the value of the attribute, otherwise return null
+     */
+    public static String getAttributeOfWebElement(final By by, final String attribute) {
+        return getAttributeOfWebElement(findElementBy(by), attribute);
     }
 }

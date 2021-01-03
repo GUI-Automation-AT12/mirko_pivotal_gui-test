@@ -13,7 +13,7 @@ public class LoginStep1Page extends BasePage {
     private WebElement nextBtn;
 
     private void fillUsernameOrEmail(final String usernameOrEmail) {
-        GuiInteractioner.fillWebElement(usernameOrEmailTextBox, usernameOrEmail);
+        GuiInteractioner.setInputText(usernameOrEmailTextBox, usernameOrEmail);
     }
 
     private void clickNextBtn() {
@@ -22,7 +22,7 @@ public class LoginStep1Page extends BasePage {
 
     /**
      * Allows to fill usernameOrEmail credential to log in Pivotal Tracker driving to Login Step 2 Page.
-     * @param usernameOrEmail
+     * @param usernameOrEmail username or email of the user
      * @return a new LoginStep2Page;
      */
     public LoginStep2Page goToLoginStep2(final String usernameOrEmail) {

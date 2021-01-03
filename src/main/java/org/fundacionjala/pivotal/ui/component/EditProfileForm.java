@@ -24,15 +24,15 @@ public class EditProfileForm extends BasePage {
     private WebElement saveEditProfileBtn;
 
     private void fillUserNameTextBox(final String newUserName) {
-        GuiInteractioner.fillWebElement(userNameTextBox, newUserName);
+        GuiInteractioner.setInputText(userNameTextBox, newUserName);
     }
 
     private void fillNameTextBox(final String newName) {
-        GuiInteractioner.fillWebElement(nameTextBox, newName);
+        GuiInteractioner.setInputText(nameTextBox, newName);
     }
 
     private void fillInitialsTextBox(final String newInitials) {
-        GuiInteractioner.fillWebElement(initialsTextBox, newInitials);
+        GuiInteractioner.setInputText(initialsTextBox, newInitials);
     }
 
     private void clickSaveEditProfileBtn() {
@@ -54,8 +54,8 @@ public class EditProfileForm extends BasePage {
 
     /**
      * Edits information of a User Profile from GUI.
-     * @param formFields
-     * @param user
+     * @param formFields fields to be edited
+     * @param user user to be edited
      */
     public void editProfileInformation(final Set<String> formFields, final User user) {
         setInformationToEdit(formFields, user);

@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Supplier;
 
 public class ProfilePage extends BaseLoggedInPage {
 
@@ -89,15 +91,22 @@ public class ProfilePage extends BaseLoggedInPage {
         return GuiInteractioner.getTextFromWebElement(changesNotifier);
     }
 
+    private HashMap<String, Supplier<String>> composeStrategyGetterMap() {
+        HashMap<String, Supplier<String>> strategyMap = new HashMap<>();
+        strategyMap.put("User name", () -> getProfileUserNameAsString());
+        strategyMap.put("Name", () -> getProfileNameAsString());
+        strategyMap.put("Initials", () -> getProfileInitialsAsString());
+        return strategyMap;
+    }
+
     /**
      * Gets edited user information described in the Profile Page as a Map.
+     * @param editedFields set of edited fields
      * @return a Map with user information present in the Profile Page
      */
-    public Map<String, String> getUserInformationAsMap() {
+    public Map<String, String> getUserEditedInfoAsMap(final Set<String> editedFields) {
         Map userInfoMap = new HashMap<String, String>();
-        userInfoMap.put("User name", getProfileUserNameAsString());
-        userInfoMap.put("Name", getProfileNameAsString());
-        userInfoMap.put("Initials", getProfileInitialsAsString());
+        editedFields.forEach(field -> userInfoMap.put(field, composeStrategyGetterMap().get(field).get()));
         return userInfoMap;
     }
 

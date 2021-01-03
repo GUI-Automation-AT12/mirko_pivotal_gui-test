@@ -2,7 +2,8 @@ package org.fundacionjala.pivotal.cucumber.hooks;
 
 import io.cucumber.java.After;
 import org.fundacionjala.core.selenium.WebDriverManager;
-import org.fundacionjala.pivotal.context.UserContext;
+import org.fundacionjala.core.throwables.PropertiesReadingException;
+import org.fundacionjala.pivotal.context.Context;
 import org.fundacionjala.pivotal.entities.User;
 import org.fundacionjala.pivotal.ui.WebTransporter;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProfilePage;
@@ -10,28 +11,28 @@ import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProfilePage;
 import java.net.MalformedURLException;
 
 public class UserHooks {
-    private final UserContext userContext;
+    private final Context context;
 
     /**
      * Adding Dependency injection to share Default Users information.
-     * @param sharedUserContext
+     * @param sharedContext
      */
-    public UserHooks(final UserContext sharedUserContext) {
-        this.userContext = sharedUserContext;
+    public UserHooks(final Context sharedContext) {
+        this.context = sharedContext;
     }
 
     /**
      * AfterHook that restore User information.
      */
     @After(value = "@restoreUserInformation")
-    public void restoreUserInformation() throws MalformedURLException {
-        for (String userAlias : userContext.getEditedUsersList()) {
+    public void restoreUserInformation() throws MalformedURLException, PropertiesReadingException {
+        for (String userAlias : context.getEditedUsersList()) {
             WebTransporter.navigateToPage("MY PROFILE");
             ProfilePage profilePage = new ProfilePage();
-            User userToRestore = userContext.getUserByAlias(userAlias);
+            User userToRestore = context.getUserByAlias(userAlias);
             profilePage.getEditProfileForm().editProfileInformation(userToRestore.getEditedFields(), userToRestore);
         }
-        userContext.getEditedUsersList().clear();
-        WebDriverManager.getInstance().getWebDriver().quit();
+        context.getEditedUsersList().clear();
+        WebDriverManager.getInstance().quit();
     }
 }

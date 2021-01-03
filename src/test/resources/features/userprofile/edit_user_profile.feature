@@ -3,8 +3,7 @@ Feature: Edit User Profile
 
   @restoreUserInformation
   Scenario: Edit User's information in My Profile section
-    Given I open chrome web browser
-      And I log in to Pivotal with Editable User credentials
+    Given I log in to Pivotal with Editable User credentials
     When I navigate to My Profile page
       And I edit My Profile with the following information
         | User name | User_UNIQUE_ID  |

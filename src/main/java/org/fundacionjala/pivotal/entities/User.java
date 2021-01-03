@@ -5,6 +5,7 @@ import org.fundacionjala.core.utils.IdGenerator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class User {
 
@@ -18,6 +19,14 @@ public class User {
     // Email & Password
     private String email;
     private String password;
+
+    private static final String KEY_ALIAS = "Alias";
+    private static final String KEY_NAME = "Name";
+    private static final String KEY_INITIALS = "Initials";
+    private static final String KEY_EMAIL = "Email";
+    private static final String KEY_PASSWORD = "Password";
+    private static final String KEY_USERNAME = "User name";
+    private static final String STRING_TO_CHANGE = "UNIQUE_ID";
 
     /**
      * Get the edited Fields for a User.
@@ -45,10 +54,10 @@ public class User {
 
     /**
      * Sets Alias to a User.
-     * @param uAlias
+     * @param userAlias
      */
-    public void setAlias(final String uAlias) {
-        this.alias = uAlias;
+    public void setAlias(final String userAlias) {
+        this.alias = userAlias;
     }
 
     /**
@@ -61,10 +70,10 @@ public class User {
 
     /**
      * Sets Email to a User.
-     * @param uEmail
+     * @param userEmail
      */
-    public void setEmail(final String uEmail) {
-        this.email = uEmail;
+    public void setEmail(final String userEmail) {
+        this.email = userEmail;
     }
 
     /**
@@ -77,10 +86,10 @@ public class User {
 
     /**
      * Sets Password to a User.
-     * @param uPassword
+     * @param userPassword
      */
-    public void setPassword(final String uPassword) {
-        this.password = uPassword;
+    public void setPassword(final String userPassword) {
+        this.password = userPassword;
     }
 
     /**
@@ -88,7 +97,7 @@ public class User {
      * @param userUserName
      */
     public void setUserName(final String userUserName) {
-        userName = userUserName.replaceAll("UNIQUE_ID", IdGenerator.getUniqueId());
+        userName = userUserName.replaceAll(STRING_TO_CHANGE, IdGenerator.getUniqueId());
     }
 
     /**
@@ -101,10 +110,10 @@ public class User {
 
     /**
      * Sets Name to a User.
-     * @param uName
+     * @param usName
      */
-    public void setName(final String uName) {
-        this.name = uName;
+    public void setName(final String usName) {
+        this.name = usName;
     }
 
     /**
@@ -133,12 +142,12 @@ public class User {
 
     private HashMap<String, Runnable> composeMapStrategy(final Map<String, String> userInformation) {
         HashMap<String, Runnable> strategyMap = new HashMap<>();
-        strategyMap.put("Alias", () -> setAlias(userInformation.get("Alias")));
-        strategyMap.put("Name", () -> setName(userInformation.get("Name")));
-        strategyMap.put("Initials", () -> setInitials(userInformation.get("Initials")));
-        strategyMap.put("Email", () -> setEmail(userInformation.get("Email")));
-        strategyMap.put("Password", () -> setPassword(userInformation.get("Password")));
-        strategyMap.put("User name", () -> setUserName(userInformation.get("User name")));
+        strategyMap.put(KEY_ALIAS, () -> setAlias(userInformation.get(KEY_ALIAS)));
+        strategyMap.put(KEY_NAME, () -> setName(userInformation.get(KEY_NAME)));
+        strategyMap.put(KEY_INITIALS, () -> setInitials(userInformation.get(KEY_INITIALS)));
+        strategyMap.put(KEY_EMAIL, () -> setEmail(userInformation.get(KEY_EMAIL)));
+        strategyMap.put(KEY_PASSWORD, () -> setPassword(userInformation.get(KEY_PASSWORD)));
+        strategyMap.put(KEY_USERNAME, () -> setUserName(userInformation.get(KEY_USERNAME)));
         return strategyMap;
     }
 
@@ -149,5 +158,26 @@ public class User {
     public void processInformation(final Map<String, String> userInformation) {
         HashMap<String, Runnable> strategyMap = composeMapStrategy(userInformation);
         userInformation.keySet().forEach(key -> strategyMap.get(key).run());
+    }
+
+    private HashMap<String, Supplier<String>> composeStrategyGetterMap() {
+        HashMap<String, Supplier<String>> strategyMap = new HashMap<>();
+        strategyMap.put(KEY_ALIAS, () -> getAlias());
+        strategyMap.put(KEY_NAME, () -> getName());
+        strategyMap.put(KEY_INITIALS, () -> getInitials());
+        strategyMap.put(KEY_EMAIL, () -> getEmail());
+        strategyMap.put(KEY_USERNAME, () -> getUserName());
+        strategyMap.put(KEY_PASSWORD, () -> getPassword());
+        return strategyMap;
+    }
+
+    /**
+     * Gets Edited User Info as Map.
+     * @return a Map with edited user info
+     */
+    public Map<String, String> getEditedInfo() {
+        Map userInfoMap = new HashMap<String, String>();
+        editedFields.forEach(field -> userInfoMap.put(field, composeStrategyGetterMap().get(field).get()));
+        return userInfoMap;
     }
 }

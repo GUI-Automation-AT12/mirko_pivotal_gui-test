@@ -1,7 +1,7 @@
 package org.fundacionjala.pivotal.config;
 
-import org.fundacionjala.core.config.PropertiesFileReader;
-import org.fundacionjala.core.throwables.EnvironmentReadingException;
+import org.fundacionjala.core.utils.PropertiesFileReader;
+import org.fundacionjala.core.throwables.PropertiesReadingException;
 
 public final class PivotalProperties {
     private static final String PROPERTIES_FILE_PATH = "pivotal.properties";
@@ -12,24 +12,20 @@ public final class PivotalProperties {
      * If singleInstance was not instanced before it create a new one, otherwise return the created.
      * @return singleInstance
      */
-    public static PivotalProperties getInstance() {
+    public static PivotalProperties getInstance() throws PropertiesReadingException {
         if (singleInstance == null) {
-            try {
-                singleInstance = new PivotalProperties();
-            } catch (EnvironmentReadingException e) {
-                e.printStackTrace();
-            }
+            singleInstance = new PivotalProperties();
         }
         return singleInstance;
     }
 
-    private PivotalProperties() throws EnvironmentReadingException {
+    private PivotalProperties() throws PropertiesReadingException {
         propertiesFileReader = new PropertiesFileReader(PROPERTIES_FILE_PATH);
     }
 
 
     /**
-     * get the BaseUrl from the properties file.
+     * Get the BaseUrl from the properties file.
      *
      * @return base url.
      */
