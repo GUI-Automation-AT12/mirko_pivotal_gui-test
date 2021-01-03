@@ -2,6 +2,8 @@ package org.fundacionjala.pivotal.cucumber.steps;
 
 import io.cucumber.java.en.Given;
 import org.fundacionjala.core.throwables.PropertiesReadingException;
+import org.fundacionjala.pivotal.api.client.RequestManager;
+import org.fundacionjala.pivotal.api.utils.ApiAuthentication;
 import org.fundacionjala.pivotal.context.Context;
 import org.fundacionjala.pivotal.entities.User;
 import org.fundacionjala.pivotal.ui.WebTransporter;
@@ -36,6 +38,9 @@ public class LoginSteps {
     public void logInToPivotal(final String userAlias) throws MalformedURLException, PropertiesReadingException {
         //Select the User Entity to get credentials
         User user = context.getUserByAlias(userAlias);
+
+        //Set User Authentication to use Pivotal API in the next steps
+        RequestManager.setRequestSpec(ApiAuthentication.getLoggedReqSpec(user));
 
         WebTransporter.navigateToPage("SIGN IN STEP ONE");
         loginStep1Page = new LoginStep1Page();

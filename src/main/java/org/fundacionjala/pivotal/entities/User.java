@@ -20,12 +20,16 @@ public class User {
     private String email;
     private String password;
 
+    // API Token
+    private String token;
+
     private static final String KEY_ALIAS = "Alias";
     private static final String KEY_NAME = "Name";
     private static final String KEY_INITIALS = "Initials";
     private static final String KEY_EMAIL = "Email";
     private static final String KEY_PASSWORD = "Password";
     private static final String KEY_USERNAME = "User name";
+    private static final String KEY_TOKEN = "Token";
     private static final String STRING_TO_CHANGE = "UNIQUE_ID";
 
     /**
@@ -140,6 +144,22 @@ public class User {
         return initials;
     }
 
+    /**
+     * Sets token to a User.
+     * @param userToken
+     */
+    public void setToken(final String userToken) {
+        this.initials = userToken;
+    }
+
+    /**
+     * Gets the token from a User.
+     * @return token.
+     */
+    public String getToken() {
+        return token;
+    }
+
     private HashMap<String, Runnable> composeMapStrategy(final Map<String, String> userInformation) {
         HashMap<String, Runnable> strategyMap = new HashMap<>();
         strategyMap.put(KEY_ALIAS, () -> setAlias(userInformation.get(KEY_ALIAS)));
@@ -148,6 +168,7 @@ public class User {
         strategyMap.put(KEY_EMAIL, () -> setEmail(userInformation.get(KEY_EMAIL)));
         strategyMap.put(KEY_PASSWORD, () -> setPassword(userInformation.get(KEY_PASSWORD)));
         strategyMap.put(KEY_USERNAME, () -> setUserName(userInformation.get(KEY_USERNAME)));
+        strategyMap.put(KEY_TOKEN, () -> setToken(userInformation.get(KEY_TOKEN)));
         return strategyMap;
     }
 
@@ -168,6 +189,7 @@ public class User {
         strategyMap.put(KEY_EMAIL, () -> getEmail());
         strategyMap.put(KEY_USERNAME, () -> getUserName());
         strategyMap.put(KEY_PASSWORD, () -> getPassword());
+        strategyMap.put(KEY_TOKEN, () -> getToken());
         return strategyMap;
     }
 

@@ -20,8 +20,7 @@ dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.1'
     compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '3.8.0'
     testImplementation group: 'io.qameta.allure', name: 'allure-cucumber6-jvm', version: '2.13.6'
-    // implementation group: 'io.rest-assured', name: 'rest-assured', version: '4.3.2'
-    // implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '4.3.2'
+    implementation group: 'io.rest-assured', name: 'rest-assured', version: '4.3.2'
 }
 
 checkstyle {
