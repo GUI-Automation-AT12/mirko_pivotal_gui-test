@@ -8,6 +8,7 @@ import org.fundacionjala.pivotal.ui.WebTransporter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import java.util.List;
 
 public class ProjectPage extends BaseLoggedInPage {
 
@@ -23,11 +24,24 @@ public class ProjectPage extends BaseLoggedInPage {
      @FindBy(css = ".public_project_label")
      private WebElement projectPublicPrivacySpan;
 
+     @FindBy(css = ".autosaves.id.text_value")
+     private WebElement storyIdTextBox;
+
+     @FindBy(css = ".autosaves.button.std.close")
+     private WebElement storyCollapseBtn;
+
+     @FindBy(css = "#panel_icebox_2483434 section")
+     private WebElement iceboxPanel;
+
      private By backlogAddStoryBtn;
 
      private By backlogNewStoryNameTextBox;
 
      private By backlogSaveNewStoryBtn;
+
+     private List<WebElement> backlogStoriesList;
+
+     private By selectedStory;
 
     /**
      * Get inner text from Project Name Span.
@@ -86,19 +100,56 @@ public class ProjectPage extends BaseLoggedInPage {
 
     private void clickBacklogSaveNewStoryBtn(final String projectId) {
         backlogSaveNewStoryBtn = By
-                .cssSelector("div#panel_backlog_ " + projectId + " div section div div div div div section form aside div nav section div button.autosaves.button.std.save");
+                .cssSelector("div#panel_backlog_" + projectId + " div section div div div div div section form aside div nav section div button.autosaves.button.std.save");
         GuiInteractioner.clickWebElement(backlogSaveNewStoryBtn);
     }
 
     /**
-     *
-     * @param story
-     * @param project
+     * Creates a new Story in Backlog panel from UI.
+     * @param story story to create
+     * @param project project that will contains the new story
      */
-    public String createNewStoryInBacklog(final Story story, final Project project) {
+    public void createNewStoryInBacklog(final Story story, final Project project) {
         clickBacklogAddStoryBtn(project.getId());
         fillBacklogNewStoryNameTextBox(story.getName(), project.getId());
         clickBacklogSaveNewStoryBtn(project.getId());
-        return 
+    }
+
+    private WebElement searchStoryInBacklogStoriesList(final String storyName, final String projectId) {
+        backlogStoriesList = WebDriverManager.getInstance().getWebDriver().findElements(By
+                .cssSelector("div#panel_backlog_" + projectId + " div section div div header span span span.tracker_markup"));
+        return GuiInteractioner.searchTextInWebElementList(backlogStoriesList, storyName);
+    }
+
+    private void clickStoryInBacklogStoryList(final String storyName, final String projectId) {
+        WebElement selectedStory = searchStoryInBacklogStoriesList(storyName, projectId);
+        GuiInteractioner.clickWebElement(selectedStory);
+    }
+
+    private void clickStoryCollapseBtn() {
+        GuiInteractioner.clickWebElement(storyCollapseBtn);
+    }
+
+    /**
+     * Gets a story Id from Story Id Text Box.
+     * @param storyName name of the story
+     * @param projectId id of the project that contains the story
+     * @return storyId
+     */
+    public String getStoryIdFromBacklogPanel(final String storyName, final String projectId) {
+        clickStoryInBacklogStoryList(storyName, projectId);
+        String storyId = GuiInteractioner.getAttributeOfWebElement(storyIdTextBox, "value");
+        storyId = storyId.substring(1);
+        clickStoryCollapseBtn();
+        return storyId;
+    }
+
+    /**
+     * Drags a Story in Backlog panel and drops it to Icebox panel.
+     * @param storyId
+     */
+    public void dragAndDropAStoryFromBacklogToIcebox(final String storyId) {
+        selectedStory = By.cssSelector("div[data-id='" + storyId + "']");
+        GuiInteractioner.dragElementAndDropTo(selectedStory, iceboxPanel);
     }
 }

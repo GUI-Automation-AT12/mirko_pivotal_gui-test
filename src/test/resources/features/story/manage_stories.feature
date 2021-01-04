@@ -7,9 +7,10 @@ Feature: Manage Stories
     When I go to Project Page of Existent Project
       And I create a new Story in Backlog with the following info
         | Name         | A New Story  |
-      And I use the API to get the Backlog
-    Then the Story should be in the Backlog
+      And I send a GET API request to "projects/{projectId}/history/snapshots"
+    Then the Story should be in "current" list in the response
     When I do a drag and drop of the Story from Backlog to Icebox
-      And I use the API to get the Icebox
-    Then the Story should be in the Icebox
-      And the Story should not be in the Backlog
+      And I send a GET API request to "projects/{projectId}/history/snapshots?fields=icebox"
+    Then the Story should be in "icebox" list in the response
+    When I send a GET API request to "projects/{projectId}/history/snapshots"
+    Then the Story should not be in "icebox" list in the response

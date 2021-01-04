@@ -25,7 +25,7 @@ public final class ApiAuthentication {
      * @return requestSpecification
      */
     public static RequestSpecification getLoggedReqSpec(final User user) throws PropertiesReadingException {
-        RestAssured.baseURI = PivotalProperties.getInstance().getBaseUrl();
+        RestAssured.baseURI = PivotalProperties.getInstance().getBaseApiUrl();
         requestSpecification = new RequestSpecBuilder()
                 .setRelaxedHTTPSValidation()
                 .addHeader(TOKEN_HEADER, user.getToken())

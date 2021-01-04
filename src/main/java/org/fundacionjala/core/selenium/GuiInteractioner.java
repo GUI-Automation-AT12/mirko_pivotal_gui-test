@@ -3,6 +3,7 @@ package org.fundacionjala.core.selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
@@ -161,5 +162,16 @@ public final class GuiInteractioner {
      */
     public static String getAttributeOfWebElement(final By by, final String attribute) {
         return getAttributeOfWebElement(findElementBy(by), attribute);
+    }
+
+    public static void dragElementAndDropTo(WebElement elementToDrag, WebElement elementToDropTo) {
+        WebDriverManager.getInstance().getWebDriverWait().until(ExpectedConditions.elementToBeClickable(elementToDrag));
+        WebDriverManager.getInstance().getWebDriverWait().until(ExpectedConditions.visibilityOf(elementToDropTo));
+        Actions act = new Actions(WebDriverManager.getInstance().getWebDriver());
+        act.dragAndDrop(elementToDrag, elementToDropTo).build().perform();
+    }
+
+    public static void dragElementAndDropTo(By elementToDrag, WebElement elementToDropTo) {
+        dragElementAndDropTo(findElementBy(elementToDrag), elementToDropTo);
     }
 }

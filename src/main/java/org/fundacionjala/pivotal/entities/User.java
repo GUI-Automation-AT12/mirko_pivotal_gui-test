@@ -149,7 +149,7 @@ public class User {
      * @param userToken
      */
     public void setToken(final String userToken) {
-        this.initials = userToken;
+        this.token = userToken;
     }
 
     /**

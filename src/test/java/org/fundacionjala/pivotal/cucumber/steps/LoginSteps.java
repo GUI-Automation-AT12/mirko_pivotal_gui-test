@@ -1,6 +1,8 @@
 package org.fundacionjala.pivotal.cucumber.steps;
 
 import io.cucumber.java.en.Given;
+import org.fundacionjala.core.config.PropertiesSetter;
+import org.fundacionjala.core.config.TestExecutionProperties;
 import org.fundacionjala.core.throwables.PropertiesReadingException;
 import org.fundacionjala.pivotal.api.client.RequestManager;
 import org.fundacionjala.pivotal.api.utils.ApiAuthentication;
@@ -36,6 +38,10 @@ public class LoginSteps {
      */
     @Given("^I log in to Pivotal with (.*?) credentials$")
     public void logInToPivotal(final String userAlias) throws MalformedURLException, PropertiesReadingException {
+
+        PropertiesSetter.setDataProviderThreadCountProp(TestExecutionProperties.getInstance().getCucumberThreadCount());
+        PropertiesSetter.setTestBrowser(TestExecutionProperties.getInstance().getTestBrowser());
+
         //Select the User Entity to get credentials
         User user = context.getUserByAlias(userAlias);
 

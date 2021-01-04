@@ -30,7 +30,6 @@ public final class BrowserParser {
         if (browserMap == null) {
             browserMap =  new HashMap<>();
             for (Browser browser: getBrowsersListFromJson()) {
-                System.out.println(browser.toString());
                 browserMap.put(browser.getName(), browser);
             }
         }
