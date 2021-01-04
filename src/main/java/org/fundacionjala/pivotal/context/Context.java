@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Context {
     private final List<User> usersList;
+    private final List<Project> projectList;
     private final List<String> editedUsersList;
     private final List<Project> projectListToDelete;
 
@@ -17,6 +18,7 @@ public class Context {
      */
     public Context() throws IOException {
         this.usersList = EntitiesParser.getUsersListFromJson();
+        this.projectList = EntitiesParser.getProjectListFromJson();
         this.editedUsersList = new ArrayList<>();
         this.projectListToDelete = new ArrayList<>();
     }
@@ -30,6 +32,20 @@ public class Context {
         for (User user : this.usersList) {
             if (alias.equals(user.getAlias())) {
                 return user;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Searches for a specific Project in projectList providing its name.
+     * @param projectName provided to search
+     * @return Project if the name matches, otherwise return null.
+     */
+    public Project getProjectByName(final String projectName) {
+        for (Project project : this.projectList) {
+            if (projectName.equals(project.getName())) {
+                return project;
             }
         }
         return null;

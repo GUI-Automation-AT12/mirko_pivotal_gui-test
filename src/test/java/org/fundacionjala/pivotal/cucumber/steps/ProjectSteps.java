@@ -10,7 +10,6 @@ import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectSettingsPage;
 import org.fundacionjala.pivotal.ui.pages.LoggedIn.ProjectsSummaryPage;
 import org.fundacionjala.pivotal.ui.popups.CreateProjectPopup;
 import org.testng.asserts.SoftAssert;
-
 import static org.junit.Assert.assertNotNull;
 import java.util.Map;
 
@@ -29,7 +28,6 @@ public class ProjectSteps {
     //Context
     private final Context context;
 
-    private static final int WAIT_TIME = 5000;
     /**
      * Adds Dependency injection to share Context information.
      * @param sharedContext

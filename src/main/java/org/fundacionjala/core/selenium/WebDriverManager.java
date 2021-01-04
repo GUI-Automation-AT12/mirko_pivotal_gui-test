@@ -10,12 +10,13 @@ public final class WebDriverManager {
 
     private static WebDriverManager webDriverManager;
     private static String browserName;
-    private WebDriver webDriver;
-    private WebDriverWait webDriverWait;
+    private final WebDriver webDriver;
+    private final WebDriverWait webDriverWait;
 
 
     /**
-     * If webDriverManager object was not created before it create a new one, otherwise return the created.
+     * If webDriverManager object was not created before it create a new one,
+     * otherwise return the created.
      * @return webDriverManager
      */
     public static WebDriverManager getInstance() {
