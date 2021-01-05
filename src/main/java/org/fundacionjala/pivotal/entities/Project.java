@@ -8,7 +8,13 @@ public class Project {
     private String privacy;
 
     /**
-     * Constructor for Project entity class.
+     * Default Constructor for Project Entity class.
+     */
+    public Project() {
+    }
+
+    /**
+     * Constructor for Project entity class with minimum info.
      * @param projectName of the new project
      * @param projectAccount of the new project
      * @param projectPrivacy of the new project

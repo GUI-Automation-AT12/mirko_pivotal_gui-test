@@ -25,11 +25,20 @@ public final class PivotalProperties {
 
 
     /**
-     * Get the BaseUrl from the properties file.
+     * Gets the BaseUrl from the properties file.
      *
      * @return base url.
      */
     public String getBaseUrl() {
         return propertiesFileReader.getProperty("baseUrl");
+    }
+
+    /**
+     * Gets the BaseApiUrl from the properties file.
+     *
+     * @return base API Url
+     */
+    public String getBaseApiUrl() {
+        return propertiesFileReader.getProperty("baseApiUrl");
     }
 }

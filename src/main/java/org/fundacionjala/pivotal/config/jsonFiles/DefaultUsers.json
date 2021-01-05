@@ -5,7 +5,8 @@
         "password": "622Mirko###",
         "userName": "userNotEdited",
         "name": "User Not Edited",
-        "initials": "UNE"
+        "initials": "UNE",
+        "token": "70e508abbd6e2fefbb4afe253faafd20"
     },
     {
         "alias": "Standard User",
@@ -13,6 +14,7 @@
         "password": "622Mirko###",
         "userName": "standardUser",
         "name": "Standard User",
-        "initials": "SU"
+        "initials": "SU",
+        "token": "70e508abbd6e2fefbb4afe253faafd20"
     }
 ]

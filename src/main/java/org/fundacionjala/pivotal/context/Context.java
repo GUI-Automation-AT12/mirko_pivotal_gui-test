@@ -2,6 +2,7 @@ package org.fundacionjala.pivotal.context;
 
 import org.fundacionjala.pivotal.entities.EntitiesParser;
 import org.fundacionjala.pivotal.entities.Project;
+import org.fundacionjala.pivotal.entities.Story;
 import org.fundacionjala.pivotal.entities.User;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,16 +10,20 @@ import java.util.List;
 
 public class Context {
     private final List<User> usersList;
+    private final List<Project> projectList;
     private final List<String> editedUsersList;
     private final List<Project> projectListToDelete;
+    private final List<Story> storyToDelete;
 
     /**
      * Constructor for Context class.
      */
     public Context() throws IOException {
         this.usersList = EntitiesParser.getUsersListFromJson();
+        this.projectList = EntitiesParser.getProjectListFromJson();
         this.editedUsersList = new ArrayList<>();
         this.projectListToDelete = new ArrayList<>();
+        this.storyToDelete = new ArrayList<>();
     }
 
     /**
@@ -30,6 +35,20 @@ public class Context {
         for (User user : this.usersList) {
             if (alias.equals(user.getAlias())) {
                 return user;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Searches for a specific Project in projectList providing its name.
+     * @param projectName provided to search
+     * @return Project if the name matches, otherwise return null.
+     */
+    public Project getProjectByName(final String projectName) {
+        for (Project project : this.projectList) {
+            if (projectName.equals(project.getName())) {
+                return project;
             }
         }
         return null;
@@ -49,5 +68,13 @@ public class Context {
      */
     public List<Project> getProjectListToDelete() {
         return projectListToDelete;
+    }
+
+    /**
+     * Get the List of Stories to delete after some Test Scenarios.
+     * @return projectListToDelete
+     */
+    public List<Story> getStoryToDelete() {
+        return storyToDelete;
     }
 }
