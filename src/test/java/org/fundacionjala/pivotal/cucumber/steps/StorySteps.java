@@ -15,7 +15,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 import java.net.MalformedURLException;
-import java.util.List;
 import java.util.Map;
 
 public class StorySteps {
@@ -65,6 +64,9 @@ public class StorySteps {
 
         //Updating Story Entity's Id
         story.setId(projectPage.getStoryIdFromBacklogPanel(story.getName(), project.getId()));
+
+        //Context updating
+        context.getStoryToDelete().add(story);
     }
 
     /**
@@ -83,7 +85,6 @@ public class StorySteps {
     @Then("the Story should be in {string} list in the response")
     public void verifyStoryIsInTheResponse(final String listName) {
         String listedStories = response.jsonPath().getString(listName + ".story_id");
-        System.out.println(story.getId());
         assertTrue("The story is not contained in the response.", listedStories.contains(story.getId()));
     }
 

@@ -2,6 +2,7 @@ package org.fundacionjala.pivotal.context;
 
 import org.fundacionjala.pivotal.entities.EntitiesParser;
 import org.fundacionjala.pivotal.entities.Project;
+import org.fundacionjala.pivotal.entities.Story;
 import org.fundacionjala.pivotal.entities.User;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class Context {
     private final List<Project> projectList;
     private final List<String> editedUsersList;
     private final List<Project> projectListToDelete;
+    private final List<Story> storyToDelete;
 
     /**
      * Constructor for Context class.
@@ -21,6 +23,7 @@ public class Context {
         this.projectList = EntitiesParser.getProjectListFromJson();
         this.editedUsersList = new ArrayList<>();
         this.projectListToDelete = new ArrayList<>();
+        this.storyToDelete = new ArrayList<>();
     }
 
     /**
@@ -65,5 +68,13 @@ public class Context {
      */
     public List<Project> getProjectListToDelete() {
         return projectListToDelete;
+    }
+
+    /**
+     * Get the List of Stories to delete after some Test Scenarios.
+     * @return projectListToDelete
+     */
+    public List<Story> getStoryToDelete() {
+        return storyToDelete;
     }
 }

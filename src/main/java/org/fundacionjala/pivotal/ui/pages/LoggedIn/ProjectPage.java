@@ -33,7 +33,7 @@ public class ProjectPage extends BaseLoggedInPage {
      @FindBy(css = "#panel_icebox_2483434 section")
      private WebElement iceboxPanel;
 
-     private By backlogAddStoryBtn;
+     private String backlogAddStoryBtnCss = "div#panel_backlog_%s div header div button span.MuiButton-label.jss9";
 
      private By backlogNewStoryNameTextBox;
 
@@ -87,9 +87,8 @@ public class ProjectPage extends BaseLoggedInPage {
     }
 
     private void clickBacklogAddStoryBtn(final String projectId) {
-        backlogAddStoryBtn = By
-                .cssSelector("div#panel_backlog_" + projectId +" div header div button span.MuiButton-label.jss9");
-        GuiInteractioner.clickWebElement(backlogAddStoryBtn);
+        By by = By.cssSelector(String.format(backlogAddStoryBtnCss, projectId));
+        GuiInteractioner.clickWebElement(by);
     }
 
     private void fillBacklogNewStoryNameTextBox(final String storyName, final String projectId) {
@@ -138,6 +137,11 @@ public class ProjectPage extends BaseLoggedInPage {
      */
     public String getStoryIdFromBacklogPanel(final String storyName, final String projectId) {
         clickStoryInBacklogStoryList(storyName, projectId);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         String storyId = GuiInteractioner.getAttributeOfWebElement(storyIdTextBox, "value");
         storyId = storyId.substring(1);
         clickStoryCollapseBtn();
